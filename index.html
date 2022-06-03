@@ -4,9 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=".assets/css/style.css" />
     <title>Document</title>
 </head>
 <body>
-    
+    <header>
+        <!-- Logo and header here. -->
+        <h1>NaNarWORD</h1>
+    </header>
+    <main>
+        <!-- Start section. -->
+        <secion id="start">
+            <h2>Welcome to NaNarWORD!</h2>
+            <ul>
+                <li>Choose your level of difficulty.</li>
+                <li>You'll only have so many guesses to get the word right.</li>
+                <li>Win, and get a gif prize! 🏆</li>
+                <li>Lost, and there shall be dire consequences! 😱 (Jk!)</li>
+            </ul>
+            <p>Ready to play?  Click start to get goin'!</p>
+            <button id="start-btn">
+                Start
+            </button>
+        </secion>
+        <!-- Choose your level. -->
+        <section id="level-div">
+            <h2>Choose your level!</h2>
+            <button id="easy" data-level="6">Common Words</button>
+            <button id="med" data-level="4">Not-So-Common Words</button>
+            <button id="hard" data-level="2">WTF Does That Mean?</button>
+        </section>
+        <!-- Reusable buttons -->
+        <section id="reuse-btn">
+            <button id="restart">Restart</button>
+            <button id="rules">How does this work again? 🤔</button>
+        </section>
+    </main>
+    <footer>
+        <p>Team NaNarwhal 2022</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
