@@ -5,40 +5,76 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=".assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Document</title>
 </head>
 
+<body class="container">
+=======
+
 <body>
   
+
     <header>
         <!-- Logo and header here. -->
+        <nav>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">NaNarWORD</a>
+              <div id="guesses">Guesses Left: <span>1</span></div>
+              <!-- <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
+                <!-- <li><a href="sass.html">Sass</a></li>
+                <li><a href="badges.html">Components</a></li>
+                <li><a href="collapsible.html">JavaScript</a></li> -->
+              </ul>
+            </div>
+          </nav>
+
         <h1>NaNarWORD</h1>
     </header>
-    <main>
+    <main class="col s12 m12 l12">
         <!-- Start section. -->
-        <secion id="start">
-            <h2>Welcome to NaNarWORD!</h2>
-            <ul>
-                <li>Choose your level of difficulty.</li>
-                <li>You'll only have so many guesses to get the word right.</li>
-                <li>Win, and get a gif prize! 🏆</li>
-                <li>Lost, and there shall be dire consequences! 😱 (Jk!)</li>
-            </ul>
-            <p>Ready to play?  Click start to get goin'!</p>
-            <button id="start-btn">
-                Start
-            </button>
-        </secion>
+        <section class="row" id="start">
+            <div class="col s12 m12 l12">
+                <h2>Welcome to NaNarWORD!</h2>
+                <ol class="">
+                    <li>Choose your level of difficulty.</li>
+                    <li>You'll only have so many guesses to get the word right.</li>
+                    <li>Win, and get a gif prize! 🏆</li>
+                    <li>Lost, and there shall be dire consequences! 😱 (Jk!)</li>
+                </ol>
+                <p>Ready to play? Click start to get goin'!</p>
+                <button class="waves-effect waves-light btn-large" id="start-btn">
+                    Start
+                </button>
+            </div>
+        </section>
+
         <!-- Choose your level. -->
-        <section id="level-div">
+        <section class="" id="level-div">
             <h2>Choose your level!</h2>
             <button id="easy" data-level="6">Common Words</button>
             <button id="med" data-level="4">Not-So-Common Words</button>
             <button id="hard" data-level="2">WTF Does That Mean?</button>
         </section>
+
+        <!-- Game play div here. -->
+        <section id="game-div">
+
+        </section>
+
+        <!-- Screen to show winner gif. -->
+        <section id="win-div">
+
+        </section>
+
+        <!-- Screen to show loser gif. -->
+        <section id="lose-div">
+
+        </section>
+
         <!-- Reusable buttons -->
-        <section id="reuse-btn">
+        <section class="" id="reuse-btn">
             <button id="restart">Restart</button>
             <button id="rules">How does this work again? 🤔</button>
         </section>
@@ -48,6 +84,7 @@
     </footer>
     <script src="assets/js/giphy.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js"></script>
 
 </body>
