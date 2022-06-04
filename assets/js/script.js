@@ -40,7 +40,7 @@ function randomWordFetch(level) {
     fetch(`https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=4&lettersMax=7&frequencyMax=${level}/definitions`, options)
         .then(response => response.json())
         .then(data => {
-            word = data.word;
+            word = data.word.toUpperCase();
             gameScreen()
         })
         .catch(err => console.error(err));
