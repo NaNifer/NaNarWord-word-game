@@ -6,7 +6,6 @@ var word;
 
 
 // // start button event listener
-=======
 // Nifer
 // start button event listener
 
