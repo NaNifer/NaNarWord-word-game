@@ -1,7 +1,7 @@
-
+// Nifer
 // start button event listener
 var startBtn = document.getElementById("start");
-element.addEventListener("click", startGame);
+startBtn.addEventListener("click", startGame);
 
 function startGame() {
   document.getElementById("start").style.display = "none";
@@ -9,7 +9,6 @@ function startGame() {
 //   possible add/remove class instead
 }
 
-// Nifer testing branch
 
 // Nolan
 // Event Listener for Level Selection
@@ -41,5 +40,28 @@ function merriamFetch(word) {
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(err => console.error(err));
+}
+
+// Nifer
+// Looks up giphy with input of WIN OR LOOSE, 
+// if win == search awesome, if loose == search bummer
+// then calls on displayGiphy()
+function getGiphy(query) {
+    const API_KEY = "dzRUlVy8AmnIrMfFmPikr7L2vL8qqV97";
+    let requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=1`;
+
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            displayGiphy(data);
+        });
+}
+// Nifer
+// Displays giphy in div
+// TODO: replace "gif" with ID for html element
+function displayGiphy(data) {
+    document.getElementById("gif").src= data.data[0].images.downsized.url;
 }
 
