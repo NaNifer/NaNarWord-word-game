@@ -6,45 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Document</title>
+    <title>NaNarWORD | A Word Game by Team NaNarwhal</title>
 </head>
 
 <body class="container">
-=======
-
-<body>
-  
-
     <header>
         <!-- Logo and header here. -->
         <nav>
             <div class="nav-wrapper">
-              <a href="#" class="brand-logo">NaNarWORD</a>
-              <div id="guesses">Guesses Left: <span>1</span></div>
-              <!-- <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
+                <a href="#" class="brand-logo"><b>NaN</b>ar<b>WORD</b></a>
+                <div id="guesses">Guesses Left: <span id="guess-num"></span></div>
+                <!-- <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
                 <!-- <li><a href="sass.html">Sass</a></li>
                 <li><a href="badges.html">Components</a></li>
                 <li><a href="collapsible.html">JavaScript</a></li> -->
-              </ul>
+                </ul>
             </div>
-          </nav>
-
-        <h1>NaNarWORD</h1>
+        </nav>
     </header>
     <main class="col s12 m12 l12">
         <!-- Start section. -->
         <section class="row" id="start">
             <div class="col s12 m12 l12">
-                <h2>Welcome to NaNarWORD!</h2>
-                <ol class="">
+                <h1>Welcome to <b>NaN</b>ar<b>WORD</b>!</h1>
+                <ol class="rules">
                     <li>Choose your level of difficulty.</li>
+                    <li>NaNarWORD will present you with a word to guess.</li>
                     <li>You'll only have so many guesses to get the word right.</li>
                     <li>Win, and get a gif prize! 🏆</li>
                     <li>Lost, and there shall be dire consequences! 😱 (Jk!)</li>
                 </ol>
                 <p>Ready to play? Click start to get goin'!</p>
-                <button class="waves-effect waves-light btn-large" id="start-btn">
+                <button class="waves-effect waves-light btn-large #42a5f5 blue lighten-1" id="start-btn">
                     Start
                 </button>
             </div>
@@ -52,41 +47,73 @@
 
         <!-- Choose your level. -->
         <section class="" id="level-div">
-            <h2>Choose your level!</h2>
-            <button id="easy" data-level="6">Common Words</button>
-            <button id="med" data-level="4">Not-So-Common Words</button>
-            <button id="hard" data-level="2">WTF Does That Mean?</button>
+            <h2 class="center-align">Choose your level!</h2>
+            <button class="waves-effect waves-light btn-large" id="easy" data-level="6">Common Words</button>
+            <button class="waves-effect waves-light btn-large" id="med" data-level="4">Not-So-Common Words</button>
+            <button class="waves-effect waves-light btn-large" id="hard" data-level="2">WTF Does That Mean?</button>
         </section>
+
+        <!-- Display top 10 solved words. -->
+        <aside class="row">
+            <div class="col s4" id="top-10">
+                <h3 class="center-align">Your Top 10 Solved Words</h3>
+            </div>
+        </aside>
 
         <!-- Game play div here. -->
+        <!-- Will turn into the results div at end of game. -->
         <section id="game-div">
 
-        </section>
+            <!-- Display win/lose gif. -->
+            <div class="row">
+                <div class="col s12 m5">
+                    <div class="card-panel" id="gif-div">
+                    </div>
+                </div>
+            </div>
 
-        <!-- Screen to show winner gif. -->
-        <section id="win-div">
-
-        </section>
-
-        <!-- Screen to show loser gif. -->
-        <section id="lose-div">
-
+            <!-- Display win/lose message and word definition. -->
+            <div class="row">
+                <div class="col s12 m5">
+                    <div class="card-panel" id="msg-def-div">
+                        <p id="win-lose-msg"></p>
+                        <p id="word-def"></p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Reusable buttons -->
-        <section class="" id="reuse-btn">
-            <button id="restart">Restart</button>
-            <button id="rules">How does this work again? 🤔</button>
+        <section class="row" id="reuse-btn">
+            <button class="waves-effect waves-light btn-large" id="restart">New Game</button>
+            <a href="#modal1"></a>
+                <button class="waves-effect waves-light btn-large btn modal-trigger" data-target="modal1" id="rules-btn">How does this work again? 🤔</button>
+            </a>
         </section>
+
+        <!-- Rules reminder modal -->            
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Here's How to Play</h4>
+                <ol class="rules">
+                    <li>After choosing your difficulty level, NaNarWORD will present you with a word to guess.</li>
+                    <li>You'll only have so many guesses to get the word right.</li>
+                    <li>Win, and get a gif prize! 🏆</li>
+                    <li>Lost, and there shall be dire consequences! 😱 (Jk!)</li>
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Continue Game</a>
+            </div>
+        </div>
     </main>
     <footer>
         <p>Team NaNarwhal 2022</p>
     </footer>
-    <script src="assets/js/giphy.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js"></script>
-
 </body>
 
 </html>
