@@ -107,7 +107,7 @@ $("#game-div").on("click", "button", function(event) {
         }
     }
 });
-=======
+
 // Nifer
 // Looks up giphy with input of WIN OR LOOSE, 
 // if win == search awesome, if loose == search bummer
