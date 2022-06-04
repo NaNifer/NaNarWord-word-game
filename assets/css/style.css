@@ -1,23 +1,42 @@
 root {
     --tiff-blue: #9CE0DE;
     --sky-blue: #1AA9F7;
-    --dark-blue: #225BE0;
-    --key-yellow: #FFD057;
+    --blue: #225BE0;
+    --gold-yellow: #FFD057;
     --purple: #7118EE;
+    --white: white;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #fff;
+    background-color: var(--white);
+    font-size: 16px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+.rules {
+    font-weight: lighter;
 }
 
 #start {
-    background-color: var(--dark-blue);
+    background-color: var(--blue);
 
 }
 
+
+.btn, .btn-large, .btn-small, .btn-flat {
+    border-radius: 6px;
+    line-height: 0px;
+    padding: 28px 80px;
+    text-transform: none;
+}
+
+
 #level-div {
-    background-color: var(--key-yellow);
+    background-color: var(--gold-yellow);
     /* font-family: 'Times New Roman', Times, serif; */
 }
 
