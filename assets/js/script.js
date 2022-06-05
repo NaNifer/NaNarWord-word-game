@@ -4,6 +4,12 @@
 var word;
 var guessCount;
 
+// Nolan
+// audio for webpage
+// Sound for user input letter guesses
+let audioPop = document.createElement("AUDIO");
+document.body.appendChild(audioPop);
+audioPop.src = "./assets/sound/pop.mp3";
 
 
 // // start button event listener
@@ -37,7 +43,7 @@ function randomWordFetch(level) {
     // Handle search parameters for level, from button data attribute
     let levelMax = level + 1;
     let levelMin = level - 1.5;
-    // Have a has number test to exclude "words" with numbers
+    // Have a "has number" test to exclude "words" with numbers
     // console.log(hasNumber.test("ABC33SDF"));  //true
     const hasNumber = /\d/;
 
@@ -113,6 +119,10 @@ $("#game-div").on("click", "button", function(event) {
     let guess = $(btnEl).data("letter");
     // Check if letter clicked is in the word string
     if (word.includes(guess)) {
+        // play audio for correct guess
+        audioPop.pause();
+        audioPop.currentTime = 0;
+        audioPop.play();
         // loop to fill in the correct letter spaces
         let slotEl = $("#guess-div").children();
         let check = '';
@@ -134,6 +144,7 @@ $("#game-div").on("click", "button", function(event) {
         if (guessCount === 0) {
             // call a end game function with loose status
         }
+    // Update guess count on HTML
 });
 
 // Nifer
