@@ -2,6 +2,7 @@
 // Global Variables
 // Nolan
 var word;
+var guessCount;
 
 
 
@@ -33,6 +34,13 @@ $("#level-div").on("click", "button", function(event) {
 // Nolan
 // Words API random fetch
 function randomWordFetch(level) {
+    // Handle search parameters for level, from button data attribute
+    let levelMax = level + 1;
+    let levelMin = level - 1.5;
+    // Have a has number test to exclude "words" with numbers
+    // console.log(hasNumber.test("ABC33SDF"));  //true
+    const hasNumber = /\d/;
+
     const options = {
         method: 'GET',
         headers: {
@@ -40,11 +48,17 @@ function randomWordFetch(level) {
             'X-RapidAPI-Key': '4d97b98fbamshd06a775c8ed3df9p1429d2jsnbf625cf74463'
         }
     };
-    fetch(`https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=4&lettersMax=7&frequencyMax=${level}/definitions`, options)
+    fetch(`https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=4&lettersMax=7&frequencyMax=4/definitions`, options)
         .then(response => response.json())
         .then(data => {
-            word = data.word.toUpperCase();
-            gameScreen()
+            if (data.frequency < levelMax && data.frequency > levelMin && !hasNumber.test(word)) {
+                word = data.word.toUpperCase();
+                gameScreen();
+                console.log(data);
+            }
+            else {
+                randomWordFetch(level);
+            }
         })
         .catch(err => console.error(err));
 }
@@ -91,6 +105,7 @@ function gameScreen() {
 }
 
 // Nolan
+// Guess Event Listener
 // Event handlers for the generated keyboard
 $("#game-div").on("click", "button", function(event) {
     let btnEl = event.target;
@@ -99,13 +114,26 @@ $("#game-div").on("click", "button", function(event) {
     // Check if letter clicked is in the word string
     if (word.includes(guess)) {
         // loop to fill in the correct letter spaces
+        let slotEl = $("#guess-div").children();
+        let check = '';
         for (i=0; i<word.length; i++) {
-            let slotEl = $("#guess-div").child(i).data("letter");
-            if (guess === slotEl) {
-                slotEl.text(guess);
+            if (guess === $(slotEl[i]).data("letter")) {
+                $(slotEl[i]).text(guess);
             }
+            // create check word string
+            check = check + $(slotEl[i]).text();
+        }
+        // If the whole word is guessed, then win
+        console.log(check);
+        if (check === word) {
+            // call a end game function with win status
         }
     }
+    // Subtract from Guess Count, if equal to zero call end game
+    guessCount--;
+        if (guessCount === 0) {
+            // call a end game function with loose status
+        }
 });
 
 // Nifer
