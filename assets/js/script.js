@@ -87,6 +87,8 @@ function merriamFetch(word) {
 // Nolan
 // Function to print gameplay Screen
 function gameScreen() {
+    // Empty the game div
+    $("#game-div").empty();
     // Create a div element to hold the guessing letters
     let guessDiv = $('<div id="guess-div"></div>');
     // Loop to create Empty word elements to guess
