@@ -124,7 +124,7 @@ function gameScreen() {
 
 // Nolan
 // Guess Event Listener
-// Event handlers for the generated keyboard
+// Event handler for the generated keyboard
 $("#game-div").on("click", "button", function (event) {
     let btnEl = event.target;
     // Store buttons data-letter as guess
@@ -137,10 +137,26 @@ $("#game-div").on("click", "button", function (event) {
         // call a end game function with loose status
     }
     // Update guess count on HTML
+    $(".guess-count").text("Guesses Remaining: " + guessCount);
 });
 
 // Nolan
-// Function to check guess
+// Event Listener for keyboard input
+addEventListener("keydown", function (event) {
+    let guess = event.key.toUpperCase();
+    // Call guessCheck to check guess
+    guessCheck(guess);
+    // Subtract from Guess Count, if equal to zero call end game
+    guessCount--;
+    if (guessCount === 0) {
+        // call a end game function with loose status
+    }
+    // Update guess count on HTML
+    $(".guess-count").text("Guesses Remaining: " + guessCount);
+});
+
+// Nolan
+// Function to check guess from user input
 function guessCheck(guess) {
     // Check if letter clicked is in the word string
     if (word.includes(guess)) {
