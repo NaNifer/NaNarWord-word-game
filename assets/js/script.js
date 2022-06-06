@@ -38,7 +38,8 @@ $("#level-div").on("click", "button", function(event) {
     console.log(`The level is ${level}`);
     // call word search function with level of word
     randomWordFetch(level);
-    // figure what to hide and show
+    // Hide the level div
+    $("#level-div").hide();
 })
 
 // Nolan
