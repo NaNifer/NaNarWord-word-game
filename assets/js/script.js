@@ -38,7 +38,8 @@ $("#level-div").on("click", "button", function(event) {
     console.log(`The level is ${level}`);
     // call word search function with level of word
     randomWordFetch(level);
-    // figure what to hide and show
+    // Hide the level div
+    $("#level-div").hide();
 })
 
 // Nolan
@@ -85,8 +86,10 @@ function merriamFetch(word) {
 
 
 // Nolan
-// Function to print gameplay Screen
+// Function to print gameplay Screen and Guess Count in Header
 function gameScreen() {
+    // Empty the game div
+    $("#game-div").empty();
     // Create a div element to hold the guessing letters
     let guessDiv = $('<div id="guess-div"></div>');
     // Loop to create Empty word elements to guess
@@ -102,7 +105,7 @@ function gameScreen() {
     keys.split('');
     // create a key div with id=key-div
     let keyDiv = $('<div id="key-div"></div>');
-    // Loop to create key div elements for keyboard
+    // Loop to create key button elements for keyboard
     for (i=0; i<keys.length; i++) {
         let keyEl = $("<button>")
             .addClass("key-el")
@@ -112,22 +115,78 @@ function gameScreen() {
     }
     // Append to the game container div
     $("#game-div").append(guessDiv, keyDiv)
+    // Add Guess Count to header
+    let guessEl = $("<p>")
+        .addClass("guess-count")
+        .text("Guesses Remaining: " + guessCount);
+    $("#guesses").append(guessEl);
 }
 
 // Nolan
 // Guess Event Listener
-// Event handlers for the generated keyboard
-$("#game-div").on("click", "button", function (event) {
+// Event handler for the generated keyboard
+$("#game-div").on("click", ".key-el", function (event) {
+    // Change btnEl class so it can't be click again and style is changed
     let btnEl = event.target;
+    $(btnEl).removeClass("key-el").addClass("key-pressed");
     // Store buttons data-letter as guess
     let guess = $(btnEl).data("letter");
+    // Call guessCheck to check guess
+    guessCheck(guess);
+    // Subtract from Guess Count, if equal to zero call end game
+    guessCount--;
+    if (guessCount === 0) {
+        endGame(false, "4.7");
+    }
+    // Update guess count on HTML
+    $(".guess-count").text("Guesses Remaining: " + guessCount);
+});
+
+// Nolan
+// Event Listener for keyboard input
+addEventListener("keydown", function (event) {
+    // store guess as uppercase letter
+    let guess = event.key.toUpperCase();
+    // let btnEl = $(`button[data-letter=${guess}]`).attr("class");
+    // console.log(btnEl);
+    // If the key hasn't been pressed continue
+    // console.log(btnEl.attr("class"));
+    // if ($(btnEl).attr("class").includes("key-el")) {
+    //     // Call guessCheck to check guess
+    //     guessCheck(guess);
+    //     // Subtract from Guess Count, if equal to zero call end game
+    //     guessCount--;
+    //     if (guessCount === 0) {
+    //         endGame(false, "4.7");
+    //     }
+    // }
+    // else {
+    //     return;
+    // }
+    guessCheck(guess);
+    // Subtract from Guess Count, if equal to zero call end game
+    guessCount--;
+    if (guessCount === 0) {
+        endGame(false, "4.7");
+    }
+    // // Change class of corresponding letter guess button
+    // $(`#key-div > [data-letter=${guess}`)
+    //     .removeClass("key-el")
+    //     .addClass("key-pressed");
+    // Update guess count on HTML
+    $(".guess-count").text("Guesses Remaining: " + guessCount);
+});
+
+// Nolan
+// Function to check guess from user input
+function guessCheck(guess) {
     // Check if letter clicked is in the word string
     if (word.includes(guess)) {
         // play audio for correct guess
         audioPop.pause();
         audioPop.currentTime = 0;
         audioPop.play();
-        // loop to fill in the correct letter spaces
+        // loop to fill in the correct letter spaces on HTML
         let slotEl = $("#guess-div").children();
         let check = '';
         for (i = 0; i < word.length; i++) {
@@ -140,7 +199,7 @@ $("#game-div").on("click", "button", function (event) {
         // If the whole word is guessed, then win
         console.log(check);
         if (check === word) {
-            // call a end game function with win status
+            endGame(true, "4.7");
         }
     }
     // Play buzzer for wrong guess
@@ -149,13 +208,7 @@ $("#game-div").on("click", "button", function (event) {
         audioBuzzer.currentTime = 0;
         audioBuzzer.play();
     }
-    // Subtract from Guess Count, if equal to zero call end game
-    guessCount--;
-    if (guessCount === 0) {
-        // call a end game function with loose status
-    }
-    // Update guess count on HTML
-});
+}
 
 // Nifer
 // Looks up giphy with input of WIN OR LOOSE, 
