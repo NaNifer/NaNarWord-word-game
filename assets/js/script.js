@@ -121,13 +121,26 @@ $("#game-div").on("click", "button", function (event) {
     let btnEl = event.target;
     // Store buttons data-letter as guess
     let guess = $(btnEl).data("letter");
+    // Call guessCheck to check guess
+    guessCheck(guess);
+    // Subtract from Guess Count, if equal to zero call end game
+    guessCount--;
+    if (guessCount === 0) {
+        // call a end game function with loose status
+    }
+    // Update guess count on HTML
+});
+
+// Nolan
+// Function to check guess
+function guessCheck(guess) {
     // Check if letter clicked is in the word string
     if (word.includes(guess)) {
         // play audio for correct guess
         audioPop.pause();
         audioPop.currentTime = 0;
         audioPop.play();
-        // loop to fill in the correct letter spaces
+        // loop to fill in the correct letter spaces on HTML
         let slotEl = $("#guess-div").children();
         let check = '';
         for (i = 0; i < word.length; i++) {
@@ -149,13 +162,7 @@ $("#game-div").on("click", "button", function (event) {
         audioBuzzer.currentTime = 0;
         audioBuzzer.play();
     }
-    // Subtract from Guess Count, if equal to zero call end game
-    guessCount--;
-    if (guessCount === 0) {
-        // call a end game function with loose status
-    }
-    // Update guess count on HTML
-});
+}
 
 // Nifer
 // Looks up giphy with input of WIN OR LOOSE, 
