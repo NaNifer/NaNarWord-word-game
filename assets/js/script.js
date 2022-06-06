@@ -86,7 +86,7 @@ function merriamFetch(word) {
 
 
 // Nolan
-// Function to print gameplay Screen
+// Function to print gameplay Screen and Guess Count in Header
 function gameScreen() {
     // Empty the game div
     $("#game-div").empty();
@@ -115,6 +115,11 @@ function gameScreen() {
     }
     // Append to the game container div
     $("#game-div").append(guessDiv, keyDiv)
+    // Add Guess Count to header
+    let guessEl = $("<p>")
+        .addClass("guess-count")
+        .text("Guesses Remaining: " + guessCount);
+    $("#guesses").append(guessEl);
 }
 
 // Nolan
