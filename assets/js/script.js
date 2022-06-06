@@ -19,20 +19,19 @@ audioBuzzer.src = "./assets/sound/buzzer.wav";
 // // start button event listener
 // Nifer
 // start button event listener
-
 var startBtn = document.getElementById("start");
 startBtn.addEventListener("click", startGame);
 
 function startGame() {
-  document.getElementById("start").style.display = "none";
-  document.getElementById("level").style.display = "block";
-//   possible add/remove class instead
+    $("#start").hide();
+    $("#level").show();
+    //   possible add/remove class instead
 }
 
 
 // Nolan
 // Event Listener for Level Selection
-$("#level-div").on("click", "button", function(event) {
+$("#level-div").on("click", "button", function (event) {
     let btnEl = event.target;
     let level = $(btnEl).data("level");
     console.log(`The level is ${level}`);
@@ -78,9 +77,9 @@ function randomWordFetch(level) {
 function merriamFetch(word) {
     // fetch the definition
     fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=654815a3-9693-4044-8b6a-47115bdf7017`)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err));
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.error(err));
 }
 
 
@@ -90,11 +89,11 @@ function gameScreen() {
     // Create a div element to hold the guessing letters
     let guessDiv = $('<div id="guess-div"></div>');
     // Loop to create Empty word elements to guess
-    for (i=0; i<word.length; i++) {
+    for (i = 0; i < word.length; i++) {
         let guess = $("<h2>")
             .addClass("guess-el")
             .data("letter", word[i])
-            .css({"border-bottom": "8px solid black", "display": "inline-block", "width": "75px", "margin": "0 10px"});
+            .css({ "border-bottom": "8px solid black", "display": "inline-block", "width": "75px", "margin": "0 10px" });
         guessDiv.append(guess);
     }
     // Create array of uppercased letters
@@ -103,7 +102,7 @@ function gameScreen() {
     // create a key div with id=key-div
     let keyDiv = $('<div id="key-div"></div>');
     // Loop to create key div elements for keyboard
-    for (i=0; i<keys.length; i++) {
+    for (i = 0; i < keys.length; i++) {
         let keyEl = $("<button>")
             .addClass("key-el")
             .data("letter", keys[i])
@@ -161,7 +160,7 @@ $("#game-div").on("click", "button", function (event) {
 // Looks up giphy with input of WIN OR LOOSE, 
 // if win == search awesome, if loose == search bummer
 // then calls on displayGiphy()
-function getGiphy(query) {
+function getGiphy(query, win) {
     const API_KEY = "dzRUlVy8AmnIrMfFmPikr7L2vL8qqV97";
     let requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=1`;
 
@@ -170,14 +169,51 @@ function getGiphy(query) {
             return response.json();
         })
         .then(function (data) {
-            displayGiphy(data);
+            displayGiphy(data, win);
         });
 }
+
 // Nifer
 // Displays giphy in div
 // TODO: replace "gif" with ID for html element
 function displayGiphy(data) {
-    document.getElementById("gif").src= data.data[0].images.downsized.url;
+    $("#game-div").empty();
+    let giphyEl = document.createElement("img");
+    giphyEl.classList.add("giphyImg");
+    giphyEl.src = data.data[0].images.downsized.url;
+    document.getElementById("game-div").append(giphyEl);
+
+    // create message & word def divs, depending on win/lose
+
 }
+
+
+// Nifer
+// End of game function
+function endGame(test, win, frequency) {
+    // win true if won false if loss
+    if (!win)
+        getGiphy("bummer", win);
+    else {
+        getGiphy("awesome", win);
+        storeWord(test, frequency);
+    }
+}
+
+
+// Accesses score board from local storage, if it exists
+let wordList = JSON.parse(localStorage.getItem("wordList")) || [];
+
+function storeWord(test, frequency) {
+    let userWordInfo = {
+        wordSaved: test,
+        level: frequency,
+    };
+    wordList.push(userWordInfo);
+    wordList.sort((a, b) => a.level - b.level);
+    localStorage.setItem("wordList", JSON.stringify(wordList));
+}
+
+
 
 
