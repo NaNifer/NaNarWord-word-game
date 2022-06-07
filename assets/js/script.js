@@ -106,10 +106,10 @@ function gameScreen() {
     let keyDiv = $('<div id="key-div"></div>');
     // Loop to create key button elements for keyboard
     for (i=0; i<keys.length; i++) {
-
+        // New data attr adding syntax
         let keyEl = $("<button>")
             .addClass("key-el")
-            .data("letter", keys[i])
+            .attr("data-letter", keys[i])
             .text(keys[i]);
         keyDiv.append(keyEl);
     }
@@ -147,32 +147,25 @@ $("#game-div").on("click", ".key-el", function (event) {
 addEventListener("keydown", function (event) {
     // store guess as uppercase letter
     let guess = event.key.toUpperCase();
-    // let btnEl = $(`button[data-letter=${guess}]`).attr("class");
-    // console.log(btnEl);
+    // Target specific button that has guess as data-attribute
+    let btnEl = $(`button[data-letter="${guess}"]`);
     // If the key hasn't been pressed continue
-    // console.log(btnEl.attr("class"));
-    // if ($(btnEl).attr("class").includes("key-el")) {
-    //     // Call guessCheck to check guess
-    //     guessCheck(guess);
-    //     // Subtract from Guess Count, if equal to zero call end game
-    //     guessCount--;
-    //     if (guessCount === 0) {
-    //         endGame(false, "4.7");
-    //     }
-    // }
-    // else {
-    //     return;
-    // }
-    guessCheck(guess);
-    // Subtract from Guess Count, if equal to zero call end game
-    guessCount--;
-    if (guessCount === 0) {
-        endGame(false, "4.7");
+    if ($(btnEl).attr("class").includes("key-el")) {
+        // Call guessCheck to check guess
+        guessCheck(guess);
+        // Subtract from Guess Count, if equal to zero call end game
+        guessCount--;
+        if (guessCount === 0) {
+            endGame(false, "4.7");
+        }
+    }
+    else {
+        return;
     }
     // // Change class of corresponding letter guess button
-    // $(`#key-div > [data-letter=${guess}`)
-    //     .removeClass("key-el")
-    //     .addClass("key-pressed");
+    $(`#key-div > [data-letter=${guess}]`)
+        .removeClass("key-el")
+        .addClass("key-pressed");
     // Update guess count on HTML
     $(".guess-count").text("Guesses Remaining: " + guessCount);
 });
