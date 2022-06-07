@@ -7,7 +7,6 @@ root {
 }
 
 body {
-    /* font-family: Arial, Helvetica, sans-serif; */
     background-color: white;
     font-size: 16px;
 }
@@ -58,9 +57,14 @@ li {
 }
 
 #level-div {
-    display: flex;
-    flex-direction: column;
     max-width: 400px;
+    position:relative;
+    height:100%;
+    margin: auto;
+}
+
+#level-div button {
+    min-width: 300px;
 }
 
 footer {
@@ -75,6 +79,8 @@ footer {
 color: black;
 padding: 10px 0px 0px 16px;
 }
+
+
 
 /* display none for stuff to be hidden on load */
 

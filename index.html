@@ -14,7 +14,7 @@
 <body class="container">
     <header>
         <!-- Logo and header here. -->
-        <nav>
+        <nav class="z-depth-0">
             <div class="nav-wrapper grey lighten-4">
               <a href="#" class="brand-logo left"><h6><b>NaN</b>ar<b>WORD</b></h6></a>
                 <div id="guesses"></div>
@@ -26,7 +26,7 @@
             </div>
         </nav>
     </header>
-    <main class="col s12 m12 l12">
+    <main class="col s12 m12 l12 center-align">
         <!-- Start section. -->
         <section class="row center-align" id="start">
             <div class="col s12 m12 l12">
@@ -46,8 +46,8 @@
         </section>
 
         <!-- Choose your level. -->
-        <section class="center-align" id="level-div">
-            <h2 class="">Choose your level!</h2>
+        <section class="col s12 m12 l12 center-align" id="level-div">
+            <h2>Choose your level!</h2>
             <button class="waves-effect waves-light btn-large teal lighten-4" id="easy" data-level="6">Common Words</button>
             <button class="waves-effect waves-light btn-large amber accent-2" id="med" data-level="4">Not-So-Common Words</button>
             <button class="waves-effect waves-light btn-large purple accent-4" id="hard" data-level="2">WTF Does That Mean?</button>
