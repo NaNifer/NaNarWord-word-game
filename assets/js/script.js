@@ -71,7 +71,7 @@ function randomWordFetch(level) {
             else {
                 // Remove any unwanted punctuation and capitolize word
                 const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
-                word = (word.toUpperCase()).replace(regex, '');
+                word = word.toUpperCase().replace(regex, '');
                 frequencyWordFetch(word);
                 gameScreen();
             }
@@ -86,6 +86,7 @@ function frequencyWordFetch(word) {
     fetch(`https://api.wordnik.com/v4/word.json/${word}/frequency?startYear=1800&endYear=2022&api_key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
+            // Defines global variable for corpus frequency for current played word
             frequency = data.totalCount;
         })
         .catch(err => console.error(err));
