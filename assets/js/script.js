@@ -45,34 +45,41 @@ $("#level-div").on("click", "button", function (event) {
 })
 
 // Nolan
-// Words API random fetch
+// Wordnik API random fetch
 function randomWordFetch(level) {
-    // Handle search parameters for level, from button data attribute
-    let levelMax = level + 1;
-    let levelMin = level - 1.5;
-    // Have a "has number" test to exclude "words" with numbers
-    // console.log(hasNumber.test("ABC33SDF"));  //true
-    const hasNumber = /\d/;
-
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com',
-            'X-RapidAPI-Key': '4d97b98fbamshd06a775c8ed3df9p1429d2jsnbf625cf74463'
-        }
-    };
-    fetch(`https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=4&lettersMax=7/definitions`, options)
+    // Handle level settings
+    let corpus;
+    if (level === 2) {
+        corpus = `maxCorpus=300`;
+    }
+    else if (level === 4) {
+        corpus = `minCorpusCount=301&maxCorpus=1000`;
+    }
+    else {
+        corpus = `minCorpusCount=10000`;
+    }
+    const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
+    fetch(`https://api.wordnik.com/v4/words.json/randomWord?excludePartOfSpeech=proper-noun&${corpus}&minLength=4&maxLength=7&api_key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
-            if (data.frequency < levelMax && data.frequency > levelMin && !hasNumber.test(word)) {
-                word = data.word.toUpperCase();
-                gameScreen();
-                frequency = data.frequency;
-                console.log(data);
-            }
-            else {
-                randomWordFetch(level);
-            }
+            console.log(data);
+            // Remove any unwanted punctuation
+            const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+            word = (data.word.toUpperCase()).replace(regex, '');
+            frequencyWordFetch(word);
+            gameScreen();
+        })
+        .catch(err => console.error(err));
+}
+
+// Nolan
+// Wordnik API frequency fetch
+function frequencyWordFetch(word) {
+    const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
+    fetch(`https://api.wordnik.com/v4/word.json/${word}/frequency?startYear=1800&endYear=2022&api_key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            frequency = data.totalCount;
         })
         .catch(err => console.error(err));
 }
@@ -137,13 +144,10 @@ $("#game-div").on("click", ".key-el", function (event) {
     $(btnEl).removeClass("key-el").addClass("key-pressed");
     // Store buttons data-letter as guess
     let guess = $(btnEl).data("letter");
-    // Call guessCheck to check guess
-    guessCheck(guess);
     // Subtract from Guess Count, if equal to zero call end game
     guessCount--;
-    if (guessCount === 0) {
-        endGame(false, frequency);
-    }
+    // Call guessCheck to check guess
+    guessCheck(guess);
     // Update guess count on HTML
     $(".guess-count").text("Guesses Remaining: " + guessCount);
 });
@@ -157,13 +161,10 @@ addEventListener("keydown", function (event) {
     let btnEl = $(`button[data-letter="${guess}"]`);
     // If the key hasn't been pressed continue
     if ($(btnEl).attr("class").includes("key-el")) {
+        // Subtract from Guess Count
+        guessCount--;
         // Call guessCheck to check guess
         guessCheck(guess);
-        // Subtract from Guess Count, if equal to zero call end game
-        guessCount--;
-        if (guessCount === 0) {
-            endGame(false, frequency);
-        }
     }
     else {
         return;
@@ -195,10 +196,12 @@ function guessCheck(guess) {
             // create check word string
             check = check + $(slotEl[i]).text();
         }
-        // If the whole word is guessed, then win
-        console.log(check);
+        // If the whole word is guessed, then win.  If out of guesses, lose
         if (check === word) {
             endGame(true, frequency);
+        }
+        else if (guessCount === 0) {
+            endGame(false, frequency);
         }
     }
     // Play buzzer for wrong guess
