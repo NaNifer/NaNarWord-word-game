@@ -104,10 +104,6 @@ function gameScreen() {
     keys.split('');
     // create a key div with id=key-div
     let keyDiv = $('<div id="key-div"></div>');
-
-    // Loop to create key div elements for keyboard
-    for (i = 0; i < keys.length; i++) {
-
     // Loop to create key button elements for keyboard
     for (i=0; i<keys.length; i++) {
 
@@ -222,7 +218,7 @@ function getGiphy(query, win) {
     const API_KEY = "dzRUlVy8AmnIrMfFmPikr7L2vL8qqV97";
     let requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=1`;
 
-    fetch(requestUrl)re
+    fetch(requestUrl)
         .then(function (response) {
             return response.json();
         })
@@ -250,8 +246,9 @@ function displayGiphy(data) {
 // End of game function
 function endGame(test, win, frequency) {
     // win true if won false if loss
-    if (!win)
+    if (!win) {
         getGiphy("bummer", win);
+    }
     else {
         getGiphy("awesome", win);
         storeWord(test, frequency);
@@ -271,7 +268,4 @@ function storeWord(test, frequency) {
     wordList.sort((a, b) => a.level - b.level);
     localStorage.setItem("wordList", JSON.stringify(wordList));
 }
-
-
-
 
