@@ -1,9 +1,9 @@
 
 // Global Variables
 // Nolan
-var word;
-var guessCount;
-var frequency;
+let word;
+let guessCount;
+let frequency;
 
 // Nolan
 // audio for webpage
@@ -62,12 +62,19 @@ function randomWordFetch(level) {
     fetch(`https://api.wordnik.com/v4/words.json/randomWord?excludePartOfSpeech=proper-noun&${corpus}&minLength=4&maxLength=7&api_key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            // Remove any unwanted punctuation
-            const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
-            word = (data.word.toUpperCase()).replace(regex, '');
-            frequencyWordFetch(word);
-            gameScreen();
+            word = data.word;
+            console.log(word);
+            // don't allow proper nouns
+            if (word.charAt(0) === word.charAt(0).toUpperCase()) {
+                randomWordFetch(level);
+            }
+            else {
+                // Remove any unwanted punctuation and capitolize word
+                const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+                word = (word.toUpperCase()).replace(regex, '');
+                frequencyWordFetch(word);
+                gameScreen();
+            }
         })
         .catch(err => console.error(err));
 }
