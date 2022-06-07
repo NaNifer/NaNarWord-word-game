@@ -65,14 +65,14 @@ function randomWordFetch(level) {
             word = data.word;
             console.log(word);
             // don't allow proper nouns
-            if (word.charAt(0) === word.charAt(0).toUpperCase()) {
+            if (word.charAt(0) === word.charAt(0).toUpperCase() || /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/.test(word)) {
                 randomWordFetch(level);
             }
             else {
                 // Remove any unwanted punctuation and capitolize word
-                const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
-                word = word.toUpperCase().replace(regex, '');
+                // const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g; .replace(regex, '')
                 frequencyWordFetch(word);
+                word = word.toUpperCase();
                 gameScreen();
             }
         })
@@ -83,11 +83,12 @@ function randomWordFetch(level) {
 // Wordnik API frequency fetch
 function frequencyWordFetch(word) {
     const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
-    fetch(`https://api.wordnik.com/v4/word.json/${word}/frequency?startYear=1800&endYear=2022&api_key=${apiKey}`)
+    fetch(`https://api.wordnik.com/v4/word.json/${word}/frequency?api_key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
             // Defines global variable for corpus frequency for current played word
             frequency = data.totalCount;
+            console.log(data);
         })
         .catch(err => console.error(err));
 }
