@@ -27,7 +27,7 @@ startBtn.addEventListener("click", startGame);
 
 function startGame() {
     $("#start").hide();
-    $("#level").show();
+    $("#level-div").show();
     //   possible add/remove class instead
 }
 
@@ -122,7 +122,7 @@ function gameScreen() {
     // create a key div with id=key-div
     let keyDiv = $('<div id="key-div"></div>');
     // Loop to create key button elements for keyboard
-    for (i=0; i<keys.length; i++) {
+    for (i = 0; i < keys.length; i++) {
         // New data attr adding syntax
         let keyEl = $("<button>")
             .addClass("key-el")
@@ -230,28 +230,58 @@ function getGiphy(query, win) {
     const API_KEY = "dzRUlVy8AmnIrMfFmPikr7L2vL8qqV97";
     let requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=1`;
 
+
+
+
+
+
     fetch(requestUrl)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            displayGiphy(data, win);
+            displayResults(data, win);
         });
 }
 
 // Nifer
-// Displays giphy in div
+//  Create message & word def divs, depending on win/lose
 // TODO: replace "gif" with ID for html element
-function displayGiphy(data) {
+function displayResults(data, win) {
     $("#game-div").empty();
+    $("#rules-btn").hide();
+    $("#restart-btn").show();
     let giphyEl = document.createElement("img");
+    let sorryMessage = document.createElement("p");
+    let winMessage = document.createElement("p");
+    let revealWordEl = document.createElement("p");
+    let wordDefinition = document.createElement("p");
+
     giphyEl.classList.add("giphyImg");
+    sorryMessage.classList.add("sorryMsg");
+    winMessage.classList.add("winMsg")
+    revealWordEl.classList.add("revealWord");
+    wordDefinition.classList.add("revealDef")
+
     giphyEl.src = data.data[0].images.downsized.url;
-    document.getElementById("game-div").append(giphyEl);
 
-    // create message & word def divs, depending on win/lose
 
+    sorryMessage.innerText = "Bummer.  Click / tap the button below to try again!"
+    winMessage.innerText = "Winning!  You got it.  Your solved word has been saved.  Play again to solve another word."
+    revealWordEl.innerText = word;
+    // call merriam
+    wordDefinition.innerText = data[0].shortdef[0];
+    //  figure of speach  data[0].fl
+    if (win) {
+        document.getElementById("game-div").append(giphyEl, winMessage, wordEl, wordDefinition);
+    }
+    else {
+        document.getElementById("game-div").append(giphyEl, sorryMessage, wordEl, wordDefinition)
+    }
 }
+
+
+// Restart button , hid game div, show level div
 
 
 // Nifer
@@ -281,3 +311,4 @@ function storeWord(test, frequency) {
     localStorage.setItem("wordList", JSON.stringify(wordList));
 }
 
+// Is there a random gif query selector?
