@@ -1,15 +1,14 @@
 root {
-    --tiff-blue: #9CE0DE;
-    --sky-blue: #1AA9F7;
-    --blue: #225BE0;
-    --gold-yellow: #FFD057;
-    --purple: #7118EE;
-    --white: white;
+    --light-blue: #40c4ff;
+    --teal: #b2dfdb;
+    --light-blue: #0277bd;
+    --amber: #ffd740;
+    --purple: #aa00ff;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: var(--white);
+    /* font-family: Arial, Helvetica, sans-serif; */
+    background-color: white;
     font-size: 16px;
 }
 
@@ -17,27 +16,39 @@ h2 {
     font-size: 32px;
 }
 
-.rules {
-    font-weight: lighter;
-}
 
 #start {
-    background-color: var(--blue);
+    background-color: var(--light-blue);
 
 }
 
+ol {
+    line-height: 2em;
+}
+
+li {
+    text-align: left;
+    list-style-position: inside;
+}
+
+#start-btn {
+    margin-top: 24px;
+    color: white;
+}
+
+#hard {
+    color: white;
+}
 
 .btn, .btn-large, .btn-small, .btn-flat {
     border-radius: 6px;
     line-height: 0px;
-    padding: 28px 80px;
     text-transform: none;
+    color: black;
 }
 
-
-#level-div {
-    background-color: var(--gold-yellow);
-    /* font-family: 'Times New Roman', Times, serif; */
+#easy, #med, #hard {
+    margin-bottom: 24px;
 }
 
 #guesses {
@@ -46,7 +57,36 @@ h2 {
     padding-right: 10px;
 }
 
+#level-div {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+}
+
 footer {
-    background-color: var(--tiff-blue);
     text-align: center;
 }
+
+#restart-btn, #rules-btn {
+    margin: 0px 16px 16px 0px;
+}
+
+.brand-logo > h6 {
+color: black;
+padding: 10px 0px 0px 16px;
+}
+
+/* display none for stuff to be hidden on load */
+
+/* 
+
+button not click: .key-el
+button been click: .key-pressed
+
+the empty blocks:
+guess-el
+
+
+
+
+*/

@@ -15,8 +15,8 @@
     <header>
         <!-- Logo and header here. -->
         <nav>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo"><b>NaN</b>ar<b>WORD</b></a>
+            <div class="nav-wrapper grey lighten-4">
+              <a href="#" class="brand-logo left"><h6><b>NaN</b>ar<b>WORD</b></h6></a>
                 <div id="guesses"></div>
                 <!-- <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
                 <!-- <li><a href="sass.html">Sass</a></li>
@@ -28,9 +28,9 @@
     </header>
     <main class="col s12 m12 l12">
         <!-- Start section. -->
-        <section class="row" id="start">
+        <section class="row center-align" id="start">
             <div class="col s12 m12 l12">
-                <h1>Welcome to <b>NaN</b>ar<b>WORD</b>!</h1>
+                <h2>Welcome to <b>NaN</b>ar<b>WORD</b>!</h2>
                 <ol class="rules">
                     <li>Choose your level of difficulty.</li>
                     <li>NaNarWORD will present you with a word to guess.</li>
@@ -46,17 +46,17 @@
         </section>
 
         <!-- Choose your level. -->
-        <section class="" id="level-div">
-            <h2 class="center-align">Choose your level!</h2>
-            <button class="waves-effect waves-light btn-large" id="easy" data-level="6">Common Words</button>
-            <button class="waves-effect waves-light btn-large" id="med" data-level="4">Not-So-Common Words</button>
-            <button class="waves-effect waves-light btn-large" id="hard" data-level="2">WTF Does That Mean?</button>
+        <section class="center-align" id="level-div">
+            <h2 class="">Choose your level!</h2>
+            <button class="waves-effect waves-light btn-large teal lighten-4" id="easy" data-level="6">Common Words</button>
+            <button class="waves-effect waves-light btn-large amber accent-2" id="med" data-level="4">Not-So-Common Words</button>
+            <button class="waves-effect waves-light btn-large purple accent-4" id="hard" data-level="2">WTF Does That Mean?</button>
         </section>
 
         <!-- Display top 10 solved words. -->
-        <aside class="row">
+        <aside class="row center-align">
             <div class="col s4" id="top-10">
-                <h3 class="center-align">Your Top 10 Solved Words</h3>
+                <h5>Your Word Bank</h5>
             </div>
         </aside>
 
@@ -85,9 +85,9 @@
 
         <!-- Reusable buttons -->
         <section class="row" id="btn-div">
-            <button class="waves-effect waves-light btn-large" id="restart-btn">New Game</button>
+            <button class="waves-effect waves-light btn-large grey lighten-1" id="restart-btn">New Game</button>
             <a href="#modal1"></a>
-            <button class="waves-effect waves-light btn-large btn modal-trigger" data-target="modal1" id="rules-btn">How
+            <button class="waves-effect waves-light btn-large btn modal-trigger grey lighten-1" data-target="modal1" id="rules-btn">How
                 does this work again? 🤔</button>
             </a>
         </section>
