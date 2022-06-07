@@ -3,6 +3,7 @@
 // Nolan
 var word;
 var guessCount;
+var frequency;
 
 // Nolan
 // audio for webpage
@@ -10,10 +11,12 @@ var guessCount;
 let audioPop = document.createElement("AUDIO");
 document.body.appendChild(audioPop);
 audioPop.src = "./assets/sound/pop.mp3";
+audioPop.volume = 0.6;
 // Sound for wrong user input letter guesses
 let audioBuzzer = document.createElement("AUDIO");
 document.body.appendChild(audioBuzzer);
 audioBuzzer.src = "./assets/sound/buzzer.wav";
+audioBuzzer.volume = 0.3;
 
 
 // // start button event listener
@@ -58,12 +61,13 @@ function randomWordFetch(level) {
             'X-RapidAPI-Key': '4d97b98fbamshd06a775c8ed3df9p1429d2jsnbf625cf74463'
         }
     };
-    fetch(`https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=4&lettersMax=7&frequencyMax=4/definitions`, options)
+    fetch(`https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=4&lettersMax=7/definitions`, options)
         .then(response => response.json())
         .then(data => {
             if (data.frequency < levelMax && data.frequency > levelMin && !hasNumber.test(word)) {
                 word = data.word.toUpperCase();
                 gameScreen();
+                frequency = data.frequency;
                 console.log(data);
             }
             else {
@@ -115,6 +119,8 @@ function gameScreen() {
     }
     // Append to the game container div
     $("#game-div").append(guessDiv, keyDiv)
+    // initialize the guess count
+    guessCount = 10;
     // Add Guess Count to header
     let guessEl = $("<p>")
         .addClass("guess-count")
@@ -136,7 +142,7 @@ $("#game-div").on("click", ".key-el", function (event) {
     // Subtract from Guess Count, if equal to zero call end game
     guessCount--;
     if (guessCount === 0) {
-        endGame(false, "4.7");
+        endGame(false, frequency);
     }
     // Update guess count on HTML
     $(".guess-count").text("Guesses Remaining: " + guessCount);
@@ -156,7 +162,7 @@ addEventListener("keydown", function (event) {
         // Subtract from Guess Count, if equal to zero call end game
         guessCount--;
         if (guessCount === 0) {
-            endGame(false, "4.7");
+            endGame(false, frequency);
         }
     }
     else {
@@ -192,7 +198,7 @@ function guessCheck(guess) {
         // If the whole word is guessed, then win
         console.log(check);
         if (check === word) {
-            endGame(true, "4.7");
+            endGame(true, frequency);
         }
     }
     // Play buzzer for wrong guess
