@@ -44,6 +44,12 @@ $("#level-div").on("click", "button", function (event) {
 })
 
 // Nolan
+// Initialization for materialize modal
+$(document).ready(function(){
+    $('.modal').modal();
+  });
+
+// Nolan
 // Wordnik API random fetch
 function randomWordFetch(level) {
     // Handle level settings
