@@ -37,7 +37,6 @@ function startGame() {
 $("#level-div").on("click", "button", function (event) {
     let btnEl = event.target;
     let level = $(btnEl).data("level");
-    console.log(`The level is ${level}`);
     // call word search function with level of word
     randomWordFetch(level);
     // Hide the level div
@@ -50,7 +49,7 @@ function randomWordFetch(level) {
     // Handle level settings
     let corpus;
     if (level === 2) {
-        corpus = `maxCorpus=300`;
+        corpus = `minCorpusCount=10&maxCorpus=300`;
     }
     else if (level === 4) {
         corpus = `minCorpusCount=301&maxCorpus=1000`;
@@ -69,9 +68,8 @@ function randomWordFetch(level) {
                 randomWordFetch(level);
             }
             else {
-                // Remove any unwanted punctuation and capitolize word
-                // const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g; .replace(regex, '')
                 frequencyWordFetch(word);
+                // Capitolize the word for game play
                 word = word.toUpperCase();
                 gameScreen();
             }
@@ -88,7 +86,6 @@ function frequencyWordFetch(word) {
         .then(data => {
             // Defines global variable for corpus frequency for current played word
             frequency = data.totalCount;
-            console.log(data);
         })
         .catch(err => console.error(err));
 }
@@ -188,6 +185,8 @@ addEventListener("keydown", function (event) {
 
 // Nolan
 // Function to check guess from user input
+// Plays a corresponding sound for correct and incorrect input
+// Calls endgame when word is guessed or user guesses run out
 function guessCheck(guess) {
     // Check if letter clicked is in the word string
     if (word.includes(guess)) {
@@ -207,9 +206,11 @@ function guessCheck(guess) {
         }
         // If the whole word is guessed, then win.  If out of guesses, lose
         if (check === word) {
+            console.log("User lost");
             endGame(true, frequency);
         }
         else if (guessCount === 0) {
+            console.log("User won");
             endGame(false, frequency);
         }
     }
