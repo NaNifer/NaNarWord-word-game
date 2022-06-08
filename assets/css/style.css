@@ -15,12 +15,6 @@ h2 {
     font-size: 32px;
 }
 
-
-#start {
-    background-color: var(--light-blue);
-
-}
-
 ol {
     line-height: 2em;
 }
@@ -28,6 +22,14 @@ ol {
 li {
     text-align: left;
     list-style-position: inside;
+}
+
+#start {
+    width: 100%;
+}
+
+#rules-div {
+    width: 60%;
 }
 
 #start-btn {
@@ -61,14 +63,35 @@ li {
     position:relative;
     height:100%;
     margin: auto;
+    display: none;
 }
 
 #level-div button {
     min-width: 300px;
 }
 
-footer {
+aside {
+    border-radius: 6px;
+    display: none;
+}
+
+#btn-div {
+    display: none;
+}
+
+footer .container {
     text-align: center;
+    color: #000;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 #restart-btn, #rules-btn {
@@ -80,7 +103,20 @@ color: black;
 padding: 10px 0px 0px 16px;
 }
 
-
+/* Keyboard Formatting */
+.guess-count{
+    color: black;
+    font-size: 14px;
+}
+.key-el, .key-pressed {
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    border: none;
+}
+#key-div {
+    margin: 40px 0px 40px 0px;
+}
 
 /* display none for stuff to be hidden on load */
 
