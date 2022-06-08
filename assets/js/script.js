@@ -4,6 +4,8 @@
 let word;
 let guessCount;
 let frequency;
+let giphyDataArray;
+let WordDefData;
 
 // Nolan
 // audio for webpage
@@ -27,7 +29,7 @@ startBtn.addEventListener("click", startGame);
 
 function startGame() {
     $("#start").hide();
-    $("#level").show();
+    $("#level-div").show();
     //   possible add/remove class instead
 }
 
@@ -90,16 +92,22 @@ function frequencyWordFetch(word) {
         .catch(err => console.error(err));
 }
 
-// Nolan
-// Function to get the dictionary definition for the word
-function merriamFetch(word) {
-    // fetch the definition
-    fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=654815a3-9693-4044-8b6a-47115bdf7017`)
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(err => console.error(err));
-}
 
+// Nifer
+// !!NOTE!!  This is a working rewrite of merriamFetch. :)
+function merriamFetch(word) {
+    return new Promise(function (resolve, reject) {
+        fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=654815a3-9693-4044-8b6a-47115bdf7017`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                resolve(data);
+            }).catch(function (error) {
+                reject(error);
+            });
+    });
+}
 
 // Nolan
 // Function to print gameplay Screen and Guess Count in Header
@@ -122,7 +130,7 @@ function gameScreen() {
     // create a key div with id=key-div
     let keyDiv = $('<div id="key-div"></div>');
     // Loop to create key button elements for keyboard
-    for (i=0; i<keys.length; i++) {
+    for (i = 0; i < keys.length; i++) {
         // New data attr adding syntax
         let keyEl = $("<button>")
             .addClass("key-el")
@@ -225,55 +233,102 @@ function guessCheck(guess) {
 // Nifer
 // Looks up giphy with input of WIN OR LOOSE, 
 // if win == search awesome, if loose == search bummer
-// then calls on displayGiphy()
-function getGiphy(query, win) {
+// then calls on endGame()
+function getGiphy(query) {
     const API_KEY = "dzRUlVy8AmnIrMfFmPikr7L2vL8qqV97";
     let requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=1`;
 
-    fetch(requestUrl)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            displayGiphy(data, win);
-        });
+    return new Promise(function (resolve, reject) {
+        fetch(requestUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                resolve(data);
+            }).catch(function (error) {
+                reject(error);
+            });
+    });
 }
 
 // Nifer
-// Displays giphy in div
-// TODO: replace "gif" with ID for html element
-function displayGiphy(data) {
-    $("#game-div").empty();
+// Checks for win/lose and prints a giphy
+function printGiphy(win) {
+
     let giphyEl = document.createElement("img");
     giphyEl.classList.add("giphyImg");
-    giphyEl.src = data.data[0].images.downsized.url;
-    document.getElementById("game-div").append(giphyEl);
-
-    // create message & word def divs, depending on win/lose
-
+    if (win) {
+        // QUESTION: Do I need to change giphyData (below) to giphyDataArray?? Scott had me change the global variable name at the top.
+        getGiphy("awesome").then(function (giphyData) {
+            giphyEl.src = giphyData.data[0].images.downsized.url;
+        })
+    }
+    else {
+        getGiphy("bummer").then(function (giphyData) {
+            console.log(giphyData);
+            giphyEl.src = giphyData.data[0].images.downsized.url;
+        })
+    }
+    return giphyEl;
 }
+
+// Nifer
+function grabWordDef(word) {
+    let revealWordEl = document.createElement("p");
+    let figSpeechEl = document.createElement("p");
+    let wordDefinition = document.createElement("p");
+    revealWordEl.classList.add("revealWord");
+    figSpeechEl.classList.add("figure-speech")
+    wordDefinition.classList.add("revealDef")
+    revealWordEl.innerText = word;
+
+    merriamFetch(word).then(function (WordDefData) {
+        wordDefinition.innerText = WordDefData[0].shortdef[0];
+        figSpeechEl.innerText = WordDefData[0].fl;
+    })
+    return [revealWordEl, figSpeechEl, wordDefinition];
+}
+
+// Nifer
+//  Creates message & word def divs, depending on win/lose
+function endGame(win) {
+    $("#game-div").empty();
+    $("#rules-btn").hide();
+    $("#restart-btn").show();
+
+    let sorryMessage = document.createElement("p");
+    let winMessage = document.createElement("p");
+    sorryMessage.classList.add("sorryMsg");
+    winMessage.classList.add("winMsg")
+    sorryMessage.innerText = "Bummer.  Click / tap the button below to try again!"
+    winMessage.innerText = "Winning!  You got it.  Your solved word has been saved.  Play again to solve another word."
+
+    // Prints gif
+    let giphyEl = printGiphy(win);
+    // Grabs the word definition and article of speech
+    let defArray = grabWordDef(word);
+
+    if (win) {
+        document.getElementById("game-div").append(giphyEl, winMessage, defArray[0], defArray[1], defArray[2]);
+    }
+    else {
+        document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[0], defArray[1], defArray[2])
+    }
+    storeWord(word, frequency);
+}
+
+// Nifer TODO:
+// Restart button , hide game div, show level div
+// reinitialize the guess count and hide guess count -- ID=#guesses  .empty()
 
 
 // Nifer
-// End of game function
-function endGame(test, win, frequency) {
-    // win true if won false if loss
-    if (!win) {
-        getGiphy("bummer", win);
-    }
-    else {
-        getGiphy("awesome", win);
-        storeWord(test, frequency);
-    }
-}
-
-
 // Accesses score board from local storage, if it exists
 let wordList = JSON.parse(localStorage.getItem("wordList")) || [];
 
 function storeWord(test, frequency) {
     let userWordInfo = {
-        wordSaved: test,
+        wordSaved: word,
         level: frequency,
     };
     wordList.push(userWordInfo);
@@ -281,3 +336,5 @@ function storeWord(test, frequency) {
     localStorage.setItem("wordList", JSON.stringify(wordList));
 }
 
+// Nifer
+// Is there a random gif query selector?
