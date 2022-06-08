@@ -118,6 +118,35 @@ function merriamFetch(word) {
 }
 
 // Nolan
+// Uses the data structure that is Fetched in merriamFetch()
+// Returns the audio src URL to add to an audio tag
+// Returns if the audio URL doesn't exist
+function merriamSound(data) {
+    let audio = data[0].hwi.prs[0].sound.audio;
+    // if audio doesn't exist then return
+    if (!audio) {
+        return;
+    }
+    // Define the subdirectory parameter using Merriam's API documentation instructions
+    let subDir;
+    if ((/\d/g).test(audio.charAt(0))) {
+        subDir = 'number';
+    }
+    if (audio.charAt(0) === 'g' && audio.charAt(1) === 'g') {
+        subDir = 'gg';
+    }
+    if (audio.charAt(0) === 'b' && audio.charAt(1) === 'i' && audio.charAt(2) === 'x') {
+        subDir = 'bix'
+    }
+    else {
+        subDir = audio[0];
+    }
+    // Return the url for the src attribute of an audio element
+    let audioUrl = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subDir}/${audio}.mp3`
+    return audioUrl;
+}
+
+// Nolan
 // Function to print gameplay Screen and Guess Count in Header
 function gameScreen() {
     // Empty the game div
