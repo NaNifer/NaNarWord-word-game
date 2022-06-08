@@ -1,9 +1,9 @@
 
 // Global Variables
 // Nolan
-var word;
-var guessCount;
-var frequency;
+let word;
+let guessCount;
+let frequency;
 
 // Nolan
 // audio for webpage
@@ -37,7 +37,6 @@ function startGame() {
 $("#level-div").on("click", "button", function (event) {
     let btnEl = event.target;
     let level = $(btnEl).data("level");
-    console.log(`The level is ${level}`);
     // call word search function with level of word
     randomWordFetch(level);
     // Hide the level div
@@ -45,34 +44,48 @@ $("#level-div").on("click", "button", function (event) {
 })
 
 // Nolan
-// Words API random fetch
+// Wordnik API random fetch
 function randomWordFetch(level) {
-    // Handle search parameters for level, from button data attribute
-    let levelMax = level + 1;
-    let levelMin = level - 1.5;
-    // Have a "has number" test to exclude "words" with numbers
-    // console.log(hasNumber.test("ABC33SDF"));  //true
-    const hasNumber = /\d/;
-
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com',
-            'X-RapidAPI-Key': '4d97b98fbamshd06a775c8ed3df9p1429d2jsnbf625cf74463'
-        }
-    };
-    fetch(`https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=4&lettersMax=7/definitions`, options)
+    // Handle level settings
+    let corpus;
+    if (level === 2) {
+        corpus = `minCorpusCount=10&maxCorpus=300`;
+    }
+    else if (level === 4) {
+        corpus = `minCorpusCount=301&maxCorpus=1000`;
+    }
+    else {
+        corpus = `minCorpusCount=10000`;
+    }
+    const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
+    fetch(`https://api.wordnik.com/v4/words.json/randomWord?excludePartOfSpeech=proper-noun&${corpus}&minLength=4&maxLength=7&api_key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
-            if (data.frequency < levelMax && data.frequency > levelMin && !hasNumber.test(word)) {
-                word = data.word.toUpperCase();
-                gameScreen();
-                frequency = data.frequency;
-                console.log(data);
-            }
-            else {
+            word = data.word;
+            console.log(word);
+            // don't allow proper nouns
+            if (word.charAt(0) === word.charAt(0).toUpperCase() || /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/.test(word)) {
                 randomWordFetch(level);
             }
+            else {
+                frequencyWordFetch(word);
+                // Capitolize the word for game play
+                word = word.toUpperCase();
+                gameScreen();
+            }
+        })
+        .catch(err => console.error(err));
+}
+
+// Nolan
+// Wordnik API frequency fetch
+function frequencyWordFetch(word) {
+    const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
+    fetch(`https://api.wordnik.com/v4/word.json/${word}/frequency?api_key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            // Defines global variable for corpus frequency for current played word
+            frequency = data.totalCount;
         })
         .catch(err => console.error(err));
 }
@@ -137,13 +150,10 @@ $("#game-div").on("click", ".key-el", function (event) {
     $(btnEl).removeClass("key-el").addClass("key-pressed");
     // Store buttons data-letter as guess
     let guess = $(btnEl).data("letter");
-    // Call guessCheck to check guess
-    guessCheck(guess);
     // Subtract from Guess Count, if equal to zero call end game
     guessCount--;
-    if (guessCount === 0) {
-        endGame(false, frequency);
-    }
+    // Call guessCheck to check guess
+    guessCheck(guess);
     // Update guess count on HTML
     $(".guess-count").text("Guesses Remaining: " + guessCount);
 });
@@ -157,13 +167,10 @@ addEventListener("keydown", function (event) {
     let btnEl = $(`button[data-letter="${guess}"]`);
     // If the key hasn't been pressed continue
     if ($(btnEl).attr("class").includes("key-el")) {
+        // Subtract from Guess Count
+        guessCount--;
         // Call guessCheck to check guess
         guessCheck(guess);
-        // Subtract from Guess Count, if equal to zero call end game
-        guessCount--;
-        if (guessCount === 0) {
-            endGame(false, frequency);
-        }
     }
     else {
         return;
@@ -178,6 +185,8 @@ addEventListener("keydown", function (event) {
 
 // Nolan
 // Function to check guess from user input
+// Plays a corresponding sound for correct and incorrect input
+// Calls endgame when word is guessed or user guesses run out
 function guessCheck(guess) {
     // Check if letter clicked is in the word string
     if (word.includes(guess)) {
@@ -195,10 +204,14 @@ function guessCheck(guess) {
             // create check word string
             check = check + $(slotEl[i]).text();
         }
-        // If the whole word is guessed, then win
-        console.log(check);
+        // If the whole word is guessed, then win.  If out of guesses, lose
         if (check === word) {
+            console.log("User lost");
             endGame(true, frequency);
+        }
+        else if (guessCount === 0) {
+            console.log("User won");
+            endGame(false, frequency);
         }
     }
     // Play buzzer for wrong guess
