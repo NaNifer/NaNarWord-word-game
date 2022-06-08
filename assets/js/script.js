@@ -381,17 +381,17 @@ function endGame(win) {
 
 // Nifer
 // Accesses score board from local storage, if it exists
-let wordList = JSON.parse(localStorage.getItem("wordList")) || [];
+// let wordList = JSON.parse(localStorage.getItem("wordList")) || [];
 
-function storeWord(test, frequency) {
-    let userWordInfo = {
-        wordSaved: word,
-        level: frequency,
-    };
-    wordList.push(userWordInfo);
-    wordList.sort((a, b) => a.level - b.level);
-    localStorage.setItem("wordList", JSON.stringify(wordList));
-}
+// function storeWord(test, frequency) {
+//     let userWordInfo = {
+//         wordSaved: word,
+//         level: frequency,
+//     };
+//     wordList.push(userWordInfo);
+//     wordList.sort((a, b) => a.level - b.level);
+//     localStorage.setItem("wordList", JSON.stringify(wordList));
+// }
 
 // Nifer
 // Is there a random gif query selector?
