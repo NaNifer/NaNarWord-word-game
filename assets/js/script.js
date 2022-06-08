@@ -212,6 +212,10 @@ addEventListener("keydown", function (event) {
     if (guess.charCodeAt(0) > 90 || guess.charCodeAt(0) < 65 || guess.length > 1) {
         return;
     }
+    // return if the user is not currently in gameplay (avoid errors in console)
+    if (guessCount === 0) {
+        return;
+    }
     // Target specific button that has guess as data-attribute
     let btnEl = $(`button[data-letter="${guess}"]`);
     // If the key hasn't been pressed continue
