@@ -43,7 +43,15 @@ $("#level-div").on("click", "button", function (event) {
     randomWordFetch(level);
     // Hide the level div
     $("#level-div").hide();
+    // Show button div and appropriate buttons
+    $("#btn-div").show();
 })
+
+// Nolan
+// Initialization for materialize modal
+$(document).ready(function(){
+    $('.modal').modal();
+  });
 
 // Nolan
 // Wordnik API random fetch
@@ -171,6 +179,10 @@ $("#game-div").on("click", ".key-el", function (event) {
 addEventListener("keydown", function (event) {
     // store guess as uppercase letter
     let guess = event.key.toUpperCase();
+    // don't allow any non-letter characters
+    if (guess.charCodeAt(0) > 90 || guess.charCodeAt(0) < 65 || guess.length > 1) {
+        return;
+    }
     // Target specific button that has guess as data-attribute
     let btnEl = $(`button[data-letter="${guess}"]`);
     // If the key hasn't been pressed continue
@@ -214,12 +226,8 @@ function guessCheck(guess) {
         }
         // If the whole word is guessed, then win.  If out of guesses, lose
         if (check === word) {
-            console.log("User lost");
-            endGame(true, frequency);
-        }
-        else if (guessCount === 0) {
             console.log("User won");
-            endGame(false, frequency);
+            endGame(true, frequency);
         }
     }
     // Play buzzer for wrong guess
@@ -227,6 +235,11 @@ function guessCheck(guess) {
         audioBuzzer.pause();
         audioBuzzer.currentTime = 0;
         audioBuzzer.play();
+    }
+    // lose if out of guesses
+    if (guessCount === 0) {
+        console.log("User lost");
+        endGame(false, frequency);
     }
 }
 
