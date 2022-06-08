@@ -43,6 +43,8 @@ $("#level-div").on("click", "button", function (event) {
     randomWordFetch(level);
     // Hide the level div
     $("#level-div").hide();
+    // Show button div and appropriate buttons
+    $("#btn-div").show();
 })
 
 // Nolan
