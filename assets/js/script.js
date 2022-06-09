@@ -247,6 +247,8 @@ function guessCheck(guess) {
         audioPop.pause();
         audioPop.currentTime = 0;
         audioPop.play();
+        // Change class of corresponding letter guess button for correct input
+        $(`#key-div > [data-letter=${guess}]`).addClass("key-correct");
         // loop to fill in the correct letter spaces on HTML
         let slotEl = $("#guess-div").children();
         let check = '';
@@ -268,11 +270,13 @@ function guessCheck(guess) {
             }, 2000)
         }
     }
-    // Play buzzer for wrong guess
+    // Incorrect Guess case
     else {
         audioBuzzer.pause();
         audioBuzzer.currentTime = 0;
         audioBuzzer.play();
+        // Change class of corresponding letter guess button for correct input
+        $(`#key-div > [data-letter=${guess}]`).addClass("key-wrong");
     }
     // lose if out of guesses
     if (guessCount === 0) {
