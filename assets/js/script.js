@@ -33,6 +33,15 @@ function startGame() {
     //   possible add/remove class instead
 }
 
+// Nolan
+// restart button event listener
+$("#restart-btn").on("click", function() {
+    // Hide game div and button div
+    $("#game-div").empty();
+    $("#game-div").hide();
+    $("#btn-div").hide();
+    $("#level-div").show();
+})
 
 // Nolan
 // Event Listener for Level Selection
