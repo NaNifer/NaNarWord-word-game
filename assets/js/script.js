@@ -17,7 +17,7 @@ let audioBuzzer = new Audio("./assets/sound/buzzer.wav");
 audioBuzzer.volume = 0.3;
 // Sound for winning game
 let audioSuccess = new Audio("./assets/sound/success.wav");
-audioSuccess.volume = .5;
+audioSuccess.volume = .45;
 // Sound for losing game
 let audioFailure = new Audio("./assets/sound/failure.wav");
 audioFailure.volume = .6;
