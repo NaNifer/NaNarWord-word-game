@@ -1,7 +1,7 @@
 // Accesses score board from local storage, if it exists
 let wordList = JSON.parse(localStorage.getItem("wordList")) || [];
 
-function storeWord(test, frequency) {
+function storeWord(word, frequency) {
     let userWordInfo = {
         wordSaved: word,
         level: frequency,
@@ -15,21 +15,16 @@ function storeWord(test, frequency) {
 
 // Creagte onclick, render the wordBoard
 function renderWordBoard(wordList) {
-    let wordBoardEl = document.getElementById("wordBoard");
+
+    let wordBoardEl = document.getElementById("top-10");
     let wordListBtn = document.createElement("button");
     wordListBtn.classList.add("btn");
 
-    while (wordBoardEl.lastChild) {
-        wordBoardEl.removeChild(wordBoardEl.lastChild);
-    }
-    for (let i = 0; i < 10 && wordList.length; i++) {
-
-        console.log(wordList[i].word);
-
+    for (let i = 0; i <= 10 && wordList.length; i++) {
         let buttonData = `
         <button class="btn" id="wordbutton" type="button">
-            ${wordList[i].word}
-            <span>${wordList[i].frequency}</span>
+            ${wordList[i].wordSaved}
+            <span>${wordList[i].level}</span>
         </button>
         `
         wordListBtn.innerHTML += buttonData;
