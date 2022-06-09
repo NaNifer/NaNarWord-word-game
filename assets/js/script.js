@@ -259,8 +259,13 @@ function guessCheck(guess) {
         }
         // If the whole word is guessed, then win.  If out of guesses, lose
         if (check === word) {
-            console.log("User won");
-            endGame(true, frequency);
+            // set a timeout function to allow user to briefly view finished word
+            setTimeout(() => {
+                // set guesscount to 0 so that keyboard event listener will be returned when not in gameplay
+                guessCount = 0;
+                console.log("User won");
+                endGame(true, frequency);
+            }, 2000)
         }
     }
     // Play buzzer for wrong guess
