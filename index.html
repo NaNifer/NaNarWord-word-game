@@ -16,7 +16,9 @@
         <!-- Logo and header here. -->
         <nav class="z-depth-0">
             <div class="nav-wrapper grey lighten-4">
-              <a href="#" class="brand-logo left"><h6><b>NaN</b>ar<b>WORD</b></h6></a>
+                <a href="#" class="brand-logo left">
+                    <h6><b>NaN</b>ar<b>WORD</b></h6>
+                </a>
                 <div id="guesses"></div>
                 <!-- <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
                 <!-- <li><a href="sass.html">Sass</a></li>
@@ -40,9 +42,10 @@
                         <li>Lost, and there shall be dire consequences! 😱 (Jk!)</li>
                     </ol>
                 </div>
-                <div clas="col s12 m12 l12 center-align" id="ready-div">
+                <div class="col s12 m12 l12 center-align" id="ready-div">
                     <p>Ready to play? Click start to get goin'!</p>
-                    <button class="waves-effect waves-light btn-large #42a5f5 blue lighten-1 center-align" id="start-btn">
+                    <button class="waves-effect waves-light btn-large #42a5f5 blue lighten-1 center-align"
+                        id="start-btn">
                         Start
                     </button>
                 </div>
@@ -52,25 +55,30 @@
         <!-- Choose your level. -->
         <section class="col s12 m12 l12 center-align" id="level-div">
             <h2>Choose your level!</h2>
-            <button class="waves-effect waves-light btn-large teal lighten-4" id="easy" data-level="6">Common Words</button>
-            <button class="waves-effect waves-light btn-large amber accent-2" id="med" data-level="4">Not-So-Common Words</button>
-            <button class="waves-effect waves-light btn-large purple accent-4" id="hard" data-level="2">WTF Does That Mean?</button>
+            <button class="waves-effect waves-light btn-large teal lighten-4" id="easy" data-level="6">Common
+                Words</button>
+            <button class="waves-effect waves-light btn-large amber accent-2" id="med" data-level="4">Not-So-Common
+                Words</button>
+            <button class="waves-effect waves-light btn-large purple accent-4" id="hard" data-level="2">WTF Does That
+                Mean?</button>
         </section>
 
         <!-- Game play div here. -->
         <!-- Will turn into the results div at end of game. -->
-        <section class=" col s12 m12 l12 center-align" id="game-div">
+        <div class="row">
+            <section class="col s12 m12 l12 center-align" id="game-div">
+            </section>
 
-        </section>
-
-        <!-- Reusable buttons -->
-        <section class="row" id="btn-div">
-            <button class="waves-effect waves-light btn-large grey lighten-1" id="restart-btn">New Game</button>
-            <a href="#modal1"></a>
-            <button class="waves-effect waves-light btn-large btn modal-trigger grey lighten-1" data-target="modal1" id="rules-btn">How
-                does this work again? 🤔</button>
-            </a>
-        </section>
+            <!-- Reusable buttons -->
+            <section class="" id="btn-div">
+                <button class="waves-effect waves-light btn-large grey lighten-1" id="restart-btn">New Game</button>
+                <a href="#modal1"></a>
+                <button class="waves-effect waves-light btn-large btn modal-trigger grey lighten-1" data-target="modal1"
+                    id="rules-btn">How
+                    does this work again? 🤔</button>
+                </a>
+            </section>
+        </div>
 
         <!-- Rules reminder modal -->
         <div id="modal1" class="modal">
@@ -103,11 +111,11 @@
             </div>
         </div>
         <div class="footer-copyright">
-          <div class="container">
-          © 2022 Team NaNarwhal
-          </div>
+            <div class="container">
+                © 2022 Team NaNarwhal
+            </div>
         </div>
-      </footer>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
