@@ -39,6 +39,7 @@ function startGame() {
 $("#level-div").on("click", "button", function (event) {
     let btnEl = event.target;
     let level = $(btnEl).data("level");
+    console.log("User level: " + level);
     // call word search function with level of word
     randomWordFetch(level);
     // Hide the level div
@@ -59,22 +60,22 @@ function randomWordFetch(level) {
     // Handle level settings
     let corpus;
     if (level === 2) {
-        corpus = `minCorpusCount=10&maxCorpus=300`;
+        corpus = `minCorpusCount=10&maxCorpusCount=400`;
     }
     else if (level === 4) {
-        corpus = `minCorpusCount=301&maxCorpus=1000`;
+        corpus = `minCorpusCount=401&maxCorpusCount=9999`;
     }
     else {
         corpus = `minCorpusCount=10000`;
     }
     const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
-    fetch(`https://api.wordnik.com/v4/words.json/randomWord?excludePartOfSpeech=proper-noun&${corpus}&minLength=4&maxLength=7&api_key=${apiKey}`)
+    fetch(`https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&${corpus}&minLength=4&maxLength=7&api_key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
             word = data.word;
             console.log(word);
             // don't allow proper nouns
-            if (word.charAt(0) === word.charAt(0).toUpperCase() || /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/.test(word)) {
+            if (word.charAt(0) === word.charAt(0).toUpperCase() || /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]/.test(word)) {
                 randomWordFetch(level);
             }
             else {
@@ -96,6 +97,7 @@ function frequencyWordFetch(word) {
         .then(data => {
             // Defines global variable for corpus frequency for current played word
             frequency = data.totalCount;
+            console.log("The frequency is: " + frequency);
         })
         .catch(err => console.error(err));
 }
