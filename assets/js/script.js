@@ -24,7 +24,7 @@ audioBuzzer.volume = 0.3;
 // // start button event listener
 // Nifer
 // start button event listener
-var startBtn = document.getElementById("start");
+var startBtn = document.getElementById("start-btn");
 startBtn.addEventListener("click", startGame);
 
 function startGame() {
@@ -50,9 +50,9 @@ $("#level-div").on("click", "button", function (event) {
 
 // Nolan
 // Initialization for materialize modal
-$(document).ready(function(){
+$(document).ready(function () {
     $('.modal').modal();
-  });
+});
 
 // Nolan
 // Wordnik API random fetch
@@ -377,21 +377,3 @@ function endGame(win) {
 // Nifer TODO:
 // Restart button , hide game div, show level div
 // reinitialize the guess count and hide guess count -- ID=#guesses  .empty()
-
-
-// Nifer
-// Accesses score board from local storage, if it exists
-let wordList = JSON.parse(localStorage.getItem("wordList")) || [];
-
-function storeWord(test, frequency) {
-    let userWordInfo = {
-        wordSaved: word,
-        level: frequency,
-    };
-    wordList.push(userWordInfo);
-    wordList.sort((a, b) => a.level - b.level);
-    localStorage.setItem("wordList", JSON.stringify(wordList));
-}
-
-// Nifer
-// Is there a random gif query selector?
