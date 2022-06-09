@@ -36,10 +36,12 @@ function startGame() {
 // Nolan
 // restart button event listener
 $("#restart-btn").on("click", function() {
-    // Hide game div and button div
+    // Hide game div and button div and aside
     $("#game-div").empty();
     $("#game-div").hide();
     $("#btn-div").hide();
+    $("#aside").hide();
+    // Show the level selection to start new game
     $("#level-div").show();
 })
 
@@ -53,8 +55,9 @@ $("#level-div").on("click", "button", function (event) {
     randomWordFetch(level);
     // Hide the level div
     $("#level-div").hide();
-    // Show button div and appropriate buttons
+    // Show button div and aside
     $("#btn-div").show();
+    $("#aside").show();
 })
 
 // Nolan
@@ -162,6 +165,7 @@ function merriamSound(data) {
 function gameScreen() {
     // Empty the game div
     $("#game-div").empty();
+    $("#game-div").show();
     // Create a div element to hold the guessing letters
     let guessDiv = $('<div id="guess-div"></div>');
     // Loop to create Empty word elements to guess
@@ -275,6 +279,8 @@ function guessCheck(guess) {
             setTimeout(() => {
                 // set guesscount to 0 so that keyboard event listener will be returned when not in gameplay
                 guessCount = 0;
+                // empty the guess count container
+                $("#guesses").empty();
                 console.log("User won");
                 endGame(true, frequency);
             }, 2000)
@@ -290,6 +296,8 @@ function guessCheck(guess) {
     }
     // lose if out of guesses
     if (guessCount === 0) {
+        // empty the guess count container
+        $("#guesses").empty();
         console.log("User lost");
         endGame(false, frequency);
     }
