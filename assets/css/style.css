@@ -139,22 +139,41 @@ padding: 10px 0px 0px 16px;
     height: 40px;
     margin: 2px;
     border: none;
+    border-radius: 4px;
 }
+
+.key-el {
+    background-color: rgb(213, 213, 213);
+}
+
+.key-el:hover {
+background-color:rgb(198, 196, 196)
+}
+
+.key-wrong {
+    color:#cbcbcb;
+    background-color: #ebebeb;
+}
+
+.key-correct {
+    background-color:#ffd740;
+}
+
+.guess-el {
+    border-bottom: 4px solid black;
+    min-height: 50px;
+    /* margin: 100px 20px 20px 20px; */
+    display: inline-block;
+    margin: 6px;
+    min-width: 50px;
+}
+
+#guess-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
 #key-div {
-    margin: 40px 0px 40px 0px;
+    margin: 40px 0px 80px 0px;
 }
-
-/* display none for stuff to be hidden on load */
-
-/* 
-
-button not click: .key-el
-button been click: .key-pressed
-
-the empty blocks:
-guess-el
-
-
-
-
-*/

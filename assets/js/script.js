@@ -160,7 +160,6 @@ function gameScreen() {
         let guess = $("<h2>")
             .addClass("guess-el")
             .data("letter", word[i])
-            .css({ "border-bottom": "8px solid black", "display": "inline-block", "width": "75px", "margin": "0 10px" });
         guessDiv.append(guess);
     }
     // Create array of uppercased letters
