@@ -10,15 +10,17 @@ let WordDefData;
 // Nolan
 // audio for webpage
 // Sound for user input letter guesses
-let audioPop = document.createElement("AUDIO");
-document.body.appendChild(audioPop);
-audioPop.src = "./assets/sound/pop.mp3";
+let audioPop = new Audio("./assets/sound/pop.mp3");
 audioPop.volume = 0.6;
 // Sound for wrong user input letter guesses
-let audioBuzzer = document.createElement("AUDIO");
-document.body.appendChild(audioBuzzer);
-audioBuzzer.src = "./assets/sound/buzzer.wav";
+let audioBuzzer = new Audio("./assets/sound/buzzer.wav");
 audioBuzzer.volume = 0.3;
+// Sound for winning game
+let audioSuccess = new Audio("./assets/sound/success.wav");
+audioSuccess.volume = .5;
+// Sound for losing game
+let audioFailure = new Audio("./assets/sound/failure.wav");
+audioFailure.volume = .6;
 
 
 // // start button event listener
@@ -275,6 +277,8 @@ function guessCheck(guess) {
         }
         // If the whole word is guessed, then win.  If out of guesses, lose
         if (check === word) {
+            // Play the success sound!
+            audioSuccess.play();
             // set a timeout function to allow user to briefly view finished word
             setTimeout(() => {
                 // set guesscount to 0 so that keyboard event listener will be returned when not in gameplay
@@ -296,6 +300,8 @@ function guessCheck(guess) {
     }
     // lose if out of guesses
     if (guessCount === 0) {
+        // Play the failure sound!
+        audioFailure.play();
         // empty the guess count container
         $("#guesses").empty();
         console.log("User lost");
