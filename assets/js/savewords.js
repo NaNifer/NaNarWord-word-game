@@ -17,14 +17,14 @@ function storeWord(word, frequency) {
 function renderWordBoard(wordList) {
 
     let wordBoardEl = document.getElementById("top-10");
-    let wordListBtn = document.createElement("button");
-    wordListBtn.classList.add("btn");
+    let wordListBtn = document.createElement("div");
+    wordListBtn.classList.add("wordButtonContainer");
 
-    for (let i = 0; i <= 10 && wordList.length; i++) {
+    for (let i = 0; i <= 10 && i < wordList.length; i++) {
         let buttonData = `
         <button class="btn" id="wordbutton" type="button">
-            ${wordList[i].wordSaved}
-            <span>${wordList[i].level}</span>
+        <span id="rarity-rating">Rarity Rating: ${Math.ceil(wordList[i].level / 10) * 10}</span>
+         ${wordList[i].wordSaved}  
         </button>
         `
         wordListBtn.innerHTML += buttonData;
