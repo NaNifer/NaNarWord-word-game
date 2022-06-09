@@ -39,6 +39,7 @@ function startGame() {
 $("#level-div").on("click", "button", function (event) {
     let btnEl = event.target;
     let level = $(btnEl).data("level");
+    console.log("User level: " + level);
     // call word search function with level of word
     randomWordFetch(level);
     // Hide the level div
@@ -59,22 +60,22 @@ function randomWordFetch(level) {
     // Handle level settings
     let corpus;
     if (level === 2) {
-        corpus = `minCorpusCount=10&maxCorpus=300`;
+        corpus = `minCorpusCount=10&maxCorpusCount=400`;
     }
     else if (level === 4) {
-        corpus = `minCorpusCount=301&maxCorpus=1000`;
+        corpus = `minCorpusCount=401&maxCorpusCount=9999`;
     }
     else {
         corpus = `minCorpusCount=10000`;
     }
     const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
-    fetch(`https://api.wordnik.com/v4/words.json/randomWord?excludePartOfSpeech=proper-noun&${corpus}&minLength=4&maxLength=7&api_key=${apiKey}`)
+    fetch(`https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&${corpus}&minLength=4&maxLength=7&api_key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
             word = data.word;
             console.log(word);
             // don't allow proper nouns
-            if (word.charAt(0) === word.charAt(0).toUpperCase() || /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/.test(word)) {
+            if (word.charAt(0) === word.charAt(0).toUpperCase() || /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]/.test(word)) {
                 randomWordFetch(level);
             }
             else {
@@ -96,6 +97,7 @@ function frequencyWordFetch(word) {
         .then(data => {
             // Defines global variable for corpus frequency for current played word
             frequency = data.totalCount;
+            console.log("The frequency is: " + frequency);
         })
         .catch(err => console.error(err));
 }
@@ -115,6 +117,35 @@ function merriamFetch(word) {
                 reject(error);
             });
     });
+}
+
+// Nolan
+// Uses the data structure that is Fetched in merriamFetch()
+// Returns the audio src URL to add to an audio tag
+// Returns if the audio URL doesn't exist
+function merriamSound(data) {
+    let audio = data[0].hwi.prs[0].sound.audio;
+    // if audio doesn't exist then return
+    if (!audio) {
+        return;
+    }
+    // Define the subdirectory parameter using Merriam's API documentation instructions
+    let subDir;
+    if ((/\d/g).test(audio.charAt(0))) {
+        subDir = 'number';
+    }
+    if (audio.charAt(0) === 'g' && audio.charAt(1) === 'g') {
+        subDir = 'gg';
+    }
+    if (audio.charAt(0) === 'b' && audio.charAt(1) === 'i' && audio.charAt(2) === 'x') {
+        subDir = 'bix'
+    }
+    else {
+        subDir = audio[0];
+    }
+    // Return the url for the src attribute of an audio element
+    let audioUrl = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subDir}/${audio}.mp3`
+    return audioUrl;
 }
 
 // Nolan
@@ -183,6 +214,10 @@ addEventListener("keydown", function (event) {
     if (guess.charCodeAt(0) > 90 || guess.charCodeAt(0) < 65 || guess.length > 1) {
         return;
     }
+    // return if the user is not currently in gameplay (avoid errors in console)
+    if (guessCount === 0) {
+        return;
+    }
     // Target specific button that has guess as data-attribute
     let btnEl = $(`button[data-letter="${guess}"]`);
     // If the key hasn't been pressed continue
@@ -214,6 +249,8 @@ function guessCheck(guess) {
         audioPop.pause();
         audioPop.currentTime = 0;
         audioPop.play();
+        // Change class of corresponding letter guess button for correct input
+        $(`#key-div > [data-letter=${guess}]`).addClass("key-correct");
         // loop to fill in the correct letter spaces on HTML
         let slotEl = $("#guess-div").children();
         let check = '';
@@ -226,15 +263,22 @@ function guessCheck(guess) {
         }
         // If the whole word is guessed, then win.  If out of guesses, lose
         if (check === word) {
-            console.log("User won");
-            endGame(true, frequency);
+            // set a timeout function to allow user to briefly view finished word
+            setTimeout(() => {
+                // set guesscount to 0 so that keyboard event listener will be returned when not in gameplay
+                guessCount = 0;
+                console.log("User won");
+                endGame(true, frequency);
+            }, 2000)
         }
     }
-    // Play buzzer for wrong guess
+    // Incorrect Guess case
     else {
         audioBuzzer.pause();
         audioBuzzer.currentTime = 0;
         audioBuzzer.play();
+        // Change class of corresponding letter guess button for correct input
+        $(`#key-div > [data-letter=${guess}]`).addClass("key-wrong");
     }
     // lose if out of guesses
     if (guessCount === 0) {
