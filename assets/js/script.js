@@ -351,6 +351,7 @@ function printGiphy(win) {
 }
 
 // Nifer
+//  Calls on definition from merriamFetch(), and creates elements
 function grabWordDef(word) {
     let revealWordEl = document.createElement("p");
     let figSpeechEl = document.createElement("p");
@@ -368,7 +369,7 @@ function grabWordDef(word) {
 }
 
 // Nifer
-//  Creates message & word def divs, depending on win/lose
+//  Creates message & displays word def divs, depending on win/lose
 function endGame(win) {
     $("#game-div").empty();
     $("#rules-btn").hide();
@@ -383,7 +384,7 @@ function endGame(win) {
 
     // Prints gif
     let giphyEl = printGiphy(win);
-    // Grabs the word definition and article of speech
+    // Grabs the word definition and article of speech and puts it in array
     let defArray = grabWordDef(word);
 
     if (win) {
