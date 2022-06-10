@@ -339,13 +339,13 @@ function printGiphy(win) {
     if (win) {
         // QUESTION: Do I need to change giphyData (below) to giphyDataArray?? Scott had me change the global variable name at the top.
         getGiphy("awesome").then(function (giphyData) {
-            giphyEl.src = giphyData.data[randomSelection].images.downsized.url;
+            console.log(giphyData);
+            giphyEl.src = giphyData.data[randomSelection].images.fixed_height.url;
         })
     }
     else {
         getGiphy("bummer").then(function (giphyData) {
-            console.log(giphyData);
-            giphyEl.src = giphyData.data[randomSelection].images.downsized.url;
+            giphyEl.src = giphyData.data[randomSelection].images.fixed_height.url;
         })
     }
     return giphyEl;
