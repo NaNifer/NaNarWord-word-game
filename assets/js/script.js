@@ -88,7 +88,7 @@ function randomWordFetch(level) {
         .then(data => {
             word = data.word;
             console.log(word);
-            // don't allow proper nouns
+            // don't allow proper nouns or words with special characters
             if (word.charAt(0) === word.charAt(0).toUpperCase() || /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]/.test(word)) {
                 randomWordFetch(level);
             }
@@ -220,6 +220,7 @@ $("#game-div").on("click", ".key-el", function (event) {
 });
 
 // Nolan
+// Guess Event Listener
 // Event Listener for keyboard input
 addEventListener("keydown", function (event) {
     // store guess as uppercase letter
