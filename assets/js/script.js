@@ -39,6 +39,8 @@ function startGame() {
 // restart button event listener
 $("#restart-btn").on("click", function() {
     // Hide game div and button div and aside
+    // Empty the game div and guess div
+    $("#guesses").empty();
     $("#game-div").empty();
     $("#game-div").hide();
     $("#btn-div").hide();
