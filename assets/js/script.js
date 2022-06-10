@@ -10,15 +10,17 @@ let WordDefData;
 // Nolan
 // audio for webpage
 // Sound for user input letter guesses
-let audioPop = document.createElement("AUDIO");
-document.body.appendChild(audioPop);
-audioPop.src = "./assets/sound/pop.mp3";
+let audioPop = new Audio("./assets/sound/pop.mp3");
 audioPop.volume = 0.6;
 // Sound for wrong user input letter guesses
-let audioBuzzer = document.createElement("AUDIO");
-document.body.appendChild(audioBuzzer);
-audioBuzzer.src = "./assets/sound/buzzer.wav";
+let audioBuzzer = new Audio("./assets/sound/buzzer.wav");
 audioBuzzer.volume = 0.3;
+// Sound for winning game
+let audioSuccess = new Audio("./assets/sound/success.wav");
+audioSuccess.volume = .45;
+// Sound for losing game
+let audioFailure = new Audio("./assets/sound/failure.wav");
+audioFailure.volume = .6;
 
 
 // // start button event listener
@@ -33,6 +35,17 @@ function startGame() {
     //   possible add/remove class instead
 }
 
+// Nolan
+// restart button event listener
+$("#restart-btn").on("click", function() {
+    // Hide game div and button div and aside
+    $("#game-div").empty();
+    $("#game-div").hide();
+    $("#btn-div").hide();
+    $("#aside").hide();
+    // Show the level selection to start new game
+    $("#level-div").show();
+})
 
 // Nolan
 // Event Listener for Level Selection
@@ -44,8 +57,9 @@ $("#level-div").on("click", "button", function (event) {
     randomWordFetch(level);
     // Hide the level div
     $("#level-div").hide();
-    // Show button div and appropriate buttons
+    // Show button div and aside
     $("#btn-div").show();
+    $("#aside").show();
 })
 
 // Nolan
@@ -74,7 +88,7 @@ function randomWordFetch(level) {
         .then(data => {
             word = data.word;
             console.log(word);
-            // don't allow proper nouns
+            // don't allow proper nouns or words with special characters
             if (word.charAt(0) === word.charAt(0).toUpperCase() || /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]/.test(word)) {
                 randomWordFetch(level);
             }
@@ -153,6 +167,7 @@ function merriamSound(data) {
 function gameScreen() {
     // Empty the game div
     $("#game-div").empty();
+    $("#game-div").show();
     // Create a div element to hold the guessing letters
     let guessDiv = $('<div id="guess-div"></div>');
     // Loop to create Empty word elements to guess
@@ -196,8 +211,6 @@ $("#game-div").on("click", ".key-el", function (event) {
     $(btnEl).removeClass("key-el").addClass("key-pressed");
     // Store buttons data-letter as guess
     let guess = $(btnEl).data("letter");
-    // Subtract from Guess Count, if equal to zero call end game
-    guessCount--;
     // Call guessCheck to check guess
     guessCheck(guess);
     // Update guess count on HTML
@@ -205,6 +218,7 @@ $("#game-div").on("click", ".key-el", function (event) {
 });
 
 // Nolan
+// Guess Event Listener
 // Event Listener for keyboard input
 addEventListener("keydown", function (event) {
     // store guess as uppercase letter
@@ -221,8 +235,6 @@ addEventListener("keydown", function (event) {
     let btnEl = $(`button[data-letter="${guess}"]`);
     // If the key hasn't been pressed continue
     if ($(btnEl).attr("class").includes("key-el")) {
-        // Subtract from Guess Count
-        guessCount--;
         // Call guessCheck to check guess
         guessCheck(guess);
     }
@@ -262,10 +274,14 @@ function guessCheck(guess) {
         }
         // If the whole word is guessed, then win.  If out of guesses, lose
         if (check === word) {
+            // Play the success sound!
+            audioSuccess.play();
             // set a timeout function to allow user to briefly view finished word
             setTimeout(() => {
                 // set guesscount to 0 so that keyboard event listener will be returned when not in gameplay
                 guessCount = 0;
+                // empty the guess count container
+                $("#guesses").empty();
                 console.log("User won");
                 endGame(true, frequency);
             }, 2000)
@@ -276,11 +292,17 @@ function guessCheck(guess) {
         audioBuzzer.pause();
         audioBuzzer.currentTime = 0;
         audioBuzzer.play();
+        // subtract from guess count
+        guessCount--;
         // Change class of corresponding letter guess button for correct input
         $(`#key-div > [data-letter=${guess}]`).addClass("key-wrong");
     }
     // lose if out of guesses
     if (guessCount === 0) {
+        // Play the failure sound!
+        audioFailure.play();
+        // empty the guess count container
+        $("#guesses").empty();
         console.log("User lost");
         endGame(false, frequency);
     }
