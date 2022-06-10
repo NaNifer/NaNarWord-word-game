@@ -2,7 +2,7 @@
 // Global Variables
 // Nolan
 let word;
-let guessCount;
+let guessCount = 0;
 let frequency;
 let giphyDataArray;
 let WordDefData;
@@ -117,6 +117,24 @@ function frequencyWordFetch(word) {
         .catch(err => console.error(err));
 }
 
+// Nolan
+// Wordnik API defintition fetch for website URL
+function wordnikFetch(word) {
+    return new Promise(function (resolve, reject) {
+        const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
+        fetch(`https://api.wordnik.com/v4/word.json/${word}/definitions?limit=1&includeRelated=false&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=${apiKey}`)
+
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                resolve(data);
+            }).catch(function (error) {
+                reject(error);
+            });
+    });
+};
+
 
 // Nifer
 // !!NOTE!!  This is a working rewrite of merriamFetch. :)
@@ -126,10 +144,26 @@ function merriamFetch(word) {
             .then(function (response) {
                 return response.json();
             })
-            .then(function (data) {
-                resolve(data);
-            }).catch(function (error) {
-                reject(error);
+            .then(async function (data) {
+                console.log(data, "129");
+                // Check to make sure data returned is full object not array of strings
+                if (typeof data[0] === 'object') {
+                    let goodFetch = true;
+                    let merriamArray = [data, goodFetch]
+                    resolve(merriamArray);
+                }
+                if (typeof data[0] === 'string') {
+                    let wordnikData = await wordnikFetch(word.toLowerCase());
+                    let goodFetch = false;
+                    let merriamArray = [wordnikData, goodFetch];
+                    resolve(merriamArray);
+                }
+            }).catch(async function (error) {
+                console.log("error in catch for merriam" + error);
+                let wordnikData = await wordnikFetch(word.toLowerCase());
+                let goodFetch = false;
+                let merriamArray = [wordnikData, goodFetch];
+                reject(merriamArray);
             });
     });
 }
@@ -355,25 +389,43 @@ function printGiphy(win) {
 }
 
 // Nifer
-function grabWordDef(word) {
+// make async so that it wait for the definition fetch
+async function grabWordDef(word) {
     let revealWordEl = document.createElement("p");
     let figSpeechEl = document.createElement("p");
     let wordDefinition = document.createElement("p");
+    let wordnikLink = document.createElement("a");
+    let wordnikHeader = document.createElement("p");
+    wordnikHeader.innerText = "Merriam Webster doesn't have a definition, check out Wordnik API's web entry:";
     revealWordEl.classList.add("revealWord");
-    figSpeechEl.classList.add("figure-speech")
-    wordDefinition.classList.add("revealDef")
+    figSpeechEl.classList.add("figure-speech");
+    wordDefinition.classList.add("revealDef");
     revealWordEl.innerText = word;
+    // create a definition array to return
+    let defArr;
 
-    merriamFetch(word).then(function (WordDefData) {
-        wordDefinition.innerText = WordDefData[0].shortdef[0];
-        figSpeechEl.innerText = WordDefData[0].fl;
-    })
-    return [revealWordEl, figSpeechEl, wordDefinition];
+    await merriamFetch(word).then(function (WordDefData) {
+        // Check created conditional to see if Merriam Webster source is returned
+        if (WordDefData[1]) {
+            console.log(WordDefData[1]);
+            wordDefinition.innerText = WordDefData[0][0].shortdef[0];
+            figSpeechEl.innerText = WordDefData[0][0].fl;
+            defArr = [WordDefData[1], revealWordEl, figSpeechEl, wordDefinition];
+        }
+        else {
+            wordnikLink.href = WordDefData[0][0].wordnikUrl;
+            wordnikLink.target = "_blank";
+            wordnikLink.textContent = "Wordnik Word Entry";
+            defArr = [WordDefData[1], revealWordEl, wordnikHeader, wordnikLink];
+        }
+    });
+    return defArr;
 }
 
 // Nifer
 //  Creates message & word def divs, depending on win/lose
-function endGame(win) {
+// Async to wait for the grabWordDef() function before appending
+async function endGame(win) {
     $("#game-div").empty();
     $("#rules-btn").hide();
     $("#restart-btn").show();
@@ -388,13 +440,25 @@ function endGame(win) {
     // Prints gif
     let giphyEl = printGiphy(win);
     // Grabs the word definition and article of speech
-    let defArray = grabWordDef(word);
-
-    if (win) {
-        document.getElementById("game-div").append(giphyEl, winMessage, defArray[0], defArray[1], defArray[2]);
+    let defArray = await grabWordDef(word);
+    console.log(defArray);
+    // if it is the Merriam Webster definition
+    if (defArray[0] === true) {
+        if (win) {
+            document.getElementById("game-div").append(giphyEl, winMessage, defArray[1], defArray[2], defArray[3]);
+        }
+        else {
+            document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[1], defArray[2], defArray[3])
+        }
     }
+    // if it is the Wordnik Source URL
     else {
-        document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[0], defArray[1], defArray[2])
+        if (win) {
+            document.getElementById("game-div").append(giphyEl, winMessage, defArray[1], defArray[2], defArray[3]);
+        }
+        else {
+            document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[1], defArray[2], defArray[3]);
+        }
     }
     storeWord(word, frequency);
 }
