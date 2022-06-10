@@ -211,8 +211,6 @@ $("#game-div").on("click", ".key-el", function (event) {
     $(btnEl).removeClass("key-el").addClass("key-pressed");
     // Store buttons data-letter as guess
     let guess = $(btnEl).data("letter");
-    // Subtract from Guess Count, if equal to zero call end game
-    guessCount--;
     // Call guessCheck to check guess
     guessCheck(guess);
     // Update guess count on HTML
@@ -237,8 +235,6 @@ addEventListener("keydown", function (event) {
     let btnEl = $(`button[data-letter="${guess}"]`);
     // If the key hasn't been pressed continue
     if ($(btnEl).attr("class").includes("key-el")) {
-        // Subtract from Guess Count
-        guessCount--;
         // Call guessCheck to check guess
         guessCheck(guess);
     }
@@ -296,6 +292,8 @@ function guessCheck(guess) {
         audioBuzzer.pause();
         audioBuzzer.currentTime = 0;
         audioBuzzer.play();
+        // subtract from guess count
+        guessCount--;
         // Change class of corresponding letter guess button for correct input
         $(`#key-div > [data-letter=${guess}]`).addClass("key-wrong");
     }
