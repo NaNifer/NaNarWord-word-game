@@ -5,7 +5,7 @@ let word;
 let guessCount;
 let frequency;
 let giphyDataArray;
-let WordDefData;
+// let WordDefData;
 
 // Nolan
 // audio for webpage
@@ -126,9 +126,18 @@ function merriamFetch(word) {
                 return response.json();
             })
             .then(function (data) {
-                resolve(data);
+                console.log(data, "129");
+                let goodFetch = true;
+                let merriamArray = [data, goodFetch]
+                resolve(merriamArray);
             }).catch(function (error) {
-                reject(error);
+                console.log("error in catch for merriam" + error);
+                let wordnikData = wordnikCatch(word);
+                let goodFetch = false;
+                reject([wordnikData, goodFetch]);
+
+
+
             });
     });
 }
@@ -357,17 +366,28 @@ function grabWordDef(word) {
     let revealWordEl = document.createElement("p");
     let figSpeechEl = document.createElement("p");
     let wordDefinition = document.createElement("p");
+    let wordnikLink = document.createElement("a");
     revealWordEl.classList.add("revealWord");
     figSpeechEl.classList.add("figure-speech")
     wordDefinition.classList.add("revealDef")
     revealWordEl.innerText = word;
 
     merriamFetch(word).then(function (WordDefData) {
-        wordDefinition.innerText = WordDefData[0].shortdef[0];
-        figSpeechEl.innerText = WordDefData[0].fl;
+        if (WordDefData[1]) {
+            console.log(WordDefData, "376");
+            wordDefinition.innerText = WordDefData[0].shortdef[0];
+            figSpeechEl.innerText = WordDefData[0].fl;
+            return [revealWordEl, figSpeechEl, wordDefinition];
+        }
+        else {
+            wordnikLink.href = WordDefData[0].wordnikData[0].wordnikUrl;
+            wordnikLink.textContent = "Wordnik Word Entry";
+            console.log(wordnikLink, "381");
+            return [wordnikLink];
+        }
     })
-    return [revealWordEl, figSpeechEl, wordDefinition];
 }
+
 
 // Nifer
 //  Creates message & displays word def divs, depending on win/lose
@@ -387,12 +407,23 @@ function endGame(win) {
     let giphyEl = printGiphy(win);
     // Grabs the word definition and article of speech and puts it in array
     let defArray = grabWordDef(word);
-
-    if (win) {
-        document.getElementById("game-div").append(giphyEl, winMessage, defArray[0], defArray[1], defArray[2]);
+    console.log(defArray, "405");
+    if (defArray.length === 1) {
+        if (win) {
+            document.getElementById("game-div").append(giphyEl, winMessage, defArray);
+        }
+        else {
+            document.getElementById("game-div").append(giphyEl, winMessage, defArray);
+        }
     }
     else {
-        document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[0], defArray[1], defArray[2])
+
+        if (win) {
+            document.getElementById("game-div").append(giphyEl, winMessage, defArray[0], defArray[1], defArray[2]);
+        }
+        else {
+            document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[0], defArray[1], defArray[2])
+        }
     }
     storeWord(word, frequency);
 }
