@@ -120,8 +120,8 @@ main {
     flex: 1 0 auto;
 }
 
-#restart-btn, #rules-btn {
-    margin: 0px 16px 16px 0px;
+#rules-btn {
+    margin: 0px 0px 0px 8px;
 }
 
 .brand-logo > h6 {
@@ -176,4 +176,29 @@ background-color:rgb(198, 196, 196)
 
 #key-div {
     margin: 40px 0px 80px 0px;
+}
+
+/* result screen texts */
+
+.winMsg, .sorryMsg {
+    font-weight: bold;
+}
+
+.revealWord {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold ;
+    color: #aa00ff;
+    margin: 0 0 8px 0;
+}
+
+.figure-speech {
+    color: #aa00ff;
+    margin: 0;
+    font-size: 14px;
+}
+
+.revealDef {
+    color: #aa00ff;
+    margin: 0 0 30px 0;
 }
