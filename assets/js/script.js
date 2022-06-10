@@ -37,7 +37,7 @@ function startGame() {
 
 // Nolan
 // restart button event listener
-$("#restart-btn").on("click", function() {
+$("#restart-btn").on("click", function () {
     // Hide game div and button div and aside
     $("#game-div").empty();
     $("#game-div").hide();
@@ -314,7 +314,7 @@ function guessCheck(guess) {
 // then calls on endGame()
 function getGiphy(query) {
     const API_KEY = "dzRUlVy8AmnIrMfFmPikr7L2vL8qqV97";
-    let requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=1`;
+    let requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=20`;
 
     return new Promise(function (resolve, reject) {
         fetch(requestUrl)
@@ -332,19 +332,20 @@ function getGiphy(query) {
 // Nifer
 // Checks for win/lose and prints a giphy
 function printGiphy(win) {
-
     let giphyEl = document.createElement("img");
+    const randomSelection = Math.floor(Math.random() * 20);
     giphyEl.classList.add("giphyImg");
+
     if (win) {
         // QUESTION: Do I need to change giphyData (below) to giphyDataArray?? Scott had me change the global variable name at the top.
         getGiphy("awesome").then(function (giphyData) {
-            giphyEl.src = giphyData.data[0].images.downsized.url;
+            giphyEl.src = giphyData.data[randomSelection].images.downsized.url;
         })
     }
     else {
         getGiphy("bummer").then(function (giphyData) {
             console.log(giphyData);
-            giphyEl.src = giphyData.data[0].images.downsized.url;
+            giphyEl.src = giphyData.data[randomSelection].images.downsized.url;
         })
     }
     return giphyEl;
