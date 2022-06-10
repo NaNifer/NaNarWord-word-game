@@ -39,23 +39,11 @@ li {
     justify-content: center;
 }
 
-.rules {
-    /* text-align: center; */
-    /* text-align: center;
-    list-style-position: inside; */
-    /* margin: auto; */
-}
-
 #rules-div {
     display: flex;
     justify-content: center;
     width: fit-content;
     margin: auto;
-    /* justify-content: center; */
-}
-
-#rules-div ol {
-    /* text-align: center; */
 }
 
 #start-btn {
@@ -69,7 +57,6 @@ li {
 
 .btn, .btn-large, .btn-small, .btn-flat {
     border-radius: 6px;
-    line-height: 0px;
     text-transform: none;
     color: black;
 }
