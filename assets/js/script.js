@@ -59,9 +59,6 @@ $("#level-div").on("click", "button", function (event) {
     randomWordFetch(level);
     // Hide the level div
     $("#level-div").hide();
-    // Show button div and aside
-    $("#btn-div").show();
-    $("#aside").show();
 })
 
 // Nolan
@@ -169,7 +166,6 @@ function merriamSound(data) {
 function gameScreen() {
     // Empty the game div
     $("#game-div").empty();
-    $("#game-div").show();
     // Create a div element to hold the guessing letters
     let guessDiv = $('<div id="guess-div"></div>');
     // Loop to create Empty word elements to guess
@@ -202,6 +198,10 @@ function gameScreen() {
         .addClass("guess-count")
         .text("Guesses Remaining: " + guessCount);
     $("#guesses").append(guessEl);
+    // Show game div, button div, and aside
+    $("#btn-div").show();
+    $("#aside").show();
+    $("#game-div").show();
 }
 
 // Nolan
