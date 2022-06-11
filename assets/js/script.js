@@ -145,7 +145,6 @@ function merriamFetch(word) {
                 return response.json();
             })
             .then(async function (data) {
-                console.log(data, "129");
                 // Check to make sure data returned is full object not array of strings
                 if (typeof data[0] === 'object') {
                     let goodFetch = true;
@@ -159,7 +158,6 @@ function merriamFetch(word) {
                     resolve(merriamArray);
                 }
             }).catch(async function (error) {
-                console.log("error in catch for merriam" + error);
                 let wordnikData = await wordnikFetch(word.toLowerCase());
                 let goodFetch = false;
                 let merriamArray = [wordnikData, goodFetch];
@@ -173,7 +171,6 @@ function merriamFetch(word) {
 // Returns the audio src URL to add to an audio tag
 // Returns if the audio URL doesn't exist
 function merriamSound(data) {
-    console.log(data);
     // check if audio exists
     if ("prs" in data[0].hwi) {
         let audio = data[0].hwi.prs[0].sound.audio;
@@ -419,7 +416,6 @@ async function grabWordDef(word) {
     await merriamFetch(word).then(function (WordDefData) {
         // Check created conditional to see if Merriam Webster source is returned
         if (WordDefData[1]) {
-            console.log(WordDefData);
             // Get Audio URL from merriamSound()
             let audioMerriam = merriamSound(WordDefData[0]);
             wordDefinition.innerText = WordDefData[0][0].shortdef[0];
@@ -456,7 +452,6 @@ async function endGame(win) {
     let giphyEl = printGiphy(win);
     // Grabs the word definition and article of speech
     let defArray = await grabWordDef(word);
-    console.log(defArray);
     // if it is the Merriam Webster definition
     if (defArray[0] === true) {
         if (win) {
