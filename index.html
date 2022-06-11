@@ -12,7 +12,7 @@
     <title>NaNarWORD | A Word Game by Team NaNarwhal</title>
 </head>
 
-<body class="container">
+<body class="container-fluid">
     <header>
         <!-- Logo and header here. -->
         <nav class="z-depth-0">
@@ -22,15 +22,28 @@
                 </a>
                 <button id="volume-btn" class="right"><img src="assets/image/sound_off.png"></button>
                 <div id="guesses"></div>
-                <!-- <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
-                <!-- <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">JavaScript</a></li> -->
                 </ul>
             </div>
         </nav>
     </header>
-    <main class="col s12 m12 l12 center-align valign-wrapper">
+
+    <!-- Display top 10 solved words. -->
+    <aside class="row center-align" id="aside">
+        <div class="amber accent-2" id="top-10">
+            <h5>Your Word Bank</h5>
+        </div>
+        <!-- Display words in aside using modal. -->
+        <div id="modal-word-bank" class="modal">
+            <div class="modal-content" id="append-definition">
+                <!-- Add the previously played words dynamically. -->
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat purple accent-4">Gotcha</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="center-align valign-wrapper">
         <!-- Start section. -->
         <section class="row" id="start">
             <div class="col s12 m12 l12 center-align" id="rules-container">
@@ -67,7 +80,7 @@
 
         <!-- Game play div here. -->
         <!-- Will turn into the results div at end of game. -->
-        <div class="row">
+        <div class="row" id="game-container-div">
             <section class="col s12 m12 l12 center-align" id="game-div">
             </section>
 
@@ -98,26 +111,10 @@
         </div>
     </main>
 
-    <!-- Display top 10 solved words. -->
-    <aside class="row center-align" id="aside">
-        <div class="col s4 grey lighten-1" id="top-10">
-            <h5>Your Word Bank</h5>
-        </div>
-        <!-- Display words in aside using modal. -->
-        <div id="modal-word-bank" class="modal">
-            <div class="modal-content" id="append-definition">
-                <!-- Add the previously played words dynamically. -->
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat purple accent-4">Gotcha</a>
-            </div>
-        </div>
-    </aside>
-
     <footer class="page-footer grey lighten-4">
         <div class="container">
             <div class="row text-black">
-                GitHub Link Here
+                <a href="https://github.com/NaNifer/NaNarWord-word-game" target="_blank" title="Visit our GitHub page!"><img src="./assets/images/GitHub-Mark-32px.png" alt="GitHub"></a>
             </div>
         </div>
         <div class="footer-copyright">

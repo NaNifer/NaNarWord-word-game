@@ -1,4 +1,4 @@
-root {
+:root {
     --light-blue: #40c4ff;
     --teal: #b2dfdb;
     --light-blue: #0277bd;
@@ -46,6 +46,15 @@ li {
     margin: auto;
 }
 
+#game-container-div {
+    /* display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%; */
+    margin: 0 auto;
+}
+
 #start-btn {
     margin-top: 24px;
     color: white;
@@ -54,7 +63,6 @@ li {
 #hard {
     color: white;
 }
-
 
 .btn,
 .btn-large,
@@ -65,6 +73,10 @@ li {
     color: black;
 }
 
+.btn:active {
+    background-color: var(--purple) !important;
+}
+
 #easy,
 #med,
 #hard {
@@ -73,7 +85,7 @@ li {
 
 #guesses {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     padding-right: 10px;
 }
 
@@ -81,7 +93,6 @@ li {
     max-width: 400px;
     position: relative;
     height: 100%;
-    margin: auto;
     display: none;
 }
 
@@ -90,8 +101,16 @@ li {
 }
 
 aside {
+    /* border-radius: 6px; */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: ;
+}
+
+#top-10 {
     border-radius: 6px;
-    /* display: none; */
+    padding: 10px;
 }
 
 #btn-div {
@@ -111,6 +130,10 @@ body {
 
 main {
     flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
 }
 
 #rules-btn {
@@ -134,6 +157,13 @@ main {
     max-width: 24px;
 }
 
+#restart-btn, #rules-btn {
+    margin-top: 20px;
+}
+
+#wordbutton {
+    background-color: #fff;
+}
 
 /* Keyboard Formatting */
 .guess-count {
@@ -150,10 +180,14 @@ main {
     border-radius: 4px;
 }
 
+/* Oddly, this stops the default teal color from showing when the button is active. */
+button:focus {
+    background-color: rgb(213, 213, 213);
+}
+
 .key-el {
     background-color: rgb(213, 213, 213) !important;
 }
-
 
 .key-el:hover {
     background-color: rgb(198, 196, 196)
@@ -161,11 +195,11 @@ main {
 
 .key-wrong {
     color: #cbcbcb;
-    background-color: #ebebeb;
+    background-color: #ebebeb !important;
 }
 
 .key-correct {
-    background-color: #ffd740;
+    background-color: #ffd740 !important;
 }
 
 .guess-el {
@@ -188,7 +222,6 @@ main {
 }
 
 /* result screen texts */
-
 .winMsg,
 .sorryMsg {
     font-weight: bold;
