@@ -11,16 +11,16 @@ let giphyDataArray;
 // audio for webpage
 // Sound for user input letter guesses
 let audioPop = new Audio("./assets/sound/pop.mp3");
-audioPop.volume = 0.6;
+audioPop.volume = 0;
 // Sound for wrong user input letter guesses
 let audioBuzzer = new Audio("./assets/sound/buzzer.wav");
-audioBuzzer.volume = 0.3;
+audioBuzzer.volume = 0;
 // Sound for winning game
 let audioSuccess = new Audio("./assets/sound/success.wav");
-audioSuccess.volume = .45;
+audioSuccess.volume = 0;
 // Sound for losing game
 let audioFailure = new Audio("./assets/sound/failure.wav");
-audioFailure.volume = .6;
+audioFailure.volume = 0;
 
 // Nolan
 // Button event listener for toggling the audio on/off
@@ -32,6 +32,7 @@ $("#volume-btn").on("click", function () {
         audioSuccess.volume = 0;
         audioFailure.volume = 0;
         // update button image
+        $("#volume-btn > img").attr("src", "./assets/image/sound_off.png");
     }
     else {
         // Sound on
@@ -40,6 +41,7 @@ $("#volume-btn").on("click", function () {
         audioSuccess.volume = .45;
         audioFailure.volume = .6;
         // update button image
+        $("#volume-btn > img").attr("src", "./assets/image/sound_on.png");
     }
 })
 
@@ -96,13 +98,13 @@ function randomWordFetch(level) {
     // Handle level settings
     let corpus;
     if (level === 2) {
-        corpus = `minCorpusCount=10&maxCorpusCount=400`;
+        corpus = `minCorpusCount=15&maxCorpusCount=500`;
     }
     else if (level === 4) {
-        corpus = `minCorpusCount=401&maxCorpusCount=9999`;
+        corpus = `minCorpusCount=600&maxCorpusCount=19999`;
     }
     else {
-        corpus = `minCorpusCount=10000`;
+        corpus = `minCorpusCount=30000`;
     }
     const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
     fetch(`https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&${corpus}&minLength=4&maxLength=7&api_key=${apiKey}`)
@@ -268,7 +270,6 @@ function gameScreen() {
     $("#game-div").append(guessContainer, guessDiv, keyDiv);
     // Show game div, button div, and aside
     $("#btn-div").show();
-    $("#aside").show();
     $("#game-div").show();
 }
 
@@ -466,6 +467,7 @@ async function endGame(win) {
     $("#game-div").empty();
     $("#rules-btn").hide();
     $("#restart-btn").show();
+    $("#aside").show();
 
     let sorryMessage = document.createElement("p");
     let winMessage = document.createElement("p");
