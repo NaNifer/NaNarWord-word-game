@@ -251,15 +251,17 @@ function gameScreen() {
             .text(keys[i]);
         keyDiv.append(keyEl);
     }
-    // Append to the game container div
-    $("#game-div").append(guessDiv, keyDiv)
     // initialize the guess count
     guessCount = 10;
-    // Add Guess Count to header
-    let guessEl = $("<p>")
+    // Create a guess count header and a container div for it to display
+    let guessContainer = $("<div>")
+        .attr("id", "guesses");
+    let guessEl = $("<h1>")
         .addClass("guess-count")
         .text("Guesses Remaining: " + guessCount);
-    $("#guesses").append(guessEl);
+    guessContainer.append(guessEl);
+    // Append to the game container div
+    $("#game-div").append(guessContainer, guessDiv, keyDiv);
     // Show game div, button div, and aside
     $("#btn-div").show();
     $("#aside").show();
