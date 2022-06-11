@@ -98,13 +98,13 @@ function randomWordFetch(level) {
     // Handle level settings
     let corpus;
     if (level === 2) {
-        corpus = `minCorpusCount=10&maxCorpusCount=400`;
+        corpus = `minCorpusCount=15&maxCorpusCount=500`;
     }
     else if (level === 4) {
-        corpus = `minCorpusCount=401&maxCorpusCount=9999`;
+        corpus = `minCorpusCount=600&maxCorpusCount=19999`;
     }
     else {
-        corpus = `minCorpusCount=10000`;
+        corpus = `minCorpusCount=30000`;
     }
     const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
     fetch(`https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&${corpus}&minLength=4&maxLength=7&api_key=${apiKey}`)
@@ -270,7 +270,6 @@ function gameScreen() {
     $("#game-div").append(guessContainer, guessDiv, keyDiv);
     // Show game div, button div, and aside
     $("#btn-div").show();
-    $("#aside").show();
     $("#game-div").show();
 }
 
@@ -468,6 +467,7 @@ async function endGame(win) {
     $("#game-div").empty();
     $("#rules-btn").hide();
     $("#restart-btn").show();
+    $("#aside").show();
 
     let sorryMessage = document.createElement("p");
     let winMessage = document.createElement("p");
