@@ -47,6 +47,7 @@ function renderWordBoard(wordList) {
 // Nifer
 // Calls on definition and displays modal
 async function retrieveDefinition(buttonEl, wordList) {
+    $("append-definition").empty();
     let appendDefEl = document.getElementById("append-definition");
     // Empties div here
     if (appendDefEl.hasChildNodes()) {
