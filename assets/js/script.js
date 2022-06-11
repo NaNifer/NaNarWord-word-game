@@ -173,28 +173,40 @@ function merriamFetch(word) {
 // Returns the audio src URL to add to an audio tag
 // Returns if the audio URL doesn't exist
 function merriamSound(data) {
-    let audio = data[0].hwi.prs[0].sound.audio;
-    // if audio doesn't exist then return
-    if (!audio) {
-        return;
-    }
-    // Define the subdirectory parameter using Merriam's API documentation instructions
-    let subDir;
-    if ((/\d/g).test(audio.charAt(0))) {
-        subDir = 'number';
-    }
-    if (audio.charAt(0) === 'g' && audio.charAt(1) === 'g') {
-        subDir = 'gg';
-    }
-    if (audio.charAt(0) === 'b' && audio.charAt(1) === 'i' && audio.charAt(2) === 'x') {
-        subDir = 'bix'
+    console.log(data);
+    // check if audio exists
+    if ("prs" in data[0].hwi) {
+        let audio = data[0].hwi.prs[0].sound.audio;
+        // if audio doesn't exist then return
+        if (!audio) {
+            return;
+        }
+        // Define the subdirectory parameter using Merriam's API documentation instructions
+        let subDir;
+        if ((/\d/g).test(audio.charAt(0))) {
+            subDir = 'number';
+        }
+        if (audio.charAt(0) === 'g' && audio.charAt(1) === 'g') {
+            subDir = 'gg';
+        }
+        if (audio.charAt(0) === 'b' && audio.charAt(1) === 'i' && audio.charAt(2) === 'x') {
+            subDir = 'bix'
+        }
+        else {
+            subDir = audio[0];
+        }
+        // Return the url for the src attribute of an audio element
+        let audioUrl = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subDir}/${audio}.mp3`
+        let audioMerriam = document.createElement("audio");
+        audioMerriam.src = audioUrl;
+        audioMerriam.controls = true;
+        return audioMerriam;
     }
     else {
-        subDir = audio[0];
+        let audioMerriam = document.createElement("p");
+        audioMerriam.textContent = "There is no audio file from Merriam Webster API for this word."
+        return audioMerriam;
     }
-    // Return the url for the src attribute of an audio element
-    let audioUrl = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subDir}/${audio}.mp3`
-    return audioUrl;
 }
 
 // Nolan
@@ -407,11 +419,14 @@ async function grabWordDef(word) {
     await merriamFetch(word).then(function (WordDefData) {
         // Check created conditional to see if Merriam Webster source is returned
         if (WordDefData[1]) {
-            console.log(WordDefData[1]);
+            console.log(WordDefData);
+            // Get Audio URL from merriamSound()
+            let audioMerriam = merriamSound(WordDefData[0]);
             wordDefinition.innerText = WordDefData[0][0].shortdef[0];
             figSpeechEl.innerText = WordDefData[0][0].fl;
-            defArr = [WordDefData[1], revealWordEl, figSpeechEl, wordDefinition];
+            defArr = [WordDefData[1], revealWordEl, figSpeechEl, wordDefinition, audioMerriam];
         }
+        // wordnik Data case
         else {
             wordnikLink.href = WordDefData[0][0].wordnikUrl;
             wordnikLink.target = "_blank";
@@ -445,10 +460,10 @@ async function endGame(win) {
     // if it is the Merriam Webster definition
     if (defArray[0] === true) {
         if (win) {
-            document.getElementById("game-div").append(giphyEl, winMessage, defArray[1], defArray[2], defArray[3]);
+            document.getElementById("game-div").append(giphyEl, winMessage, defArray[1], defArray[2], defArray[3], defArray[4]);
         }
         else {
-            document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[1], defArray[2], defArray[3])
+            document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[1], defArray[2], defArray[3], defArray[4]);
         }
     }
     // if it is the Wordnik Source URL
