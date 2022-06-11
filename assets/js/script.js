@@ -5,7 +5,7 @@ let word;
 let guessCount = 0;
 let frequency;
 let giphyDataArray;
-let WordDefData;
+// let WordDefData;
 
 // Nolan
 // audio for webpage
@@ -58,7 +58,7 @@ function startGame() {
 
 // Nolan
 // restart button event listener
-$("#restart-btn").on("click", function() {
+$("#restart-btn").on("click", function () {
     // Hide game div and button div and aside
     // Empty the game div and guess div
     $("#guesses").empty();
@@ -154,7 +154,7 @@ function wordnikFetch(word) {
                 reject(error);
             });
     });
-};
+}
 
 
 // Nifer
@@ -169,7 +169,7 @@ function merriamFetch(word) {
                 // Check to make sure data returned is full object not array of strings
                 if (typeof data[0] === 'object') {
                     let goodFetch = true;
-                    let merriamArray = [data, goodFetch]
+                    let merriamArray = [data, goodFetch];
                     resolve(merriamArray);
                 }
                 if (typeof data[0] === 'string') {
@@ -214,7 +214,7 @@ function merriamSound(data) {
             subDir = audio[0];
         }
         // Return the url for the src attribute of an audio element
-        let audioUrl = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subDir}/${audio}.mp3`
+        let audioUrl = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subDir}/${audio}.mp3`;
         let audioMerriam = document.createElement("audio");
         audioMerriam.src = audioUrl;
         audioMerriam.controls = true;
@@ -222,7 +222,7 @@ function merriamSound(data) {
     }
     else {
         let audioMerriam = document.createElement("p");
-        audioMerriam.textContent = "There is no audio file from Merriam Webster API for this word."
+        audioMerriam.textContent = "There is no audio file from Merriam Webster API for this word.";
         return audioMerriam;
     }
 }
@@ -238,7 +238,7 @@ function gameScreen() {
     for (i = 0; i < word.length; i++) {
         let guess = $("<h2>")
             .addClass("guess-el")
-            .data("letter", word[i])
+            .data("letter", word[i]);
         guessDiv.append(guess);
     }
     // Create array of uppercased letters
@@ -385,7 +385,7 @@ function guessCheck(guess) {
 // then calls on endGame()
 function getGiphy(query) {
     const API_KEY = "dzRUlVy8AmnIrMfFmPikr7L2vL8qqV97";
-    let requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=1`;
+    let requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=20`;
 
     return new Promise(function (resolve, reject) {
         fetch(requestUrl)
@@ -403,19 +403,20 @@ function getGiphy(query) {
 // Nifer
 // Checks for win/lose and prints a giphy
 function printGiphy(win) {
-
     let giphyEl = document.createElement("img");
+    const randomSelection = Math.floor(Math.random() * 20);
     giphyEl.classList.add("giphyImg");
+
     if (win) {
         // QUESTION: Do I need to change giphyData (below) to giphyDataArray?? Scott had me change the global variable name at the top.
         getGiphy("awesome").then(function (giphyData) {
-            giphyEl.src = giphyData.data[0].images.downsized.url;
+            console.log(giphyData);
+            giphyEl.src = giphyData.data[randomSelection].images.fixed_height.url;
         })
     }
     else {
         getGiphy("bummer").then(function (giphyData) {
-            console.log(giphyData);
-            giphyEl.src = giphyData.data[0].images.downsized.url;
+            giphyEl.src = giphyData.data[randomSelection].images.fixed_height.url;
         })
     }
     return giphyEl;
@@ -456,6 +457,7 @@ async function grabWordDef(word) {
     });
     return defArr;
 }
+
 
 // Nifer
 //  Creates message & word def divs, depending on win/lose
