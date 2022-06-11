@@ -24,18 +24,22 @@ audioFailure.volume = .6;
 
 // Nolan
 // Button event listener for toggling the audio on/off
-$(".brand-logo").on("click", function () {
+$("#volume-btn").on("click", function () {
     if (audioPop.volume > 0) {
+        // sound off
         audioPop.volume = 0;
         audioBuzzer.volume = 0;
         audioSuccess.volume = 0;
         audioFailure.volume = 0;
+        // update button image
     }
     else {
+        // Sound on
         audioPop.volume = 0.6;
         audioBuzzer.volume = 0.3;
         audioSuccess.volume = .45;
         audioFailure.volume = .6;
+        // update button image
     }
 })
 
