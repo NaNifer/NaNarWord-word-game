@@ -22,13 +22,13 @@ function renderWordBoard(wordList) {
 
     // let wordBoardEl = document.getElementById("top-10");
     let wordListDiv = document.getElementById("word-list-div");
-
+    // coul
     wordListDiv.classList.add("wordButtonContainer");
     wordListDiv.innerHTML = "";
     for (let i = 0; i <= 10 && i < wordList.length; i++) {
         buttonData = `
         <a href="#modal-word-bank" class="modal-trigger">
-        <button id="wordbutton" type="button" data-target="modal-word-bank" class="btn modal-trigger" data-word=${wordList[i].wordSaved}>
+        <button id="wordbutton" type="button" data-target="modal-word-bank" class="btn modal-trigger" data-word=${wordList[i].wordSaved} data-frequency=${wordList[i].level}>
          ${wordList[i].wordSaved}  
         </button>
         </a>
@@ -39,7 +39,6 @@ function renderWordBoard(wordList) {
     // let wordbuttonEl = document.getElementById("wordbutton")
     $(wordListDiv).on("click", "button", function (event) {
         let buttonEl = event.target
-        console.log("im hit");
         retrieveDefinition(buttonEl, wordList);
     });
 }
@@ -49,23 +48,35 @@ function renderWordBoard(wordList) {
 // Calls on definition and displays modal
 async function retrieveDefinition(buttonEl, wordList) {
     let appendDefEl = document.getElementById("append-definition");
-    let rarityRatingEl = document.createElement("p");
-    rarityRatingEl.textContent = `Corpus Frequency: ${Math.ceil(wordList[i].level / 10) * 10}`
     // Empties div here
     if (appendDefEl.hasChildNodes()) {
         appendDefEl.innerHTML = "";
     }
+    let recallFreqEl = document.createElement("p");
     let recallWord = buttonEl.dataset.word;
-    console.log(recallWord);
+    recallFreqEl.innerText = `Corpus Frequency: ${buttonEl.dataset.frequency}`;
     let defArray = await grabWordDef(recallWord);
     // Merriam
     if (defArray[0] === true) {
-        appendDefEl.append(defArray[1], defArray[2], defArray[3], defArray[4], rarityRatingEl);
+        appendDefEl.append(
+            defArray[1],
+            defArray[2],
+            defArray[3],
+            defArray[4],
+            recallFreqEl,
+            defArray[6]
+        );
 
     }
     // if it is the Wordnik Source URL
     else {
-        appendDefEl.append(defArray[1], defArray[2], defArray[3], rarityRatingEl);
+        appendDefEl.append(
+            defArray[1],
+            defArray[2],
+            defArray[3],
+            recallFreqEl,
+            defArray[5]
+        );
     }
 
 }

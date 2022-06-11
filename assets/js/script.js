@@ -45,8 +45,6 @@ $("#volume-btn").on("click", function () {
     }
 })
 
-
-// // start button event listener
 // Nifer
 // start button event listener
 var startBtn = document.getElementById("start-btn");
@@ -55,7 +53,6 @@ startBtn.addEventListener("click", startGame);
 function startGame() {
     $("#start").hide();
     $("#level-div").show();
-    //   possible add/remove class instead
 }
 
 // Nolan
@@ -411,7 +408,6 @@ function printGiphy(win) {
     if (win) {
         // QUESTION: Do I need to change giphyData (below) to giphyDataArray?? Scott had me change the global variable name at the top.
         getGiphy("awesome").then(function (giphyData) {
-            console.log(giphyData);
             giphyEl.src = giphyData.data[randomSelection].images.fixed_height.url;
         })
     }
@@ -431,7 +427,11 @@ async function grabWordDef(word) {
     let wordDefinition = document.createElement("p");
     let wordnikLink = document.createElement("a");
     let wordnikHeader = document.createElement("p");
+    let wordnikFreqDscr = document.createElement("p");
+    let rarityRatingEl = document.createElement("p");
+    rarityRatingEl.textContent = `Corpus Frequency: ${frequency}`
     wordnikHeader.innerText = "Merriam Webster doesn't have a definition, check out Wordnik API's web entry:";
+    wordnikFreqDscr.innerHTML = "Corpus Frequency is the number of times the word appears in Wordnik API's corpus data of text.  It signifies how common the word is in recorded language.";
     revealWordEl.classList.add("revealWord");
     figSpeechEl.classList.add("figure-speech");
     wordDefinition.classList.add("revealDef");
@@ -446,14 +446,14 @@ async function grabWordDef(word) {
             let audioMerriam = merriamSound(WordDefData[0]);
             wordDefinition.innerText = WordDefData[0][0].shortdef[0];
             figSpeechEl.innerText = WordDefData[0][0].fl;
-            defArr = [WordDefData[1], revealWordEl, figSpeechEl, wordDefinition, audioMerriam];
+            defArr = [WordDefData[1], revealWordEl, figSpeechEl, wordDefinition, audioMerriam, rarityRatingEl, wordnikFreqDscr];
         }
         // wordnik Data case
         else {
             wordnikLink.href = WordDefData[0][0].wordnikUrl;
             wordnikLink.target = "_blank";
             wordnikLink.textContent = "Wordnik Word Entry";
-            defArr = [WordDefData[1], revealWordEl, wordnikHeader, wordnikLink];
+            defArr = [WordDefData[1], revealWordEl, wordnikHeader, wordnikLink, rarityRatingEl, wordnikFreqDscr];
         }
     });
     return defArr;
@@ -483,24 +483,54 @@ async function endGame(win) {
     // if it is the Merriam Webster definition
     if (defArray[0] === true) {
         if (win) {
-            document.getElementById("game-div").append(giphyEl, winMessage, defArray[1], defArray[2], defArray[3], defArray[4]);
+            document.getElementById("game-div").append(
+                giphyEl,
+                winMessage,
+                defArray[1],
+                defArray[2],
+                defArray[3],
+                defArray[4],
+                defArray[5],
+                defArray[6]
+            );
         }
         else {
-            document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[1], defArray[2], defArray[3], defArray[4]);
+            document.getElementById("game-div").append(
+                giphyEl,
+                sorryMessage,
+                defArray[1],
+                defArray[2],
+                defArray[3],
+                defArray[4],
+                defArray[5],
+                defArray[6]
+            );
         }
     }
     // if it is the Wordnik Source URL
     else {
         if (win) {
-            document.getElementById("game-div").append(giphyEl, winMessage, defArray[1], defArray[2], defArray[3]);
+            document.getElementById("game-div").append(
+                giphyEl,
+                winMessage,
+                defArray[1],
+                defArray[2],
+                defArray[3],
+                defArray[4],
+                defArray[5]
+            );
         }
         else {
-            document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[1], defArray[2], defArray[3]);
+            document.getElementById("game-div").append(
+                giphyEl,
+                sorryMessage,
+                defArray[1],
+                defArray[2],
+                defArray[3],
+                defArray[4],
+                defArray[5]
+            );
         }
     }
     storeWord(word, frequency);
 }
-
-// Nifer TODO:
-// Restart button , hide game div, show level div
-// reinitialize the guess count and hide guess count -- ID=#guesses  .empty()
