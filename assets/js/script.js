@@ -11,16 +11,16 @@ let giphyDataArray;
 // audio for webpage
 // Sound for user input letter guesses
 let audioPop = new Audio("./assets/sound/pop.mp3");
-audioPop.volume = 0.6;
+audioPop.volume = 0;
 // Sound for wrong user input letter guesses
 let audioBuzzer = new Audio("./assets/sound/buzzer.wav");
-audioBuzzer.volume = 0.3;
+audioBuzzer.volume = 0;
 // Sound for winning game
 let audioSuccess = new Audio("./assets/sound/success.wav");
-audioSuccess.volume = .45;
+audioSuccess.volume = 0;
 // Sound for losing game
 let audioFailure = new Audio("./assets/sound/failure.wav");
-audioFailure.volume = .6;
+audioFailure.volume = 0;
 
 // Nolan
 // Button event listener for toggling the audio on/off
@@ -32,6 +32,7 @@ $("#volume-btn").on("click", function () {
         audioSuccess.volume = 0;
         audioFailure.volume = 0;
         // update button image
+        $("#volume-btn > img").attr("src", "./assets/image/sound_off.png");
     }
     else {
         // Sound on
@@ -40,6 +41,7 @@ $("#volume-btn").on("click", function () {
         audioSuccess.volume = .45;
         audioFailure.volume = .6;
         // update button image
+        $("#volume-btn > img").attr("src", "./assets/image/sound_on.png");
     }
 })
 
