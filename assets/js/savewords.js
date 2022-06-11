@@ -18,8 +18,11 @@ function storeWord(word, frequency) {
 // Nifer
 // Create onclick, render the wordBoard
 function renderWordBoard(wordList) {
-    let wordBoardEl = document.getElementById("top-10");
-    let wordListDiv = document.createElement("div");
+    $("word-list-div").empty();
+
+    // let wordBoardEl = document.getElementById("top-10");
+    let wordListDiv = document.getElementById("word-list-div");
+
     wordListDiv.classList.add("wordButtonContainer");
     wordListDiv.innerHTML = "";
     for (let i = 0; i <= 10 && i < wordList.length; i++) {
@@ -31,27 +34,40 @@ function renderWordBoard(wordList) {
         </a>
         `
         wordListDiv.innerHTML += buttonData;
-        wordBoardEl.appendChild(wordListDiv);
-        wordListDiv.addEventListener("click", function (event) {
-            let buttonEl = event.target
-            retrieveDefinition(buttonEl, wordList);
-        });
+        // wordListDiv.appendChild(buttonData);
     }
+    // let wordbuttonEl = document.getElementById("wordbutton")
+    $(wordListDiv).on("click", "button", function (event) {
+        let buttonEl = event.target
+        console.log("im hit");
+        retrieveDefinition(buttonEl, wordList);
+    });
 }
+
 
 // Nifer
 // Calls on definition and displays modal
-function retrieveDefinition(buttonEl, wordList) {
+async function retrieveDefinition(buttonEl, wordList) {
     let appendDefEl = document.getElementById("append-definition");
-    console.log(appendDefEl);
+    let rarityRatingEl = document.createElement("p");
+    rarityRatingEl.textContent = `Corpus Frequency: ${Math.ceil(wordList[i].level / 10) * 10}`
     // Empties div here
     if (appendDefEl.hasChildNodes()) {
         appendDefEl.innerHTML = "";
     }
     let recallWord = buttonEl.dataset.word;
     console.log(recallWord);
-    let defArray = grabWordDef(recallWord);
-    appendDefEl.append(defArray[0], defArray[1], defArray[2], "Rarity Rating: " + Math.ceil(wordList[i].level / 10) * 10);
+    let defArray = await grabWordDef(recallWord);
+    // Merriam
+    if (defArray[0] === true) {
+        appendDefEl.append(defArray[1], defArray[2], defArray[3], defArray[4], rarityRatingEl);
+
+    }
+    // if it is the Wordnik Source URL
+    else {
+        appendDefEl.append(defArray[1], defArray[2], defArray[3], rarityRatingEl);
+    }
+
 }
 
 // Angie & Ivy
