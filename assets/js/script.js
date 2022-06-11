@@ -2,7 +2,7 @@
 // Global Variables
 // Nolan
 let word;
-let guessCount;
+let guessCount = 0;
 let frequency;
 let giphyDataArray;
 // let WordDefData;
@@ -22,6 +22,27 @@ audioSuccess.volume = .45;
 let audioFailure = new Audio("./assets/sound/failure.wav");
 audioFailure.volume = .6;
 
+// Nolan
+// Button event listener for toggling the audio on/off
+$("#volume-btn").on("click", function () {
+    if (audioPop.volume > 0) {
+        // sound off
+        audioPop.volume = 0;
+        audioBuzzer.volume = 0;
+        audioSuccess.volume = 0;
+        audioFailure.volume = 0;
+        // update button image
+    }
+    else {
+        // Sound on
+        audioPop.volume = 0.6;
+        audioBuzzer.volume = 0.3;
+        audioSuccess.volume = .45;
+        audioFailure.volume = .6;
+        // update button image
+    }
+})
+
 
 // // start button event listener
 // Nifer
@@ -39,6 +60,8 @@ function startGame() {
 // restart button event listener
 $("#restart-btn").on("click", function () {
     // Hide game div and button div and aside
+    // Empty the game div and guess div
+    $("#guesses").empty();
     $("#game-div").empty();
     $("#game-div").hide();
     $("#btn-div").hide();
@@ -57,9 +80,8 @@ $("#level-div").on("click", "button", function (event) {
     randomWordFetch(level);
     // Hide the level div
     $("#level-div").hide();
-    // Show button div and aside
-    $("#btn-div").show();
-    $("#aside").show();
+    // show rules button
+    $("#rules-btn").show();
 })
 
 // Nolan
@@ -116,6 +138,24 @@ function frequencyWordFetch(word) {
         .catch(err => console.error(err));
 }
 
+// Nolan
+// Wordnik API defintition fetch for website URL
+function wordnikFetch(word) {
+    return new Promise(function (resolve, reject) {
+        const apiKey = 'hhienm8ei1xnj2ctbftdhka6dgygqlxs3kta6w8x3j1umngci';
+        fetch(`https://api.wordnik.com/v4/word.json/${word}/definitions?limit=1&includeRelated=false&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=${apiKey}`)
+
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                resolve(data);
+            }).catch(function (error) {
+                reject(error);
+            });
+    });
+}
+
 
 // Nifer
 // !!NOTE!!  This is a working rewrite of merriamFetch. :)
@@ -125,19 +165,24 @@ function merriamFetch(word) {
             .then(function (response) {
                 return response.json();
             })
-            .then(function (data) {
-                console.log(data, "129");
-                let goodFetch = true;
-                let merriamArray = [data, goodFetch]
-                resolve(merriamArray);
-            }).catch(function (error) {
-                console.log("error in catch for merriam" + error);
-                let wordnikData = wordnikCatch(word);
+            .then(async function (data) {
+                // Check to make sure data returned is full object not array of strings
+                if (typeof data[0] === 'object') {
+                    let goodFetch = true;
+                    let merriamArray = [data, goodFetch];
+                    resolve(merriamArray);
+                }
+                if (typeof data[0] === 'string') {
+                    let wordnikData = await wordnikFetch(word.toLowerCase());
+                    let goodFetch = false;
+                    let merriamArray = [wordnikData, goodFetch];
+                    resolve(merriamArray);
+                }
+            }).catch(async function (error) {
+                let wordnikData = await wordnikFetch(word.toLowerCase());
                 let goodFetch = false;
-                reject([wordnikData, goodFetch]);
-
-
-
+                let merriamArray = [wordnikData, goodFetch];
+                reject(merriamArray);
             });
     });
 }
@@ -147,28 +192,39 @@ function merriamFetch(word) {
 // Returns the audio src URL to add to an audio tag
 // Returns if the audio URL doesn't exist
 function merriamSound(data) {
-    let audio = data[0].hwi.prs[0].sound.audio;
-    // if audio doesn't exist then return
-    if (!audio) {
-        return;
-    }
-    // Define the subdirectory parameter using Merriam's API documentation instructions
-    let subDir;
-    if ((/\d/g).test(audio.charAt(0))) {
-        subDir = 'number';
-    }
-    if (audio.charAt(0) === 'g' && audio.charAt(1) === 'g') {
-        subDir = 'gg';
-    }
-    if (audio.charAt(0) === 'b' && audio.charAt(1) === 'i' && audio.charAt(2) === 'x') {
-        subDir = 'bix'
+    // check if audio exists
+    if ("prs" in data[0].hwi) {
+        let audio = data[0].hwi.prs[0].sound.audio;
+        // if audio doesn't exist then return
+        if (!audio) {
+            return;
+        }
+        // Define the subdirectory parameter using Merriam's API documentation instructions
+        let subDir;
+        if ((/\d/g).test(audio.charAt(0))) {
+            subDir = 'number';
+        }
+        if (audio.charAt(0) === 'g' && audio.charAt(1) === 'g') {
+            subDir = 'gg';
+        }
+        if (audio.charAt(0) === 'b' && audio.charAt(1) === 'i' && audio.charAt(2) === 'x') {
+            subDir = 'bix'
+        }
+        else {
+            subDir = audio[0];
+        }
+        // Return the url for the src attribute of an audio element
+        let audioUrl = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subDir}/${audio}.mp3`;
+        let audioMerriam = document.createElement("audio");
+        audioMerriam.src = audioUrl;
+        audioMerriam.controls = true;
+        return audioMerriam;
     }
     else {
-        subDir = audio[0];
+        let audioMerriam = document.createElement("p");
+        audioMerriam.textContent = "There is no audio file from Merriam Webster API for this word.";
+        return audioMerriam;
     }
-    // Return the url for the src attribute of an audio element
-    let audioUrl = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subDir}/${audio}.mp3`
-    return audioUrl;
 }
 
 // Nolan
@@ -176,14 +232,13 @@ function merriamSound(data) {
 function gameScreen() {
     // Empty the game div
     $("#game-div").empty();
-    $("#game-div").show();
     // Create a div element to hold the guessing letters
     let guessDiv = $('<div id="guess-div"></div>');
     // Loop to create Empty word elements to guess
     for (i = 0; i < word.length; i++) {
         let guess = $("<h2>")
             .addClass("guess-el")
-            .data("letter", word[i])
+            .data("letter", word[i]);
         guessDiv.append(guess);
     }
     // Create array of uppercased letters
@@ -200,15 +255,21 @@ function gameScreen() {
             .text(keys[i]);
         keyDiv.append(keyEl);
     }
-    // Append to the game container div
-    $("#game-div").append(guessDiv, keyDiv)
     // initialize the guess count
     guessCount = 10;
-    // Add Guess Count to header
-    let guessEl = $("<p>")
+    // Create a guess count header and a container div for it to display
+    let guessContainer = $("<div>")
+        .attr("id", "guesses");
+    let guessEl = $("<h1>")
         .addClass("guess-count")
         .text("Guesses Remaining: " + guessCount);
-    $("#guesses").append(guessEl);
+    guessContainer.append(guessEl);
+    // Append to the game container div
+    $("#game-div").append(guessContainer, guessDiv, keyDiv);
+    // Show game div, button div, and aside
+    $("#btn-div").show();
+    $("#aside").show();
+    $("#game-div").show();
 }
 
 // Nolan
@@ -361,37 +422,46 @@ function printGiphy(win) {
 }
 
 // Nifer
-//  Calls on definition from merriamFetch(), and creates elements
-function grabWordDef(word) {
+// make async so that it wait for the definition fetch
+async function grabWordDef(word) {
     let revealWordEl = document.createElement("p");
     let figSpeechEl = document.createElement("p");
     let wordDefinition = document.createElement("p");
     let wordnikLink = document.createElement("a");
+    let wordnikHeader = document.createElement("p");
+    wordnikHeader.innerText = "Merriam Webster doesn't have a definition, check out Wordnik API's web entry:";
     revealWordEl.classList.add("revealWord");
-    figSpeechEl.classList.add("figure-speech")
-    wordDefinition.classList.add("revealDef")
+    figSpeechEl.classList.add("figure-speech");
+    wordDefinition.classList.add("revealDef");
     revealWordEl.innerText = word;
+    // create a definition array to return
+    let defArr;
 
-    merriamFetch(word).then(function (WordDefData) {
+    await merriamFetch(word).then(function (WordDefData) {
+        // Check created conditional to see if Merriam Webster source is returned
         if (WordDefData[1]) {
-            console.log(WordDefData, "376");
-            wordDefinition.innerText = WordDefData[0].shortdef[0];
-            figSpeechEl.innerText = WordDefData[0].fl;
-            return [revealWordEl, figSpeechEl, wordDefinition];
+            // Get Audio URL from merriamSound()
+            let audioMerriam = merriamSound(WordDefData[0]);
+            wordDefinition.innerText = WordDefData[0][0].shortdef[0];
+            figSpeechEl.innerText = WordDefData[0][0].fl;
+            defArr = [WordDefData[1], revealWordEl, figSpeechEl, wordDefinition, audioMerriam];
         }
+        // wordnik Data case
         else {
-            wordnikLink.href = WordDefData[0].wordnikData[0].wordnikUrl;
+            wordnikLink.href = WordDefData[0][0].wordnikUrl;
+            wordnikLink.target = "_blank";
             wordnikLink.textContent = "Wordnik Word Entry";
-            console.log(wordnikLink, "381");
-            return [wordnikLink];
+            defArr = [WordDefData[1], revealWordEl, wordnikHeader, wordnikLink];
         }
-    })
+    });
+    return defArr;
 }
 
 
 // Nifer
-//  Creates message & displays word def divs, depending on win/lose
-function endGame(win) {
+//  Creates message & word def divs, depending on win/lose
+// Async to wait for the grabWordDef() function before appending
+async function endGame(win) {
     $("#game-div").empty();
     $("#rules-btn").hide();
     $("#restart-btn").show();
@@ -405,24 +475,24 @@ function endGame(win) {
 
     // Prints gif
     let giphyEl = printGiphy(win);
-    // Grabs the word definition and article of speech and puts it in array
-    let defArray = grabWordDef(word);
-    console.log(defArray, "405");
-    if (defArray.length === 1) {
+    // Grabs the word definition and article of speech
+    let defArray = await grabWordDef(word);
+    // if it is the Merriam Webster definition
+    if (defArray[0] === true) {
         if (win) {
-            document.getElementById("game-div").append(giphyEl, winMessage, defArray);
+            document.getElementById("game-div").append(giphyEl, winMessage, defArray[1], defArray[2], defArray[3], defArray[4]);
         }
         else {
-            document.getElementById("game-div").append(giphyEl, winMessage, defArray);
+            document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[1], defArray[2], defArray[3], defArray[4]);
         }
     }
+    // if it is the Wordnik Source URL
     else {
-
         if (win) {
-            document.getElementById("game-div").append(giphyEl, winMessage, defArray[0], defArray[1], defArray[2]);
+            document.getElementById("game-div").append(giphyEl, winMessage, defArray[1], defArray[2], defArray[3]);
         }
         else {
-            document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[0], defArray[1], defArray[2])
+            document.getElementById("game-div").append(giphyEl, sorryMessage, defArray[1], defArray[2], defArray[3]);
         }
     }
     storeWord(word, frequency);
