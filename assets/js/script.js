@@ -338,6 +338,7 @@ function guessCheck(guess) {
         for (i = 0; i < word.length; i++) {
             if (guess === $(slotEl[i]).data("letter")) {
                 $(slotEl[i]).text(guess);
+                $(slotEl[i]).addClass("jello");
             }
             // create check word string
             check = check + $(slotEl[i]).text();
