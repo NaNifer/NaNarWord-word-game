@@ -22,6 +22,23 @@ audioSuccess.volume = .45;
 let audioFailure = new Audio("./assets/sound/failure.wav");
 audioFailure.volume = .6;
 
+// Nolan
+// Button event listener for toggling the audio on/off
+$(".brand-logo").on("click", function () {
+    if (audioPop.volume > 0) {
+        audioPop.volume = 0;
+        audioBuzzer.volume = 0;
+        audioSuccess.volume = 0;
+        audioFailure.volume = 0;
+    }
+    else {
+        audioPop.volume = 0.6;
+        audioBuzzer.volume = 0.3;
+        audioSuccess.volume = .45;
+        audioFailure.volume = .6;
+    }
+})
+
 
 // // start button event listener
 // Nifer
