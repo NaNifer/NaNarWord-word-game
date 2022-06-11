@@ -55,13 +55,19 @@ li {
     color: white;
 }
 
-.btn, .btn-large, .btn-small, .btn-flat {
+
+.btn,
+.btn-large,
+.btn-small,
+.btn-flat {
     border-radius: 6px;
     text-transform: none;
     color: black;
 }
 
-#easy, #med, #hard {
+#easy,
+#med,
+#hard {
     margin-bottom: 24px;
 }
 
@@ -73,8 +79,8 @@ li {
 
 #level-div {
     max-width: 400px;
-    position:relative;
-    height:100%;
+    position: relative;
+    height: 100%;
     margin: auto;
     display: none;
 }
@@ -111,17 +117,32 @@ main {
     margin: 0px 0px 0px 8px;
 }
 
-.brand-logo > h6 {
-color: black;
-padding: 10px 0px 0px 16px;
+.brand-logo>h6 {
+    color: black;
+    padding: 10px 0px 0px 16px;
 }
 
+#volume-btn {
+    border: 1x solid grey;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    margin: 12px 24px 12px 0px;
+}
+
+#volume-btn img {
+    max-width: 24px;
+}
+
+
 /* Keyboard Formatting */
-.guess-count{
+.guess-count {
     color: black;
     font-size: 14px;
 }
-.key-el, .key-pressed {
+
+.key-el,
+.key-pressed {
     width: 40px;
     height: 40px;
     margin: 2px;
@@ -130,20 +151,21 @@ padding: 10px 0px 0px 16px;
 }
 
 .key-el {
-    background-color: rgb(213, 213, 213);
+    background-color: rgb(213, 213, 213) !important;
 }
 
+
 .key-el:hover {
-background-color:rgb(198, 196, 196)
+    background-color: rgb(198, 196, 196)
 }
 
 .key-wrong {
-    color:#cbcbcb;
+    color: #cbcbcb;
     background-color: #ebebeb;
 }
 
 .key-correct {
-    background-color:#ffd740;
+    background-color: #ffd740;
 }
 
 .guess-el {
@@ -151,13 +173,13 @@ background-color:rgb(198, 196, 196)
     min-height: 50px;
     /* margin: 100px 20px 20px 20px; */
     display: inline-block;
-    margin: 6px;
+    margin: 10px;
     min-width: 50px;
 }
 
 #guess-div {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: flex-end;
 }
 
@@ -167,14 +189,15 @@ background-color:rgb(198, 196, 196)
 
 /* result screen texts */
 
-.winMsg, .sorryMsg {
+.winMsg,
+.sorryMsg {
     font-weight: bold;
 }
 
 .revealWord {
     display: inline-block;
     font-size: 20px;
-    font-weight: bold ;
+    font-weight: bold;
     color: #aa00ff;
     margin: 0 0 8px 0;
 }
