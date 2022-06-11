@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/animation.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>NaNarWORD | A Word Game by Team NaNarwhal</title>
 </head>
@@ -15,10 +16,11 @@
     <header>
         <!-- Logo and header here. -->
         <nav class="z-depth-0">
-            <div class="nav-wrapper grey lighten-4">
+            <div class="nav-wrapper grey lighten-4" id="navbar">
                 <a href="#" class="brand-logo left">
                     <h6><b>NaN</b>ar<b>WORD</b></h6>
                 </a>
+                <button id="volume-btn" class="right"><img src="assets/image/sound_off.png"></button>
                 <div id="guesses"></div>
                 <!-- <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
                 <!-- <li><a href="sass.html">Sass</a></li>
@@ -34,7 +36,7 @@
             <div class="col s12 m12 l12 center-align" id="rules-container">
                 <h2>Welcome to <b>NaN</b>ar<b>WORD</b>!</h2>
                 <div class="col s12 m12 l12 center-align" id="rules-div">
-                    <ol class="">
+                    <ol>
                         <li>Choose your level of difficulty.</li>
                         <li>NaNarWORD will present you with a word to guess.</li>
                         <li>You'll only have so many guesses to get the word right.</li>
@@ -44,7 +46,7 @@
                 </div>
                 <div class="col s12 m12 l12 center-align" id="ready-div">
                     <p>Ready to play? Click start to get goin'!</p>
-                    <button class="waves-effect waves-light btn-large #42a5f5 blue lighten-1 center-align"
+                    <button class="waves-effect waves-light btn-large blue lighten-1 center-align"
                         id="start-btn">
                         Start
                     </button>
@@ -71,11 +73,10 @@
 
             <!-- Reusable buttons -->
             <section class="" id="btn-div">
-                <button class="waves-effect waves-light btn-large grey lighten-1" id="restart-btn">New Game</button>
+                <button class="waves-effect waves-light btn-large light-blue lighten-4" id="restart-btn">Play Again</button>
                 <a href="#modal1"></a>
-                <button class="waves-effect waves-light btn-large btn modal-trigger grey lighten-1" data-target="modal1"
-                    id="rules-btn">How
-                    does this work again? 🤔</button>
+                <button class="waves-effect waves-light btn-large btn modal-trigger light-blue lighten-4" data-target="modal1"
+                    id="rules-btn">How does this work again? 🤔</button>
                 </a>
             </section>
         </div>
