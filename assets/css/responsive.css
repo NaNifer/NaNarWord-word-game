@@ -30,6 +30,7 @@
         margin: 40px auto;
     }
 
+    /* MAX LENGTH OF A WORD IS SEVEN CHARACTERS; BASE MOBILE SIZING OFF OF THIS */
     #guess-div {
         display: flex;
         justify-content: center;
