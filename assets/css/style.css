@@ -127,6 +127,10 @@ aside {
     width: 20vw;
 }
 
+aside h5 {
+    margin: auto;
+}
+
 #top-10 {
     border-radius: 6px;
     margin: 10px;
@@ -191,6 +195,7 @@ main {
     background-repeat: no-repeat;
     border-radius: 6px;
     margin: 12px 24px 12px 0px;
+    padding-top: 5px;
 }
 
 #volume-btn img {
