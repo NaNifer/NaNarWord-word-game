@@ -1,0 +1,24 @@
+@media only screen and (max-width: 600px) {
+    h2 {
+        font-size: 28px;
+    }
+
+    body {
+        font-size: 5vw;
+    }
+
+    main {
+        margin: 0;
+        display: flex;
+        text-align: center;
+        width: 100%
+    }
+
+    #top-10 {
+        width: fit-content;
+        max-height: 600px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+}
