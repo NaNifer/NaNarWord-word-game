@@ -18,7 +18,7 @@ function storeWord(word, frequency) {
 // Nifer
 // Create onclick, render the wordBoard
 function renderWordBoard(wordList) {
-    $("word-list-div").empty();
+    $("#word-list-div").empty();
 
     // let wordBoardEl = document.getElementById("top-10");
     let wordListDiv = document.getElementById("word-list-div");
@@ -47,7 +47,7 @@ function renderWordBoard(wordList) {
 // Nifer
 // Calls on definition and displays modal
 async function retrieveDefinition(buttonEl, wordList) {
-    $("append-definition").empty();
+    $("#append-definition").empty();
     let appendDefEl = document.getElementById("append-definition");
     // Empties div here
     if (appendDefEl.hasChildNodes()) {

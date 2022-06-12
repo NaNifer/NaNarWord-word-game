@@ -1,4 +1,4 @@
-root {
+:root {
     --light-blue: #40c4ff;
     --teal: #b2dfdb;
     --light-blue: #0277bd;
@@ -7,6 +7,9 @@ root {
 }
 
 body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
     background-color: white;
     font-size: 16px;
 }
@@ -22,6 +25,23 @@ ol {
 li {
     text-align: left;
     list-style-position: inside;
+}
+
+.nav-wrapper {
+    height: fit-content;
+    border-top: 5px solid #000;
+    background-image: linear-gradient(140deg,
+    rgba(255, 215, 64, 1),
+    rgba(178, 223, 219, 1),
+    rgba(64, 196, 255, 1),
+    rgba(2, 119, 189, 1),
+    rgba(170, 0, 255, 1));
+}
+
+.brand-logo h2 {
+    color: #000;
+    padding-left: 10%;
+    margin: 5% auto;
 }
 
 #start {
@@ -46,15 +66,23 @@ li {
     margin: auto;
 }
 
+#game-container-div {
+    display: none;
+    justify-content: center;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    width: 70vw;
+    padding: 10px;
+}
+
 #start-btn {
     margin-top: 24px;
-    color: white;
+    color: #000;
 }
 
 #hard {
     color: white;
 }
-
 
 .btn,
 .btn-large,
@@ -65,6 +93,10 @@ li {
     color: black;
 }
 
+.btn:active {
+    background-color: var(--purple) !important;
+}
+
 #easy,
 #med,
 #hard {
@@ -73,7 +105,7 @@ li {
 
 #guesses {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     padding-right: 10px;
 }
 
@@ -81,7 +113,6 @@ li {
     max-width: 400px;
     position: relative;
     height: 100%;
-    margin: auto;
     display: none;
 }
 
@@ -90,8 +121,16 @@ li {
 }
 
 aside {
+    /* border-radius: 6px; */
+    display: none;
+    flex-direction: column;
+    width: 20vw;
+}
+
+#top-10 {
     border-radius: 6px;
-    /* display: none; */
+    margin: 10px;
+    padding: 10px;
 }
 
 #btn-div {
@@ -103,14 +142,38 @@ footer .container {
     color: #000;
 }
 
-body {
+.page-footer {
+    background-image: linear-gradient(140deg,
+    rgba(255, 215, 64, 1),
+    rgba(178, 223, 219, 1),
+    rgba(64, 196, 255, 1),
+    rgba(2, 119, 189, 1),
+    rgba(170, 0, 255, 1));
+}
+
+.footer-copyright {
+    height: 5px;
+}
+
+.footer-copyright p {
+    color: #fff;
+}
+
+#main-aside-row {
     display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    flex-direction:row;
+    flex-wrap: wrap;
+    /* padding: 10%; */
+    margin: auto;
+    /* position: relative; */
 }
 
 main {
     flex: 1 0 auto;
+    flex-wrap: wrap;
+    margin: 0 auto;
 }
 
 #rules-btn {
@@ -123,10 +186,10 @@ main {
 }
 
 #volume-btn {
-    border: 1x solid grey;
-    background-color: Transparent;
+    border: 1x solid 000;
+    background-color: #fff;
     background-repeat: no-repeat;
-    border-radius: 10px;
+    border-radius: 6px;
     margin: 12px 24px 12px 0px;
 }
 
@@ -134,6 +197,16 @@ main {
     max-width: 24px;
 }
 
+#restart-btn, #rules-btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#wordbutton {
+    background-color: #fff;
+    min-width: 75%;
+    margin: 5px;
+}
 
 /* Keyboard Formatting */
 .guess-count {
@@ -150,10 +223,14 @@ main {
     border-radius: 4px;
 }
 
+/* Oddly, this stops the default teal color from showing when the button is active. */
+button:focus {
+    background-color: rgb(213, 213, 213);
+}
+
 .key-el {
     background-color: rgb(213, 213, 213) !important;
 }
-
 
 .key-el:hover {
     background-color: rgb(198, 196, 196)
@@ -161,17 +238,16 @@ main {
 
 .key-wrong {
     color: #cbcbcb;
-    background-color: #ebebeb;
+    background-color: #ebebeb !important;
 }
 
 .key-correct {
-    background-color: #ffd740;
+    background-color: #ffd740 !important;
 }
 
 .guess-el {
     border-bottom: 4px solid black;
     min-height: 50px;
-    /* margin: 100px 20px 20px 20px; */
     display: inline-block;
     margin: 10px;
     min-width: 50px;
@@ -185,10 +261,10 @@ main {
 
 #key-div {
     margin: 40px 0px 80px 0px;
+    width: 50vw;
 }
 
-/* result screen texts */
-
+/* Result Screen Text Formatting */
 .winMsg,
 .sorryMsg {
     font-weight: bold;
