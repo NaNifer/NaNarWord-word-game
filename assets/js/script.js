@@ -170,7 +170,9 @@ function merriamFetch(word) {
                 // Check to make sure data returned is full object not array of strings
                 if (typeof data[0] === 'object') {
                     let goodFetch = true;
-                    let merriamArray = [data, goodFetch];
+                    // get wordnik url for attribution
+                    let wordnikData = await wordnikFetch(word.toLowerCase());
+                    let merriamArray = [data, goodFetch, wordnikData];
                     resolve(merriamArray);
                 }
                 if (typeof data[0] === 'string') {
@@ -448,7 +450,11 @@ async function grabWordDef(word) {
             let audioMerriam = merriamSound(WordDefData[0]);
             wordDefinition.innerText = WordDefData[0][0].shortdef[0];
             figSpeechEl.innerText = WordDefData[0][0].fl;
-            defArr = [WordDefData[1], revealWordEl, figSpeechEl, wordDefinition, audioMerriam, rarityRatingEl, wordnikFreqDscr];
+            // Wordnik attribution URL
+            wordnikLink.href = WordDefData[0][0].wordnikUrl;
+            wordnikLink.target = "_blank";
+            wordnikLink.textContent = "Wordnik Word Entry";
+            defArr = [WordDefData[1], revealWordEl, figSpeechEl, wordDefinition, audioMerriam, rarityRatingEl, wordnikFreqDscr, wordnikLink];
         }
         // wordnik Data case
         else {
@@ -493,7 +499,8 @@ async function endGame(win) {
                 defArray[3],
                 defArray[4],
                 defArray[5],
-                defArray[6]
+                defArray[6],
+                defArray[7]
             );
         }
         else {
@@ -505,7 +512,8 @@ async function endGame(win) {
                 defArray[3],
                 defArray[4],
                 defArray[5],
-                defArray[6]
+                defArray[6],
+                defArray[7]
             );
         }
     }

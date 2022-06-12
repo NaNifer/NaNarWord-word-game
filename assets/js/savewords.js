@@ -65,7 +65,8 @@ async function retrieveDefinition(buttonEl, wordList) {
             defArray[3],
             defArray[4],
             recallFreqEl,
-            defArray[6]
+            defArray[6],
+            defArray[7]
         );
 
     }
