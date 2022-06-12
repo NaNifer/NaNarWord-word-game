@@ -18,11 +18,7 @@ function storeWord(word, frequency) {
 // Nifer
 // Create onclick, render the wordBoard
 function renderWordBoard(wordList) {
-    $("#word-list-div").empty();
-
-    // let wordBoardEl = document.getElementById("top-10");
     let wordListDiv = document.getElementById("word-list-div");
-    // coul
     wordListDiv.classList.add("wordButtonContainer");
     wordListDiv.innerHTML = "";
     for (let i = 0; i <= 10 && i < wordList.length; i++) {
@@ -34,20 +30,20 @@ function renderWordBoard(wordList) {
         </a>
         `
         wordListDiv.innerHTML += buttonData;
-        // wordListDiv.appendChild(buttonData);
     }
-    // let wordbuttonEl = document.getElementById("wordbutton")
-    $(wordListDiv).on("click", "button", function (event) {
-        let buttonEl = event.target
-        retrieveDefinition(buttonEl, wordList);
-    });
 }
+
+// Nifer
+// Sets event listener
+$("#word-list-div").on("click", "button", function (event) {
+    let buttonEl = event.target
+    retrieveDefinition(buttonEl, wordList);
+});
 
 
 // Nifer
 // Calls on definition and displays modal
 async function retrieveDefinition(buttonEl, wordList) {
-    $("#append-definition").empty();
     let appendDefEl = document.getElementById("append-definition");
     // Empties div here
     if (appendDefEl.hasChildNodes()) {
@@ -69,7 +65,7 @@ async function retrieveDefinition(buttonEl, wordList) {
         );
 
     }
-    // if it is the Wordnik Source URL
+    // If it is the Wordnik Source URL
     else {
         appendDefEl.append(
             defArray[1],
