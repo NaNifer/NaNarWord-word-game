@@ -1,4 +1,3 @@
-
 // Global Variables
 // Nolan
 let word;
@@ -63,6 +62,7 @@ $("#restart-btn").on("click", function () {
     $("#guesses").empty();
     $("#game-div").empty();
     $("#game-div").hide();
+    $("#game-container-div").hide();
     $("#btn-div").hide();
     $("#aside").hide();
     // Show the level selection to start new game
@@ -81,6 +81,8 @@ $("#level-div").on("click", "button", function (event) {
     $("#level-div").hide();
     // show rules button
     $("#rules-btn").show();
+    // Show the game container div.
+    $("#game-container-div").show().css("display", "flex");
 })
 
 // Nolan
@@ -467,7 +469,7 @@ async function endGame(win) {
     $("#game-div").empty();
     $("#rules-btn").hide();
     $("#restart-btn").show();
-    $("#aside").show();
+    $("#aside").show().css("display", "flex");
 
     let sorryMessage = document.createElement("p");
     let winMessage = document.createElement("p");
