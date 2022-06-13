@@ -76,6 +76,10 @@ li {
     padding: 10px;
 }
 
+#corpus-footnote {
+    font-size: 10px;
+}
+
 #start-btn {
     margin-top: 24px;
     color: #000;
