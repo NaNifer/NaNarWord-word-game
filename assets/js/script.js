@@ -434,6 +434,7 @@ async function grabWordDef(word) {
     let wordnikLink = document.createElement("a");
     let wordnikHeader = document.createElement("p");
     let wordnikFreqDscr = document.createElement("p");
+    wordnikFreqDscr.setAttribute("id", "corpus-footnote");
     let rarityRatingEl = document.createElement("p");
     rarityRatingEl.textContent = `Corpus Frequency: ${frequency}`
     wordnikHeader.innerText = "Merriam Webster doesn't have a definition, check out Wordnik API's web entry:";

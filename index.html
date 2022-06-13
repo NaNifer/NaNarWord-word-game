@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/animation.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/responsive.css" />
     <title>NaNarWORD | A Word Game by Team NaNarwhal</title>
 </head>
 
@@ -21,7 +22,7 @@
                     <h2><b>NaN</b>ar<b>WORD</b></h2>
                 </a>
                 <button id="volume-btn" class="right"><img src="assets/image/sound_off.png"></button>
-                <div id="guesses"></div>
+                <!-- <div id="guesses"></div> -->
                 </ul>
             </div>
         </nav>
@@ -29,6 +30,76 @@
 
     <!-- Display top 10 solved words. -->
     <div class="row container-fluid center-align valign-wrapper" id="main-aside-row">
+
+        <main class="center-align valign-wrapper">
+            <!-- Start section. -->
+            <section class="row" id="start">
+                <div class="col s12 m12 l12 center-align" id="rules-container">
+                    <h1>Welcome to <b>NaN</b>ar<b>WORD</b>!</h1>
+                    <div class="col s12 m12 l12 center-align" id="rules-div">
+                        <ol>
+                            <li>Choose your level of difficulty.</li>
+                            <li>NaNarWORD will present you with a word to guess.</li>
+                            <li>You'll only have so many guesses to get the word right.</li>
+                            <li>Win, and get a gif prize! 🏆</li>
+                            <li>Lose, and there shall be dire consequences! 😱 (Jk!)</li>
+                        </ol>
+                    </div>
+                    <div class="col s12 m12 l12 center-align" id="ready-div">
+                        <p>Ready to play? Click start to get goin'!</p>
+                        <button class="waves-effect waves-light btn-large amber accent-2 center-align" id="start-btn">
+                            Start
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Choose your level. -->
+            <section class="col s12 m12 l12 center-align" id="level-div">
+                <h2>Choose Your Level</h2>
+                <button class="waves-effect waves-light btn-large teal lighten-4" id="easy" data-level="6">Common
+                    Words</button>
+                <button class="waves-effect waves-light btn-large amber accent-2" id="med" data-level="4">Not-So-Common
+                    Words</button>
+                <button class="waves-effect waves-light btn-large purple accent-4" id="hard" data-level="2">WTF Does
+                    That
+                    Mean?</button>
+            </section>
+
+            <!-- Game play div here. -->
+            <!-- Will turn into the results div at end of game. -->
+            <div class="row center-align valign-wrapper" id="game-container-div">
+                <section class="center-align" id="game-div">
+                </section>
+
+                <!-- Reusable buttons -->
+                <section class="col s12 m12 l12" id="btn-div">
+                    <button class="waves-effect waves-light btn-large light-blue lighten-4" id="restart-btn">Play
+                        Again</button>
+                    <a href="#modal1"></a>
+                    <button class="waves-effect waves-light btn-large btn modal-trigger light-blue lighten-4"
+                        data-target="modal1" id="rules-btn">How does this work again? 🤔</button>
+                    </a>
+                </section>
+            </div>
+
+            <!-- Rules reminder modal -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h4>Here's How to Play</h4>
+                    <ol class="rules">
+                        <li>After choosing your difficulty level, NaNarWORD will present you with a word to guess.</li>
+                        <li>You'll only have so many guesses to get the word right.</li>
+                        <li>Win, and get a gif prize! 🏆</li>
+                        <li>Lose, and there shall be dire consequences! 😱 (Jk!)</li>
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat amber accent-2">Continue Game</a>
+                </div>
+            </div>
+        </main>
+
         <aside class="row center-align pull-s8" id="aside">
             <div class="amber accent-2" id="top-10">
                 <h5>Your Word Bank</h5>
@@ -45,84 +116,32 @@
                 </div>
             </div>
         </aside>
-    
-        <main class="center-align valign-wrapper">
-            <!-- Start section. -->
-            <section class="row" id="start">
-                <div class="col s12 m12 l12 center-align" id="rules-container">
-                    <h2>Welcome to <b>NaN</b>ar<b>WORD</b>!</h2>
-                    <div class="col s12 m12 l12 center-align" id="rules-div">
-                        <ol>
-                            <li>Choose your level of difficulty.</li>
-                            <li>NaNarWORD will present you with a word to guess.</li>
-                            <li>You'll only have so many guesses to get the word right.</li>
-                            <li>Win, and get a gif prize! 🏆</li>
-                            <li>Lost, and there shall be dire consequences! 😱 (Jk!)</li>
-                        </ol>
-                    </div>
-                    <div class="col s12 m12 l12 center-align" id="ready-div">
-                        <p>Ready to play? Click start to get goin'!</p>
-                        <button class="waves-effect waves-light btn-large amber accent-2 center-align" id="start-btn">
-                            Start
-                        </button>
-                    </div>
-                </div>
-            </section>
-    
-            <!-- Choose your level. -->
-            <section class="col s12 m12 l12 center-align" id="level-div">
-                <h2>Choose your level!</h2>
-                <button class="waves-effect waves-light btn-large teal lighten-4" id="easy" data-level="6">Common
-                    Words</button>
-                <button class="waves-effect waves-light btn-large amber accent-2" id="med" data-level="4">Not-So-Common
-                    Words</button>
-                <button class="waves-effect waves-light btn-large purple accent-4" id="hard" data-level="2">WTF Does That
-                    Mean?</button>
-            </section>
-    
-            <!-- Game play div here. -->
-            <!-- Will turn into the results div at end of game. -->
-            <div class="row center-align valign-wrapper" id="game-container-div">
-                <section class="center-align" id="game-div">
-                </section>
-    
-                <!-- Reusable buttons -->
-                <section class="col s12 m12 l12" id="btn-div">
-                    <button class="waves-effect waves-light btn-large light-blue lighten-4" id="restart-btn">Play
-                        Again</button>
-                    <a href="#modal1"></a>
-                    <button class="waves-effect waves-light btn-large btn modal-trigger light-blue lighten-4"
-                        data-target="modal1" id="rules-btn">How does this work again? 🤔</button>
-                    </a>
-                </section>
-            </div>
-    
-            <!-- Rules reminder modal -->
-            <div id="modal1" class="modal">
-                <div class="modal-content">
-                    <h4>Here's How to Play</h4>
-                    <ol class="rules">
-                        <li>After choosing your difficulty level, NaNarWORD will present you with a word to guess.</li>
-                        <li>You'll only have so many guesses to get the word right.</li>
-                        <li>Win, and get a gif prize! 🏆</li>
-                        <li>Lost, and there shall be dire consequences! 😱 (Jk!)</li>
-                    </ol>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat amber accent-2">Continue Game</a>
-                </div>
-            </div>
-        </main>
+
     </div>
 
     <footer class="page-footer">
         <div class="container">
             <div class="row text-black">
-                <a href="https://github.com/NaNifer/NaNarWord-word-game" target="_blank" alt="Visit our GitHub page!" src="./assets/images/GitHub-Mark-32px.png"><img src="./assets/images/GitHub-Mark-32px.png" alt="Visit our GitHub page!" /></a> <p>Powered by Wordnik API, Merriam-Webster API, & Giphy</p>
+                <div id="footer-logos">
+                    <a href="https://dictionaryapi.com/" target="_blank" title="Powered by Merriam Webster">
+                        <img src="./assets/images/MWLogo_LightBG_50x50_2x.png" alt="Powered by Merriam-Webster API"
+                            srcset="" />
+                    </a>
+                    <a href="https://developer.wordnik.com/" target="_blank" title="Powered by Wordnik">
+                        <img src="./assets/images/wordnik_badge_a1.png" alt="Powered by Wordnik" id="wordnik-img" />
+                    </a>
+                    <a href="https://developers.giphy.com/" target="_blank" title="Powered by Giphy">
+                        <img src="./assets/images/Giphy-Icon-Circle-50-px.png" alt="Powered by Giphy">
+                    </a>
+                </div>
             </div>
         </div>
         <div class="footer-copyright black">
-            <div class="container">
+            <div class="container" id="team-narwhal">
+                <a href="https://github.com/NaNifer/NaNarWord-word-game" target="_blank" alt="Visit our GitHub page!">
+                    <img src="./assets/images/GitHub-Mark-32px-white.png" alt="Visit our GitHub page!"
+                        id="github-btn" />
+                </a>
                 <p>© 2022 Team NaNarwhal</p>
             </div>
         </div>

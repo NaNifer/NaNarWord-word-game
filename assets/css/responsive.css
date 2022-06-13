@@ -1,0 +1,56 @@
+@media only screen and (max-width: 600px) {
+    h2 {
+        font-size: 28px;
+    }
+
+    body {
+        font-size: 5vw;
+        width: 100vw;
+    }
+
+    main {
+        margin: 0;
+        display: flex;
+        text-align: center;
+        width: 100%;
+    }
+
+    aside {
+        width: 100vw;
+        flex-direction: row;
+    }
+
+    #game-div {
+        width: 100vw;
+    }
+
+    #key-div {
+        width: 100vw;
+        margin: 40px auto;
+    }
+
+    /* MAX LENGTH OF A WORD IS SEVEN CHARACTERS; BASE MOBILE SIZING OFF OF THIS */
+    #guess-div {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    #top-10 {
+        width: auto;
+        max-height: 600px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #wordbutton {
+        width: 40vw;
+    }
+
+    #volume-btn {
+        margin: 5px 5% 5px auto;
+    }
+    
+}
