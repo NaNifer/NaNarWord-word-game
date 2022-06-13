@@ -195,16 +195,18 @@ function merriamFetch(word) {
 // Returns the audio src URL to add to an audio tag
 // Returns if the audio URL doesn't exist
 function merriamSound(data) {
-    // check if audio exists
+    // check if pronunciation entry exists
     if ("prs" in data[0].hwi) {
         let audio = data[0].hwi.prs[0].sound.audio;
-        // if audio doesn't exist then return
+        // if audio doesn't exist then return element with no audio statement
         if (!audio) {
-            return;
+            let audioMerriam = document.createElement("p");
+            audioMerriam.textContent = "There is no audio file from Merriam Webster API for this word.";
+            return audioMerriam;
         }
         // Define the subdirectory parameter using Merriam's API documentation instructions
         let subDir;
-        if ((/\d/g).test(audio.charAt(0))) {
+        if ((/[\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/gu).test(audio.charAt(0))) {
             subDir = 'number';
         }
         if (audio.charAt(0) === 'g' && audio.charAt(1) === 'g') {
