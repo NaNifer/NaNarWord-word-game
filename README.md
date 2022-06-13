@@ -9,10 +9,10 @@
   - [Links](#links)
 - [Behind the Code](#behind-the-code)
   - [Built with](#built-with)
-  - [APIs](#APIs)
+  - [APIs](#apis)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
-- [Author](#author)
+- [Authors](#authors)
 - [Acknowledgments](#acknowledgments)
 ​
 ​
@@ -23,6 +23,8 @@
 Welcome to NaNarWord!  This mobile friendly web app provides an immersive experience into the world of words.  After choosing a level, the player is challenged to guess a randomly selected word, provided by Wordnik API, with a limited number of guesses.  Upon winning or losing, a fun suprise appears on screen; this includes academic information about that word, well as audio of pronumnciation if available, and a reward GIF.  The player's top 10 previously solved words are kept in a word bank sorted by most rarely used first.  If they want to see the corpus frequency and information about that word, they can click it for an informational modal.
 
 Ease into gameplay by selecting "common words", challenge yourself by choosing the "not so common words" category, and delve into the fringes of word society by playing the "WTF does that mean?" category.  The experience is fun, and educational!
+
+Play [here](https://nanifer.github.io/NaNarWord-word-game/).
 ​
 ### Features
 ​
@@ -45,7 +47,7 @@ If the player finds themselves lost during gameplay, there is an informational h
 
 ​
 ### Gameplay Gif
-​
+​**Nolan will add a gif of our gameplay once final version of the site is ready**
 ![](./screenshot.jpg)
 ​
 Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
@@ -76,12 +78,12 @@ Here is the deployed web app, check it out!
 The NaNarWord game employs three different APIs to deliver the best gameplay to the player.  In the [resources](#useful-resources) section of this readme, there are links for all APIs used in this web app.  Following is some information on those three APIs: Wordnik API, Merriam Webster API, and Giphy API.
 
 ##### Wordnik
-Wordnik is a non-profit organization striving to provide access to information on every English word to eveyone on this planet.  Their data is extensive and powerful in the sense that they have built a corpus of word data that is very large.  The reason the project team used Wordnik to provide the random words is because we could provide very obscure and "non-proper" words for our "WTF does that mean?" category.  Merriam Webster will only provide official words that they have in their dictionary.
+[Wordnik](https://www.wordnik.com/) is a non-profit organization striving to provide access to information on every English word to eveyone on this planet.  Their data is extensive and powerful in the sense that they have built a corpus of word data that is very large.  The reason the project team used Wordnik to provide the random words is because we could provide very obscure and "non-proper" words for our "WTF does that mean?" category.  Merriam Webster will only provide official words that they have in their dictionary.
 
 Wordnik provided us a query parameter for "corpus frequency" to filter random words by how many occurrences that word has in their corpus of data.  This provided an interesting way to present players words based on commonality.  Also, when Merriam Webster doesn't have an entry for one of these non-offical obscure words, the user is presented with Worknik's URL entry for that word.  There, one can find information on what part of their corpus the word appears and alternative definition sources.
 
 ##### Merriam Webster
-The project team wanted an official provider of word definitions for the words played.  We chose Merriam Webster's dictionary API because they are a respected source.  When they don't have a defintion for obscure words, the code would provide Wordnik data instead.  In order to access the audio files, the URL parameters would have to be condition built using data provided in the fetch request.  Below is a block of code that can be used to appropriately build the correct URL.  There is a case to check that entry has a proununciation key; if it does, then the code will build the URL as directed by the API docs.  This code block can be repurposed to quickly build sound URLs from Merriam Webster API.
+The project team wanted an official provider of word definitions for the words played.  We chose [Merriam Webster's dictionary API](https://dictionaryapi.com/) because they are a respected source.  When they don't have a defintion for obscure words, the code would provide Wordnik data instead.  In order to access the audio files, the URL parameters would have to be condition built using data provided in the fetch request.  Below is a block of code that can be used to appropriately build the correct URL.  There is a case to check that entry has a proununciation key; if it does, then the code will build the URL as directed by the API docs.  This code block can be repurposed to quickly build sound URLs from Merriam Webster API data objects.
 ```js
 function merriamSound(data) {
     // check if pronunciation entry exists
@@ -121,22 +123,11 @@ function merriamSound(data) {
     }
 }
 ```
+​##### Giphy
+**Nifer add some giphy info and possibly code blocks**
+
 ​
-To see how you can add code snippets, see below:
-​
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-​
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-​
-If you want more help with writing markdown, check out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-​
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+**Everyone Add anything you find interesting for employers or fellow coders**
 ​
 ### Continued development
 ​
@@ -172,5 +163,7 @@ Also, a new feature that we definitely want to implement is word categories.  It
 ## Acknowledgments
 ​
 ### From Nolan
-I want to give a special thank you to Wordnik for being available for questions as well as for providing a very cool API to work with.  Their mission is to provide access to English word information to anyone everywhere on our home Earth.  Also, thank you to my team for persavering through this project enthusiastically.  It wasn't easy but you all made it a fun experience!
+I want to give a special thank you to Wordnik for being available for questions as well as for providing a very cool API to work with.  Specifically Erin McKean, thank you for responding so quickly to emails!  Their mission is to provide access to English word information to anyone everywhere on our home Earth.  Also, thank you to my team for persavering through this project enthusiastically.  It wasn't easy but you all made it a fun experience!
+
+**Everyone add any thank you's!!**
 ​
