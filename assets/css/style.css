@@ -14,7 +14,8 @@ body {
     font-size: 16px;
 }
 
-h2 {
+h2,
+#guesses h1 {
     font-size: 32px;
 }
 
@@ -31,11 +32,11 @@ li {
     height: fit-content;
     border-top: 5px solid #000;
     background-image: linear-gradient(140deg,
-    rgba(255, 215, 64, 1),
-    rgba(178, 223, 219, 1),
-    rgba(64, 196, 255, 1),
-    rgba(2, 119, 189, 1),
-    rgba(170, 0, 255, 1));
+            rgba(255, 215, 64, 1),
+            rgba(178, 223, 219, 1),
+            rgba(64, 196, 255, 1),
+            rgba(2, 119, 189, 1),
+            rgba(170, 0, 255, 1));
 }
 
 .brand-logo h2 {
@@ -75,6 +76,10 @@ li {
     padding: 10px;
 }
 
+#corpus-footnote {
+    font-size: 10px;
+}
+
 #start-btn {
     margin-top: 24px;
     color: #000;
@@ -105,6 +110,7 @@ li {
 
 #guesses {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     padding-right: 10px;
 }
@@ -148,15 +154,44 @@ footer .container {
 
 .page-footer {
     background-image: linear-gradient(140deg,
-    rgba(255, 215, 64, 1),
-    rgba(178, 223, 219, 1),
-    rgba(64, 196, 255, 1),
-    rgba(2, 119, 189, 1),
-    rgba(170, 0, 255, 1));
+            rgba(255, 215, 64, 1),
+            rgba(178, 223, 219, 1),
+            rgba(64, 196, 255, 1),
+            rgba(2, 119, 189, 1),
+            rgba(170, 0, 255, 1));
+}
+
+#footer-logos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer-logos img {
+    margin: 5px;
+}
+
+#wordnik-img {
+    padding: 12px;
 }
 
 .footer-copyright {
-    height: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#team-narwhal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#team-narwhal a {
+    margin: 10px;
 }
 
 .footer-copyright p {
@@ -167,11 +202,9 @@ footer .container {
     display: flex;
     justify-content: space-between;
     align-content: center;
-    flex-direction:row;
+    flex-direction: row;
     flex-wrap: wrap;
-    /* padding: 10%; */
     margin: auto;
-    /* position: relative; */
 }
 
 main {
@@ -202,7 +235,8 @@ main {
     max-width: 24px;
 }
 
-#restart-btn, #rules-btn {
+#restart-btn,
+#rules-btn {
     margin-top: 20px;
     margin-bottom: 20px;
 }
