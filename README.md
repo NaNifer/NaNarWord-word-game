@@ -216,7 +216,7 @@ On the CSS side, it might be worth it to consider alternative frameworks outside
 ## Acknowledgments
 ​
 ### From Nolan
-I want to give a special thank you to Wordnik for being available for questions as well as for providing a very cool API to work with.  Specifically Erin McKean, thank you for responding so quickly to emails!  Their mission is to provide access to English word information to anyone everywhere on our home Earth.  Also, thank you to my team for persevering through this project enthusiastically.  It wasn't easy but you all made it a fun experience!
+I want to give a special thank you to Wordnik for being available for questions as well as for providing a very cool API to work with.  Specifically Erin McKean, thank you for responding so quickly to emails!  Their mission is to provide access to English word information to anyone everywhere on our home Earth.  Also, thank you to my team for persevering through this project enthusiastically.  It wasn't easy but you all made it a fun experience!  Finally, thank you to the TA's and instructors support from the Berkeley bootcamp when we struggled with asynchronous functions and github collaboration.
 
 ### From Nifer
 Huge shout out to [nullaus](https://github.com/nullaus) who was my quick dial on JS questions, and helped our team navigate git using repositories and conflicts. And of course, it has been a pleasure to work with this great team of people. Everyone is very collaborative, flexible, dedicated, and posses a refined growth-mindset. The process has been fun and intellectually stimulating!
