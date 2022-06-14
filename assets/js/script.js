@@ -454,7 +454,7 @@ async function grabWordDef(word) {
             wordDefinition.innerText = WordDefData[0][0].shortdef[0];
             figSpeechEl.innerText = WordDefData[0][0].fl;
             // Wordnik attribution URL
-            wordnikLink.href = WordDefData[0][0].wordnikUrl;
+            wordnikLink.href = WordDefData[2][0].wordnikUrl;
             wordnikLink.target = "_blank";
             wordnikLink.textContent = "Wordnik Word Entry";
             defArr = [WordDefData[1], revealWordEl, figSpeechEl, wordDefinition, audioMerriam, rarityRatingEl, wordnikFreqDscr, wordnikLink];
