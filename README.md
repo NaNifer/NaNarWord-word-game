@@ -123,9 +123,46 @@ function merriamSound(data) {
    }
 }
 ```
-​##### Giphy
-**Nifer add some giphy info and possibly code blocks**
- 
+​##### Displaying the WordBank Modal
+Our team saved all of the dynamically displayed content into a vairable called defArray, which grabs its data from the grabWordDef function. The saved array allowed us to use the information both in the endGame function, as well as the WordBank Modal once one of the word buttons are clicked. Here is an example of how easy it made it to append in the modal:
+
+```js
+// Calls on definition and displays modal
+async function retrieveDefinition(buttonEl, wordList) {
+    let appendDefEl = document.getElementById("append-definition");
+    // Empties div here
+    if (appendDefEl.hasChildNodes()) {
+        appendDefEl.innerHTML = "";
+    }
+    let recallFreqEl = document.createElement("p");
+    let recallWord = buttonEl.dataset.word;
+    recallFreqEl.innerText = `Corpus Frequency: ${buttonEl.dataset.frequency}`;
+    let defArray = await grabWordDef(recallWord);
+    // Merriam
+    if (defArray[0] === true) {
+        appendDefEl.append(
+            defArray[1],
+            defArray[2],
+            defArray[3],
+            defArray[4],
+            recallFreqEl,
+            defArray[6],
+            defArray[7]
+        );
+
+    }
+    // If it is the Wordnik Source URL
+    else {
+        appendDefEl.append(
+            defArray[1],
+            defArray[2],
+            defArray[3],
+            recallFreqEl,
+            defArray[5]
+        );
+    }
+}
+``` 
 ​
 **Everyone Add anything you find interesting for employers or fellow coders**
 ​
@@ -150,7 +187,8 @@ Also, a new feature that we definitely want to implement is word categories.  It
 ## Authors
  
 ### Nifer Kilakila
-**Nifer add here**
+- GitHub - [NaNifer](https://github.com/NaNifer)
+- Portfolio - [Nifer Kilakila](https://nanifer.github.io/Nifer-Kilakila-Portfolio-h2/)
 ### Angie Soto​
 **Angie add here**
 ### Ivy Chang
@@ -164,5 +202,9 @@ Also, a new feature that we definitely want to implement is word categories.  It
 ​
 ### From Nolan
 I want to give a special thank you to Wordnik for being available for questions as well as for providing a very cool API to work with.  Specifically Erin McKean, thank you for responding so quickly to emails!  Their mission is to provide access to English word information to anyone everywhere on our home Earth.  Also, thank you to my team for persevering through this project enthusiastically.  It wasn't easy but you all made it a fun experience!
+
+### From Nifer
+Huge shout out to [nullaus](https://github.com/nullaus) who was my quick dial on JS questions, and helped our team navigate git using repositories and conflicts. And of course, it has been a pleasure to work with this great team of people. Everyone is very collaborative, flexible, dedicated, and posses a refined growth-mindset. The process has been fun and intellectually stimulating!
+
  
 **Everyone add any thank you's!!**
