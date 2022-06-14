@@ -173,7 +173,9 @@ NaNarWord is in it's infancy currently.  The team is proud of what was accomplis
 As of now, the information utilized from Merriam Webster API is just scratching the surface of what is available.  Merriam Webster API has very complex data structures returned in fetch requests that need to be read on a case by case.  In the future we would like to provide much richer word information for solved words instead of one abbreviated shortdefinition that is currently provided.  More research must be done to properly read and utilize Merriam Webster's complicated data structure return.
  
 Also, a new feature that we definitely want to implement is word categories.  It would be fun for the user to be able to select word categories for gameplay instead of truly random words.  Wordnik API has some parameters providing related words but aren't quite extensive enough data structures to give players enough words to play through.  There is definitely a solution to this problem that can be worked through in the future to implement this feature.
- 
+
+On the CSS side, it might be worth it to consider alternative frameworks outside of [Materalize](https://materializecss.com/). While Materalize is simple and has most of the basics for building sites. Their whole framework was hard to use for scaling, especially when design are more customized or involved specific interactions. Documentations were also limited and sometime confusing to read/find information needed. A lot of the current code is a mix of the framework and manual tweaks in additional css files. We did found a cool css animation site, [Animista](https://animista.net/play/basic/flip), that would be fun to dive more into. Adding effects and motion to this application. 
+
 **Anyone add addition continued development here**
 ​
 ### Useful resources
@@ -192,7 +194,8 @@ Also, a new feature that we definitely want to implement is word categories.  It
 ### Angie Soto​
 **Angie add here**
 ### Ivy Chang
-**Ivy add here**
+- Website - [Ivy Chang](https://howl-lab.github.io/Portfolio/)
+- Github - [howl-lab](https://github.com/howl-lab)
 ### Nolan Spence
 - Website - [Nolan Spence](https://unicorn-barf.github.io/Portfolio_Website_HTML_CSS/)
 - Github - [Unicorn-Barf](https://github.com/Unicorn-Barf)
@@ -206,5 +209,7 @@ I want to give a special thank you to Wordnik for being available for questions 
 ### From Nifer
 Huge shout out to [nullaus](https://github.com/nullaus) who was my quick dial on JS questions, and helped our team navigate git using repositories and conflicts. And of course, it has been a pleasure to work with this great team of people. Everyone is very collaborative, flexible, dedicated, and posses a refined growth-mindset. The process has been fun and intellectually stimulating!
 
- 
+### From Ivy
+Just to really hammer it, this project would not have been close to the state it is now without THIS team. Eveyone showed up with enthusiasm, genuine interest and love for this application daily. This has been a dream team and I'm so glad we got to put out something extrememly cool to be in this world. 
+
 **Everyone add any thank you's!!**
