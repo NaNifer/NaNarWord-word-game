@@ -74,7 +74,6 @@ $("#restart-btn").on("click", function () {
 $("#level-div").on("click", "button", function (event) {
     let btnEl = event.target;
     let level = $(btnEl).data("level");
-    console.log("User level: " + level);
     // call word search function with level of word
     randomWordFetch(level);
     // Hide the level div
@@ -134,7 +133,6 @@ function frequencyWordFetch(word) {
         .then(data => {
             // Defines global variable for corpus frequency for current played word
             frequency = data.totalCount;
-            console.log("The frequency is: " + frequency);
         })
         .catch(err => console.error(err));
 }
@@ -181,7 +179,9 @@ function merriamFetch(word) {
                     let merriamArray = [wordnikData, goodFetch];
                     resolve(merriamArray);
                 }
-            }).catch(async function (error) {
+            })
+            // error cases are handled by providing Wordnik Data
+            .catch(async function (error) {
                 let wordnikData = await wordnikFetch(word.toLowerCase());
                 let goodFetch = false;
                 let merriamArray = [wordnikData, goodFetch];
@@ -357,7 +357,6 @@ function guessCheck(guess) {
                 guessCount = 0;
                 // empty the guess count container
                 $("#guesses").empty();
-                console.log("User won");
                 endGame(true, frequency);
             }, 2000)
         }
@@ -378,7 +377,6 @@ function guessCheck(guess) {
         audioFailure.play();
         // empty the guess count container
         $("#guesses").empty();
-        console.log("User lost");
         endGame(false, frequency);
     }
 }
@@ -451,8 +449,20 @@ async function grabWordDef(word) {
         if (WordDefData[1]) {
             // Get Audio URL from merriamSound()
             let audioMerriam = merriamSound(WordDefData[0]);
-            wordDefinition.innerText = WordDefData[0][0].shortdef[0];
-            figSpeechEl.innerText = WordDefData[0][0].fl;
+            // Loop through definition data in case the first entry doesn't have a short def or figure of speech
+            for (i=0; i<WordDefData[0].length; i++) {
+                wordDefinition.innerText = WordDefData[0][i].shortdef[0];
+                figSpeechEl.innerText = WordDefData[0][i].fl;
+                // break if wordDefinition and figure of speech are defined
+                if (wordDefinition.innerText !== 'undefined' && figSpeechEl.innerText !== 'undefined') {
+                    break;
+                }
+                // if no short definitions exist, let the user know
+                if (i === WordDefData[0].length - 1) {
+                    wordDefinition.innerText = "There is no short definition from Merriam Webster.";
+                    figSpeechEl.innerText = "No figure of speech from Merriam Webster.";
+                }
+            }
             // Wordnik attribution URL
             wordnikLink.href = WordDefData[2][0].wordnikUrl;
             wordnikLink.target = "_blank";
