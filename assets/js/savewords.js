@@ -64,7 +64,6 @@ async function retrieveDefinition(buttonEl, wordList) {
             defArray[6],
             defArray[7]
         );
-
     }
     // If it is the Wordnik Source URL
     else {
