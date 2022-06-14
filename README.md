@@ -3,7 +3,7 @@
 # NaNarWord - The smart word guessing game
 ​
 ## Table of contents
-​
+
 - [Overview](#overview)
     - [The Game](#the-game)
     - [Features](#features)
@@ -16,8 +16,9 @@
     - [Useful resources](#useful-resources)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgments)
-​
-​
+
+<br/>
+
 ## Overview
 ​
 ### The Game
@@ -27,7 +28,9 @@ Welcome to NaNarWord!  This mobile friendly web app provides an immersive experi
 Ease into gameplay by selecting "common words", challenge yourself by choosing the "not so common words" category, and delve into the fringes of word society by playing the "WTF does that mean?" category.  The experience is fun, and educational!
  
 **Play the game [here](https://nanifer.github.io/NaNarWord-word-game/).**
-​
+
+<br/>
+
 ### Features
 ​
 NaNarWord is loaded with little features to enhance user experience.  Here are a few to note so you don't miss out:
@@ -58,6 +61,9 @@ If the player finds themselves lost during gameplay, there is an informational h
 Here is the deployed web app, check it out!
 - Live Site URL: [https://nanifer.github.io/NaNarWord-word-game/](https://nanifer.github.io/NaNarWord-word-game/)
 
+<br/>
+<br/>
+
 ## Behind the Code
 ​
 ### Built with
@@ -66,16 +72,21 @@ Here is the deployed web app, check it out!
 - CSS
 - JavaScript
 - Materialize CSS framework
-​
-​
+
+<br/>
+
 ### APIs
 ​
 The NaNarWord game employs three different APIs to deliver the best gameplay to the player.  In the [resources](#useful-resources) section of this readme, there are links for all APIs used in this web app.  Following is some information on those three APIs: Wordnik API, Merriam Webster API, and Giphy API.
+
+<br/>
  
 ##### Wordnik
 [Wordnik](https://www.wordnik.com/) is a non-profit organization striving to provide access to information on every English word to everyone on this planet.  Their data is extensive and powerful in the sense that they have built a corpus of word data that is very large.  The reason the project team used Wordnik to provide the random words is because we could provide very obscure and "non-proper" words for our "WTF does that mean?" category.  Merriam Webster will only provide official words that they have in their dictionary.
  
 Wordnik provided us a query parameter for "corpus frequency" to filter random words by how many occurrences that word has in their corpus of data.  This provided an interesting way to present players words based on commonality.  Also, when Merriam Webster doesn't have an entry for one of these non-official obscure words, the user is presented with Worknik's URL entry for that word.  There, one can find information on what part of their corpus the word appears and alternative definition sources.
+
+<br/>
  
 ##### Merriam Webster
 The project team wanted an official provider of word definitions for the words played.  We chose [Merriam Webster's Dictionary API](https://dictionaryapi.com/) because they are a recognizable and respected source.  When they don't have a defintion for obscure words, the code would provide Wordnik data instead.  In order to access the Merriam Webster audio files, the URL parameters would have to be conditionally built using data provided in the fetch request.  Below is a block of code that can be used to appropriately build the correct URL; all it needs is the Merriam Webster API data as a parameter.  There is a case to check that entry has a proununciation key; next it will check if the pronounciation key has audio data.  If it does, the code will build the URL as directed by the API docs and return an `<audio>` element with the correct src value; if not, it will return a `<p>` element to notify the use that no audio is available for that word.  This code block can be repurposed to quickly build sound URLs from Merriam Webster API data objects.
@@ -119,6 +130,8 @@ function merriamSound(data) {
 }
 ```
 
+<br/>
+
 ##### Displaying the Word Bank Modal
 
 Our team saved all of the dynamically created elements for the word information data into a variable called `defArray`; `defArray` receives its data from the `grabWordDef()` function. The saved array allowed us to use the created elements both in the `endGame()` function for displaying word data after gameplay, and the WordBank Modal when one of the word buttons is clicked. Here is an example of how easy it made it to append in the "Word Bank" modal:
@@ -161,7 +174,8 @@ async function retrieveDefinition(buttonEl, wordList) {
 }
 ``` 
 
-​
+<br/>
+
 ### Continued development
 ​
 NaNarWord is in it's infancy currently.  The team is proud of what was accomplished in the first version deployment but also look forward to future development.  We not only want to refine the app's UI/UX but also add new features to further engage the user.
@@ -183,7 +197,9 @@ On the CSS side, it might be worth it to consider alternative frameworks outside
  
 ​
 ## Authors
- 
+
+<br/>
+
 ### Nifer Kilakila
 - GitHub - [NaNifer](https://github.com/NaNifer)
 - Portfolio - [Nifer Kilakila](https://nanifer.github.io/Nifer-Kilakila-Portfolio-h2/)
