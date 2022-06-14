@@ -1,17 +1,19 @@
-# NaNarWord - Word Guessing Game
+<img src="./assets/image/rm_logo.png">
+
+# NaNarWord - The smart word guessing game
 ​
 ## Table of contents
 ​
 - [Overview](#overview)
- - [The Game](#the-game)
- - [Features](#features)
- - [Gameplay Gif](#gameplay-gif)
- - [Links](#links)
+    - [The Game](#the-game)
+    - [Features](#features)
+    - [Gameplay Gif](#gameplay-gif)
+    - [Links](#links)
 - [Behind the Code](#behind-the-code)
- - [Built with](#built-with)
- - [APIs](#apis)
- - [Continued development](#continued-development)
- - [Useful resources](#useful-resources)
+    - [Built with](#built-with)
+    - [APIs](#apis)
+    - [Continued development](#continued-development)
+    - [Useful resources](#useful-resources)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgments)
 ​
@@ -24,14 +26,14 @@ Welcome to NaNarWord!  This mobile friendly web app provides an immersive experi
  
 Ease into gameplay by selecting "common words", challenge yourself by choosing the "not so common words" category, and delve into the fringes of word society by playing the "WTF does that mean?" category.  The experience is fun, and educational!
  
-Play [here](https://nanifer.github.io/NaNarWord-word-game/).
+**Play the game [here](https://nanifer.github.io/NaNarWord-word-game/).**
 ​
 ### Features
 ​
 NaNarWord is loaded with little features to enhance user experience.  Here are a few to note so you don't miss out:
  
 ##### Sound
-If you're the type that enjoys a more immersive experience, yes our app has sound!  On page load the game will not play any of the sound effects, so be sure to click on the sound button to toggle sound on/off located in the top right of the screen if you want to add a touch of joy. Below is an image of what it looks like:
+If you're the type that enjoys a more immersive experience, yes our app has sound!  On page load the game will not play any of the sound effects, so be sure to click on the sound button to toggle sound on/off located in the top right of the screen if you want to add a touch of joy. Below is an image of what the sound button looks like:
  
 ![Sound Button](./assets/image/rm_sound.png)
  
@@ -47,26 +49,19 @@ If the player finds themselves lost during gameplay, there is an informational h
  
 ​
 ### Gameplay Gif
-​**Nolan will add a gif of our gameplay once final version of the site is ready**
-![](./screenshot.jpg)
-​
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-​
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-​
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-​
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+\
+![Gameplay Gif](./assets/image/rm_gameplay.gif)
+
 ​
 ### Links
 ​
 Here is the deployed web app, check it out!
 - Live Site URL: [https://nanifer.github.io/NaNarWord-word-game/](https://nanifer.github.io/NaNarWord-word-game/)
-​
+
 ## Behind the Code
 ​
 ### Built with
-​
+
 - Semantic HTML5 markup
 - CSS
 - JavaScript
@@ -123,8 +118,10 @@ function merriamSound(data) {
    }
 }
 ```
-​##### Displaying the WordBank Modal
-Our team saved all of the dynamically displayed content into a vairable called defArray, which grabs its data from the grabWordDef function. The saved array allowed us to use the information both in the endGame function, as well as the WordBank Modal once one of the word buttons are clicked. Here is an example of how easy it made it to append in the modal:
+
+##### Displaying the Word Bank Modal
+
+Our team saved all of the dynamically created elements for the word information data into a variable called `defArray`; `defArray` receives its data from the `grabWordDef()` function. The saved array allowed us to use the created elements both in the `endGame()` function for displaying word data after gameplay, and the WordBank Modal when one of the word buttons is clicked. Here is an example of how easy it made it to append in the "Word Bank" modal:
 
 ```js
 // Calls on definition and displays modal
@@ -163,8 +160,7 @@ async function retrieveDefinition(buttonEl, wordList) {
     }
 }
 ``` 
-​
-**Everyone Add anything you find interesting for employers or fellow coders**
+
 ​
 ### Continued development
 ​
