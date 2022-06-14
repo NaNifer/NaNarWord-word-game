@@ -21,7 +21,7 @@ function renderWordBoard(wordList) {
     let wordListDiv = document.getElementById("word-list-div");
     wordListDiv.classList.add("wordButtonContainer");
     wordListDiv.innerHTML = "";
-    for (let i = 0; i <= 10 && i < wordList.length; i++) {
+    for (let i = 0; i < 10 && i < wordList.length; i++) {
         buttonData = `
         <a href="#modal-word-bank" class="modal-trigger">
         <button id="wordbutton" type="button" data-target="modal-word-bank" class="btn modal-trigger" data-word=${wordList[i].wordSaved} data-frequency=${wordList[i].level}>
@@ -64,7 +64,6 @@ async function retrieveDefinition(buttonEl, wordList) {
             defArray[6],
             defArray[7]
         );
-
     }
     // If it is the Wordnik Source URL
     else {

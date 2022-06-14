@@ -4,7 +4,6 @@ let word;
 let guessCount = 0;
 let frequency;
 let giphyDataArray;
-// let WordDefData;
 
 // Nolan
 // audio for webpage
@@ -157,7 +156,7 @@ function wordnikFetch(word) {
 
 
 // Nifer
-// !!NOTE!!  This is a working rewrite of merriamFetch. :)
+// Fetches a word from merriam, sends it to merriamArray or wordnikFetch on catch
 function merriamFetch(word) {
     return new Promise(function (resolve, reject) {
         fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=654815a3-9693-4044-8b6a-47115bdf7017`)
@@ -382,9 +381,7 @@ function guessCheck(guess) {
 }
 
 // Nifer
-// Looks up giphy with input of WIN OR LOOSE, 
-// if win == search awesome, if loose == search bummer
-// then calls on endGame()
+// Looks up giphy with input of WIN t/f 
 function getGiphy(query) {
     const API_KEY = "dzRUlVy8AmnIrMfFmPikr7L2vL8qqV97";
     let requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=20`;
@@ -404,13 +401,13 @@ function getGiphy(query) {
 
 // Nifer
 // Checks for win/lose and prints a giphy
+// then calls on endGame()
 function printGiphy(win) {
     let giphyEl = document.createElement("img");
     const randomSelection = Math.floor(Math.random() * 20);
     giphyEl.classList.add("giphyImg");
 
     if (win) {
-        // QUESTION: Do I need to change giphyData (below) to giphyDataArray?? Scott had me change the global variable name at the top.
         getGiphy("awesome").then(function (giphyData) {
             giphyEl.src = giphyData.data[randomSelection].images.fixed_height.url;
         })
