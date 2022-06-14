@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="stylesheet" href="./assets/css/animation.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/responsive.css" />
     <title>NaNarWORD | A Word Game by Team NaNarwhal</title>
+    <link rel="shortcut icon" href="./assets/images/narwhal.ico" type="image/x-icon">
 </head>
 
 <body class="container-fluid">
@@ -35,7 +36,7 @@
             <!-- Start section. -->
             <section class="row" id="start">
                 <div class="col s12 m12 l12 center-align" id="rules-container">
-                    <h1>Welcome to <b>NaN</b>ar<b>WORD</b>!</h1>
+                    <img src="./assets/images/NaNarWORD-Logo-500px.png" alt="Welcome to NaNarWORD!" />
                     <div class="col s12 m12 l12 center-align" id="rules-div">
                         <ol>
                             <li>Choose your level of difficulty.</li>
@@ -56,14 +57,16 @@
 
             <!-- Choose your level. -->
             <section class="col s12 m12 l12 center-align" id="level-div">
-                <h2>Choose Your Level</h2>
-                <button class="waves-effect waves-light btn-large teal lighten-4" id="easy" data-level="6">Common
-                    Words</button>
-                <button class="waves-effect waves-light btn-large amber accent-2" id="med" data-level="4">Not-So-Common
-                    Words</button>
-                <button class="waves-effect waves-light btn-large purple accent-4" id="hard" data-level="2">WTF Does
-                    That
-                    Mean?</button>
+                <div id="level-select">
+                    <h2>Choose Your Level</h2>
+                    <button class="waves-effect waves-light btn-large teal lighten-4" id="easy" data-level="6">Common
+                        Words</button>
+                    <button class="waves-effect waves-light btn-large amber accent-2" id="med" data-level="4">Not-So-Common
+                        Words</button>
+                    <button class="waves-effect waves-light btn-large purple accent-4" id="hard" data-level="2">WTF Does
+                        That
+                        Mean?</button>
+                </div>
             </section>
 
             <!-- Game play div here. -->

@@ -15,6 +15,11 @@
         width: 100%;
     }
 
+    #start img {
+        width: 75vw;
+        height: auto;
+    }
+
     aside {
         width: 100vw;
         flex-direction: row;
@@ -34,7 +39,12 @@
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        width: 100%;
+        width: 100vw;
+    }
+
+    .guess-el {
+        margin: 1vw;
+        width: 10vw;
     }
 
     #top-10 {
