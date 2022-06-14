@@ -11,7 +11,11 @@ body {
     min-height: 100vh;
     flex-direction: column;
     background-color: white;
-    font-size: 16px;
+    font-size: 20px;
+}
+
+h1 {
+    font-size: 40px;
 }
 
 h2,
@@ -45,19 +49,15 @@ li {
     margin: 5% auto;
 }
 
-#start {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-self: auto;
-    width: 100%;
+#start img {
+    margin: auto;
 }
 
 #rules-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 0 auto;
 }
 
 #rules-div {
@@ -77,7 +77,7 @@ li {
 }
 
 #corpus-footnote {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 #start-btn {
@@ -116,10 +116,24 @@ li {
 }
 
 #level-div {
-    max-width: 400px;
+    display: none;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    /* max-width: 400px; */
     position: relative;
     height: 100%;
-    display: none;
+}
+
+#level-div img {
+    float: right;
+}
+
+#level-select {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
 }
 
 #level-div button {
