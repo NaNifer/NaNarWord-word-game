@@ -44,7 +44,7 @@ If you're the type that enjoys a more immersive experience, yes our app has soun
 ##### Pronunciation and Definition
 The webapp provides information after completing gameplay about the last played word.  Also, a "word bank" is displayed for the user's top rarest previously played words.  Be sure to checkout the information; most words are accompanied by Merriam Webster's short definition and a pronunciation audio player.  If data is not available from Merriam Webster, checkout the URL for Wordnik's entry of that word on their website is provided for more information.  In addition, the "word bank" is interactive and will display an informational modal for any word you click.  The information provided is the same type as the end of game information.  Below is an example of a modal provided by clicking a "word bank" word:
  
-![Word Bank Modal](./assets/image/rm_word_bank_modal.png)
+![Word Bank Modal](./assets/image/rm_word_bank_modal.PNG)
  
 ##### Help Modal
 If the player finds themselves lost during gameplay, there is an informational help modal available.  Just access it by clicking the "How does this work again?" button below the gameplay area.  It looks like this:
