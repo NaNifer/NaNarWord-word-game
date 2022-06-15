@@ -49,7 +49,7 @@ The webapp provides information after completing gameplay about the last played 
 ##### Help Modal
 If the player finds themselves lost during gameplay, there is an informational help modal available.  Just access it by clicking the "How does this work again?" button below the gameplay area.  It looks like this:
  
-![Word Bank Modal](./assets/images/rm_help.PNG)
+![Word Bank Modal](./assets/images/rm_help.png)
  
 ​
 ### Gameplay Gif
