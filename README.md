@@ -1,21 +1,25 @@
-# NaNarWord - Word Guessing Game
-​
+# NaNarWord - The smart word guessing game
+<img src="./assets/image/rm_logo.png">
+
+<br/>
+
 ## Table of contents
-​
+
 - [Overview](#overview)
- - [The Game](#the-game)
- - [Features](#features)
- - [Gameplay Gif](#gameplay-gif)
- - [Links](#links)
+    - [The Game](#the-game)
+    - [Features](#features)
+    - [Gameplay Gif](#gameplay-gif)
+    - [Links](#links)
 - [Behind the Code](#behind-the-code)
- - [Built with](#built-with)
- - [APIs](#apis)
- - [Continued development](#continued-development)
- - [Useful resources](#useful-resources)
+    - [Built with](#built-with)
+    - [APIs](#apis)
+    - [Continued development](#continued-development)
+    - [Useful resources](#useful-resources)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgments)
-​
-​
+
+<br/>
+
 ## Overview
 ​
 ### The Game
@@ -24,14 +28,16 @@ Welcome to NaNarWord!  This mobile friendly web app provides an immersive experi
  
 Ease into gameplay by selecting "common words", challenge yourself by choosing the "not so common words" category, and delve into the fringes of word society by playing the "WTF does that mean?" category.  The experience is fun, and educational!
  
-Play [here](https://nanifer.github.io/NaNarWord-word-game/).
-​
+**Play the game [here](https://nanifer.github.io/NaNarWord-word-game/).**
+
+<br/>
+
 ### Features
 ​
 NaNarWord is loaded with little features to enhance user experience.  Here are a few to note so you don't miss out:
  
 ##### Sound
-If you're the type that enjoys a more immersive experience, yes our app has sound!  On page load the game will not play any of the sound effects, so be sure to click on the sound button to toggle sound on/off located in the top right of the screen if you want to add a touch of joy. Below is an image of what it looks like:
+If you're the type that enjoys a more immersive experience, yes our app has sound!  On page load the game will not play any of the sound effects, so be sure to click on the sound button to toggle sound on/off located in the top right of the screen if you want to add a touch of joy. Below is an image of what the sound button looks like:
  
 ![Sound Button](./assets/image/rm_sound.png)
  
@@ -47,40 +53,41 @@ If the player finds themselves lost during gameplay, there is an informational h
  
 ​
 ### Gameplay Gif
-​**Nolan will add a gif of our gameplay once final version of the site is ready**
-![](./screenshot.jpg)
-​
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-​
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-​
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-​
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+\
+![Gameplay Gif](./assets/image/rm_gameplay.gif)
+
 ​
 ### Links
 ​
 Here is the deployed web app, check it out!
 - Live Site URL: [https://nanifer.github.io/NaNarWord-word-game/](https://nanifer.github.io/NaNarWord-word-game/)
-​
+
+<br/>
+<br/>
+
 ## Behind the Code
 ​
 ### Built with
-​
+
 - Semantic HTML5 markup
 - CSS
 - JavaScript
 - Materialize CSS framework
-​
-​
+
+<br/>
+
 ### APIs
 ​
 The NaNarWord game employs three different APIs to deliver the best gameplay to the player.  In the [resources](#useful-resources) section of this readme, there are links for all APIs used in this web app.  Following is some information on those three APIs: Wordnik API, Merriam Webster API, and Giphy API.
+
+<br/>
  
 ##### Wordnik
 [Wordnik](https://www.wordnik.com/) is a non-profit organization striving to provide access to information on every English word to everyone on this planet.  Their data is extensive and powerful in the sense that they have built a corpus of word data that is very large.  The reason the project team used Wordnik to provide the random words is because we could provide very obscure and "non-proper" words for our "WTF does that mean?" category.  Merriam Webster will only provide official words that they have in their dictionary.
  
 Wordnik provided us a query parameter for "corpus frequency" to filter random words by how many occurrences that word has in their corpus of data.  This provided an interesting way to present players words based on commonality.  Also, when Merriam Webster doesn't have an entry for one of these non-official obscure words, the user is presented with Worknik's URL entry for that word.  There, one can find information on what part of their corpus the word appears and alternative definition sources.
+
+<br/>
  
 ##### Merriam Webster
 The project team wanted an official provider of word definitions for the words played.  We chose [Merriam Webster's Dictionary API](https://dictionaryapi.com/) because they are a recognizable and respected source.  When they don't have a defintion for obscure words, the code would provide Wordnik data instead.  In order to access the Merriam Webster audio files, the URL parameters would have to be conditionally built using data provided in the fetch request.  Below is a block of code that can be used to appropriately build the correct URL; all it needs is the Merriam Webster API data as a parameter.  There is a case to check that entry has a proununciation key; next it will check if the pronounciation key has audio data.  If it does, the code will build the URL as directed by the API docs and return an `<audio>` element with the correct src value; if not, it will return a `<p>` element to notify the use that no audio is available for that word.  This code block can be repurposed to quickly build sound URLs from Merriam Webster API data objects.
@@ -123,8 +130,12 @@ function merriamSound(data) {
    }
 }
 ```
-​##### Displaying the WordBank Modal
-Our team saved all of the dynamically displayed content into a vairable called defArray, which grabs its data from the grabWordDef function. The saved array allowed us to use the information both in the endGame function, as well as the WordBank Modal once one of the word buttons are clicked. Here is an example of how easy it made it to append in the modal:
+
+<br/>
+
+##### Displaying the Word Bank Modal
+
+Our team saved all of the dynamically created elements for the word information data into a variable called `defArray`; `defArray` receives its data from the `grabWordDef()` function. The saved array allowed us to use the created elements both in the `endGame()` function for displaying word data after gameplay, and the WordBank Modal when one of the word buttons is clicked. Here is an example of how easy it made it to append in the "Word Bank" modal:
 
 ```js
 // Calls on definition and displays modal
@@ -163,9 +174,9 @@ async function retrieveDefinition(buttonEl, wordList) {
     }
 }
 ``` 
-​
-**Everyone Add anything you find interesting for employers or fellow coders**
-​
+
+<br/>
+
 ### Continued development
 ​
 NaNarWord is in it's infancy currently.  The team is proud of what was accomplished in the first version deployment but also look forward to future development.  We not only want to refine the app's UI/UX but also add new features to further engage the user.
@@ -176,8 +187,8 @@ Also, a new feature that we definitely want to implement is word categories.  It
 
 On the CSS side, it might be worth it to consider alternative frameworks outside of [Materalize](https://materializecss.com/). While Materalize is simple and has most of the basics for building sites. Their whole framework was hard to use for scaling, especially when design are more customized or involved specific interactions. Documentations were also limited and sometime confusing to read/find information needed. A lot of the current code is a mix of the framework and manual tweaks in additional css files. We did found a cool css animation site, [Animista](https://animista.net/play/basic/flip), that would be fun to dive more into. Adding effects and motion to this application. 
 
-**Anyone add addition continued development here**
-​
+<br/>
+
 ### Useful resources
 ​
 - [Wordnik](https://www.wordnik.com/) - This is the website for the non-profit group that built the Wordnik API utilized in this project.
@@ -187,12 +198,15 @@ On the CSS side, it might be worth it to consider alternative frameworks outside
  
 ​
 ## Authors
- 
+
+<br/>
+
 ### Nifer Kilakila
 - GitHub - [NaNifer](https://github.com/NaNifer)
 - Portfolio - [Nifer Kilakila](https://nanifer.github.io/Nifer-Kilakila-Portfolio-h2/)
 ### Angie Soto​
-**Angie add here**
+- Website - [Angie Soto](https://anakela.github.io/homework2)
+- Github - [anakela](https://github.com/anakela)
 ### Ivy Chang
 - Website - [Ivy Chang](https://howl-lab.github.io/Portfolio/)
 - Github - [howl-lab](https://github.com/howl-lab)
@@ -204,12 +218,10 @@ On the CSS side, it might be worth it to consider alternative frameworks outside
 ## Acknowledgments
 ​
 ### From Nolan
-I want to give a special thank you to Wordnik for being available for questions as well as for providing a very cool API to work with.  Specifically Erin McKean, thank you for responding so quickly to emails!  Their mission is to provide access to English word information to anyone everywhere on our home Earth.  Also, thank you to my team for persevering through this project enthusiastically.  It wasn't easy but you all made it a fun experience!
+I want to give a special thank you to Wordnik for being available for questions as well as for providing a very cool API to work with.  Specifically Erin McKean, thank you for responding so quickly to emails!  Their mission is to provide access to English word information to anyone everywhere on our home Earth.  Also, thank you to my team for persevering through this project enthusiastically.  It wasn't easy but you all made it a fun experience!  Finally, thank you to the TA's and instructors support from the Berkeley bootcamp when we struggled with asynchronous functions and github collaboration.
 
 ### From Nifer
 Huge shout out to [nullaus](https://github.com/nullaus) who was my quick dial on JS questions, and helped our team navigate git using repositories and conflicts. And of course, it has been a pleasure to work with this great team of people. Everyone is very collaborative, flexible, dedicated, and posses a refined growth-mindset. The process has been fun and intellectually stimulating!
 
 ### From Ivy
-Just to really hammer it, this project would not have been close to the state it is now without THIS team. Eveyone showed up with enthusiasm, genuine interest and love for this application daily. This has been a dream team and I'm so glad we got to put out something extrememly cool to be in this world. 
-
-**Everyone add any thank you's!!**
+Just to really hammer it, this project would not have been close to the state it is now without THIS team. Eveyone showed up with enthusiasm, genuine interest and love for this application daily. This has been a dream team and I'm so glad we got to put out something extrememly cool to be in this world.
