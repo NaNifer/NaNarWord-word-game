@@ -108,7 +108,7 @@ function randomWordFetch(level) {
         .then(response => response.json())
         .then(data => {
             word = data.word;
-            console.log(word);
+//             console.log(word);
             // don't allow proper nouns or words with special characters
             if (word.charAt(0) === word.charAt(0).toUpperCase() || /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]/.test(word)) {
                 randomWordFetch(level);
