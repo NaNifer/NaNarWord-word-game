@@ -30,7 +30,7 @@ $("#volume-btn").on("click", function () {
         audioSuccess.volume = 0;
         audioFailure.volume = 0;
         // update button image
-        $("#volume-btn > img").attr("src", "./assets/image/sound_off.png");
+        $("#volume-btn > img").attr("src", "./assets/images/sound_off.png");
     }
     else {
         // Sound on
@@ -39,7 +39,7 @@ $("#volume-btn").on("click", function () {
         audioSuccess.volume = .45;
         audioFailure.volume = .6;
         // update button image
-        $("#volume-btn > img").attr("src", "./assets/image/sound_on.png");
+        $("#volume-btn > img").attr("src", "./assets/images/sound_on.png");
     }
 })
 
