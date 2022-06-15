@@ -1,5 +1,5 @@
 # NaNarWord - The smart word guessing game
-<img src="./assets/images/rm_logo.png" style="width:50%; display:block; margin-left:auto; margin-right:auto">
+<img src="./assets/images/rm_logo.png">
 
 <br/>
 
@@ -11,10 +11,10 @@
     - [Gameplay Gif](#gameplay-gif)
     - [Links](#links)
 - [Behind the Code](#behind-the-code)
-    - [Built with](#built-with)
+    - [Built With](#built-with)
     - [APIs](#apis)
-    - [Continued development](#continued-development)
-    - [Useful resources](#useful-resources)
+    - [Continued Development](#continued-development)
+    - [Useful Resources](#useful-resources)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgments)
 
@@ -67,12 +67,13 @@ Here is the deployed web app, check it out!
 
 ## Behind the Code
 ​
-### Built with
+### Built With
 
-- Semantic HTML5 markup
+- Semantic HTML5 Markup
 - CSS
 - JavaScript
-- Materialize CSS framework
+- [Materialize CSS Framework](https://materializecss.com/)
+- [Animista](https://animista.net/)
 
 <br/>
 
@@ -82,14 +83,14 @@ The NaNarWord game employs three different APIs to deliver the best gameplay to 
 
 <br/>
  
-##### Wordnik
+#### **Wordnik**
 [Wordnik](https://www.wordnik.com/) is a non-profit organization striving to provide access to information on every English word to everyone on this planet.  Their data is extensive and powerful in the sense that they have built a corpus of word data that is very large.  The reason the project team used Wordnik to provide the random words is because we could provide very obscure and "non-proper" words for our "WTF does that mean?" category.  Merriam Webster will only provide official words that they have in their dictionary.
  
 Wordnik provided us a query parameter for "corpus frequency" to filter random words by how many occurrences that word has in their corpus of data.  This provided an interesting way to present players words based on commonality.  Also, when Merriam Webster doesn't have an entry for one of these non-official obscure words, the user is presented with Worknik's URL entry for that word.  There, one can find information on what part of their corpus the word appears and alternative definition sources.
 
 <br/>
  
-##### Merriam Webster
+#### **Merriam Webster**
 The project team wanted an official provider of word definitions for the words played.  We chose [Merriam Webster's Dictionary API](https://dictionaryapi.com/) because they are a recognizable and respected source.  When they don't have a defintion for obscure words, the code would provide Wordnik data instead.  In order to access the Merriam Webster audio files, the URL parameters would have to be conditionally built using data provided in the fetch request.  Below is a block of code that can be used to appropriately build the correct URL; all it needs is the Merriam Webster API data as a parameter.  There is a case to check that entry has a proununciation key; next it will check if the pronounciation key has audio data.  If it does, the code will build the URL as directed by the API docs and return an `<audio>` element with the correct src value; if not, it will return a `<p>` element to notify the use that no audio is available for that word.  This code block can be repurposed to quickly build sound URLs from Merriam Webster API data objects.
 ```js
 function merriamSound(data) {
@@ -133,7 +134,7 @@ function merriamSound(data) {
 
 <br/>
 
-##### Displaying the Word Bank Modal
+#### **Displaying the Word Bank Modal**
 
 Our team saved all of the dynamically created elements for the word information data into a variable called `defArray`; `defArray` receives its data from the `grabWordDef()` function. The saved array allowed us to use the created elements both in the `endGame()` function for displaying word data after gameplay, and the WordBank Modal when one of the word buttons is clicked. Here is an example of how easy it made it to append in the "Word Bank" modal:
 
@@ -177,7 +178,7 @@ async function retrieveDefinition(buttonEl, wordList) {
 
 <br/>
 
-### Continued development
+### Continued Development
 ​
 NaNarWord is in it's infancy currently.  The team is proud of what was accomplished in the first version deployment but also look forward to future development.  We not only want to refine the app's UI/UX but also add new features to further engage the user.
  
@@ -189,12 +190,14 @@ On the CSS side, it might be worth it to consider alternative frameworks outside
 
 <br/>
 
-### Useful resources
+### Useful Resources
 ​
 - [Wordnik](https://www.wordnik.com/) - This is the website for the non-profit group that built the Wordnik API utilized in this project.
 - [Wordnik API](https://developer.wordnik.com/) - This is the developer site for Wordnik API which we used for random words and their word information.  Very ease to follow documentation to start using their API.
 - [Merriam Webster Dictionary API](https://dictionaryapi.com/) - This is the website for Merriam Webster's API which contains the documentation on how to use it.
 - [Giphy API](https://developers.giphy.com/) - This is the website for Gihpy's API and has the documentation on how to use it.
+- [Materialize CSS Framework](https://materializecss.com/) - CSS framework that utilizes a grid system.
+- [Animista](https://animista.net/) - Cool website that builds CSS animation code using user entered parameters.
  
 ​
 ## Authors
@@ -225,3 +228,8 @@ Huge shout out to [nullaus](https://github.com/nullaus) who was my quick dial on
 
 ### From Ivy
 Just to really hammer it, this project would not have been close to the state it is now without THIS team. Eveyone showed up with enthusiasm, genuine interest and love for this application daily. This has been a dream team and I'm so glad we got to put out something extrememly cool to be in this world.
+
+### From Angie
+I'd like to give a very big shout out to the entirety of Team NaNarwhal!  Everyone was so supportive of everyone else.  We all jumped in to assist one another, answer questions, and find solutions to issues that arose.  There were times where I felt as though I might not get through the project, but the team was there to cheer me and everyone else along the whole way.
+
+Additionaly, the TAs who assisted us during and after hours were immensely helpful!  I truly don't know where we would have been without their guidance.
