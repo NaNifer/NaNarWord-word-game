@@ -53,7 +53,9 @@ If the player finds themselves lost during gameplay, there is an informational h
  
 ​
 ### Gameplay Gif
-\
+
+<br/>
+
 ![Gameplay Gif](./assets/images/rm_gameplay.gif)
 
 ​
