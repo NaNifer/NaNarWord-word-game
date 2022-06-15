@@ -1,7 +1,8 @@
+# NaNarWord - The smart word guessing game
 <img src="./assets/image/rm_logo.png">
 
-# NaNarWord - The smart word guessing game
-​
+<br/>
+
 ## Table of contents
 
 - [Overview](#overview)
@@ -186,8 +187,8 @@ Also, a new feature that we definitely want to implement is word categories.  It
 
 On the CSS side, it might be worth it to consider alternative frameworks outside of [Materalize](https://materializecss.com/). While Materalize is simple and has most of the basics for building sites. Their whole framework was hard to use for scaling, especially when design are more customized or involved specific interactions. Documentations were also limited and sometime confusing to read/find information needed. A lot of the current code is a mix of the framework and manual tweaks in additional css files. We did found a cool css animation site, [Animista](https://animista.net/play/basic/flip), that would be fun to dive more into. Adding effects and motion to this application. 
 
-**Anyone add addition continued development here**
-​
+<br/>
+
 ### Useful resources
 ​
 - [Wordnik](https://www.wordnik.com/) - This is the website for the non-profit group that built the Wordnik API utilized in this project.
@@ -204,7 +205,8 @@ On the CSS side, it might be worth it to consider alternative frameworks outside
 - GitHub - [NaNifer](https://github.com/NaNifer)
 - Portfolio - [Nifer Kilakila](https://nanifer.github.io/Nifer-Kilakila-Portfolio-h2/)
 ### Angie Soto​
-**Angie add here**
+- Website - [Angie Soto](https://anakela.github.io/homework2)
+- Github - [anakela](https://github.com/anakela)
 ### Ivy Chang
 - Website - [Ivy Chang](https://howl-lab.github.io/Portfolio/)
 - Github - [howl-lab](https://github.com/howl-lab)
@@ -222,6 +224,4 @@ I want to give a special thank you to Wordnik for being available for questions 
 Huge shout out to [nullaus](https://github.com/nullaus) who was my quick dial on JS questions, and helped our team navigate git using repositories and conflicts. And of course, it has been a pleasure to work with this great team of people. Everyone is very collaborative, flexible, dedicated, and posses a refined growth-mindset. The process has been fun and intellectually stimulating!
 
 ### From Ivy
-Just to really hammer it, this project would not have been close to the state it is now without THIS team. Eveyone showed up with enthusiasm, genuine interest and love for this application daily. This has been a dream team and I'm so glad we got to put out something extrememly cool to be in this world. 
-
-**Everyone add any thank you's!!**
+Just to really hammer it, this project would not have been close to the state it is now without THIS team. Eveyone showed up with enthusiasm, genuine interest and love for this application daily. This has been a dream team and I'm so glad we got to put out something extrememly cool to be in this world.
