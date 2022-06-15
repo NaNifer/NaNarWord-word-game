@@ -1,5 +1,5 @@
 # NaNarWord - The smart word guessing game
-<img src="./assets/image/rm_logo.png">
+<img src="./assets/images/rm_logo.png" style="width:50%; display:block; margin-left:auto; margin-right:auto">
 
 <br/>
 
@@ -39,22 +39,22 @@ NaNarWord is loaded with little features to enhance user experience.  Here are a
 ##### Sound
 If you're the type that enjoys a more immersive experience, yes our app has sound!  On page load the game will not play any of the sound effects, so be sure to click on the sound button to toggle sound on/off located in the top right of the screen if you want to add a touch of joy. Below is an image of what the sound button looks like:
  
-![Sound Button](./assets/image/rm_sound.png)
+![Sound Button](./assets/images/rm_sound.png)
  
 ##### Pronunciation and Definition
 The webapp provides information after completing gameplay about the last played word.  Also, a "word bank" is displayed for the user's top rarest previously played words.  Be sure to checkout the information; most words are accompanied by Merriam Webster's short definition and a pronunciation audio player.  If data is not available from Merriam Webster, checkout the URL for Wordnik's entry of that word on their website is provided for more information.  In addition, the "word bank" is interactive and will display an informational modal for any word you click.  The information provided is the same type as the end of game information.  Below is an example of a modal provided by clicking a "word bank" word:
  
-![Word Bank Modal](./assets/image/rm_word_bank_modal.png)
+![Word Bank Modal](./assets/images/rm_word_bank_modal.PNG)
  
 ##### Help Modal
 If the player finds themselves lost during gameplay, there is an informational help modal available.  Just access it by clicking the "How does this work again?" button below the gameplay area.  It looks like this:
  
-![Word Bank Modal](./assets/image/rm_help.png)
+![Word Bank Modal](./assets/images/rm_help.png)
  
 ​
 ### Gameplay Gif
 \
-![Gameplay Gif](./assets/image/rm_gameplay.gif)
+![Gameplay Gif](./assets/images/rm_gameplay.gif)
 
 ​
 ### Links
