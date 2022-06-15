@@ -1,5 +1,5 @@
 # NaNarWord - The smart word guessing game
-<img src="./assets/image/rm_logo.png" style="width:50%; display:block; margin-left:auto; margin-right:auto">
+<img src="./assets/image/rm_logo.png">
 
 <br/>
 
