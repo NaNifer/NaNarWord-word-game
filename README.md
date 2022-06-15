@@ -196,8 +196,8 @@ On the CSS side, it might be worth it to consider alternative frameworks outside
 - [Wordnik API](https://developer.wordnik.com/) - This is the developer site for Wordnik API which we used for random words and their word information.  Very ease to follow documentation to start using their API.
 - [Merriam Webster Dictionary API](https://dictionaryapi.com/) - This is the website for Merriam Webster's API which contains the documentation on how to use it.
 - [Giphy API](https://developers.giphy.com/) - This is the website for Gihpy's API and has the documentation on how to use it.
-- [Materialize CSS Framework](https://materializecss.com/)
-- [Animista](https://animista.net/)
+- [Materialize CSS Framework](https://materializecss.com/) - CSS framework that utilizes a grid system.
+- [Animista](https://animista.net/) - Cool website that builds CSS animation code using user entered parameters.
  
 ​
 ## Authors
